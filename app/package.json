@@ -12,7 +12,7 @@
     "nodemon": "^3.0.1"
   },
   "scripts": {
-    "dev": "node server.js"
+    "dev": "nodemon server.js"
   },
   "name": "web-driver",
   "description": "Remote controlled car project made with ROC Ter AA and Mercantec",
