@@ -14,7 +14,9 @@ app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.use('/', require('./route/account'))
+//Routers
+app.use('/', require('./routes/account'))
+
 
 const port = 3000;
 server.listen(port, ()=> {

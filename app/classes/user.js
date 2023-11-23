@@ -22,6 +22,28 @@ const register = async (username, email, password) => {
     })
     return user;
 }
+
+const validate = async (loginName, password) => {
+    const user = await prisma.user.findFirst({
+        where: {
+            OR:[
+                {email: loginName},
+                {username: loginName}
+            ]
+        }
+    })
+    if (user) {
+            let result = await comparePassword(password, user.password)
+            if(!result) return false
+
+            return user
+    }
+
+    return false
+} 
+
+
 module.exports = {
+    validate,
     register
 }
