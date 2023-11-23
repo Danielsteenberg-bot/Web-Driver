@@ -6,9 +6,9 @@ const parseUrl = require('body-parser');
 
 let encodeUrl = parseUrl.urlencoded({ extended: false });
 
-router.route('/login')
+router.route('/')
     .get((req, res) => {
-        res.render('login', {
+        res.render('account/login', {
             title: "Login"
         })
     })
@@ -18,13 +18,14 @@ router.route('/login')
 
         if (user) {
             console.log(user);
+            res.redirect('/dashboard/manage')
         }
 
     })
 
 router.route('/register')
     .get(encodeUrl, (req, res) => {
-        res.render('register')
+        res.render('account/register')
     })
     .post(encodeUrl, async (req, res) => {
         const username = req.body.userName;
@@ -32,6 +33,10 @@ router.route('/register')
         const password = req.body.passWord;
 
         const user = await register(username, email, password)
+
+        if(user){
+            res.redirect('/')
+        }
 
         console.log(user)
     });

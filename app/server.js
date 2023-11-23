@@ -12,6 +12,7 @@ app.use(express.json());
 
 //Routers
 app.use('/', require('./routes/account'))
+app.use('/dashboard', require('./routes/home'))
 
 
 const port = 3000;
