@@ -15,7 +15,7 @@ const checkLogged = (req, res, next) => {
 // Routers
 router.route('/manage')
     .get((req, res) => {
-        console.log(req.session.userId);
+        
         res.render('dashboard/manage', {
             title: "manage"
         })
