@@ -5,7 +5,7 @@ body, html{
 }
 @font-face{
     font-family: Poppins;
-    src: url("../font/Poppins/Poppins-Regular.ttf") format("truetype"); /* Path to your font file */
+    src: url("font/Poppins/Poppins-Regular.ttf") format("truetype"); /* Path to your font file */
     font-weight: normal;
     font-style: normal;
 }
