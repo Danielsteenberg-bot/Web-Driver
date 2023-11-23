@@ -1,11 +1,14 @@
 const express = require('express');
-const { validate } = require('../classes/user');
+const { validate, register } = require('../classes/user');
 const router = express.Router()
 const app = express()
+const parseUrl = require('body-parser');
 
-router.route('/login')
+let encodeUrl = parseUrl.urlencoded({ extended: false });
+
+router.route('/')
     .get((req, res) => {
-        res.render('login', {
+        res.render('account/login', {
             title: "Login"
         })
     })
@@ -13,13 +16,30 @@ router.route('/login')
         const data = req.body
         const user = await validate(data.login_username, data.login_password)
 
-        if(user){
+        if (user) {
             console.log(user);
+            res.redirect('/dashboard/manage')
         }
-        
+
     })
 
+router.route('/register')
+    .get(encodeUrl, (req, res) => {
+        res.render('account/register')
+    })
+    .post(encodeUrl, async (req, res) => {
+        const username = req.body.userName;
+        const email = req.body.email;
+        const password = req.body.passWord;
 
+        const user = await register(username, email, password)
+
+        if(user){
+            res.redirect('/')
+        }
+
+        console.log(user)
+    });
 
 
 module.exports = router

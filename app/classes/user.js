@@ -1,9 +1,27 @@
-const { PrismaClient } = require("@prisma/client");
+const {PrismaClient} = require("@prisma/client");
 const prisma = new PrismaClient()
-const bcrypt = require('bcrypt');
+const bcrypt = require ('bcrypt');
 
 const hashPassword = async (pass) => await bcrypt.hash(pass, 10)
 const comparePassword = async (pass, hash) => await bcrypt.compare(pass, hash)
+
+const register = async (username, email, password) => {
+    const hash = await hashPassword(password)
+    const user = await prisma.user.create({
+        data : {
+            username, 
+            password:hash,
+            email
+
+        },
+        select : {
+            id:true,
+            email:true,
+            username:true
+        }
+    })
+    return user;
+}
 
 const validate = async (loginName, password) => {
     const user = await prisma.user.findFirst({
@@ -16,7 +34,7 @@ const validate = async (loginName, password) => {
     })
     if (user) {
             let result = await comparePassword(password, user.password)
-            if(!user) return false
+            if(!result) return false
 
             return user
     }
@@ -26,5 +44,6 @@ const validate = async (loginName, password) => {
 
 
 module.exports = {
-    validate
+    validate,
+    register
 }
