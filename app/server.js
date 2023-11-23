@@ -14,7 +14,7 @@ app.use(express.json());
 
 
 //Routers
-app.use('/account', require('./routes/account'))
+app.use('/', require('./routes/account'))
 
 const port = 3000;
 server.listen(port, () => {

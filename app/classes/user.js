@@ -2,6 +2,7 @@ const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient()
 const bcrypt = require('bcrypt');
 
+
 const hashPassword = async (pass) => await bcrypt.hash(pass, 10)
 const comparePassword = async (pass, hash) => await bcrypt.compare(pass, hash)
 
@@ -16,7 +17,7 @@ const validate = async (loginName, password) => {
     })
     if (user) {
             let result = await comparePassword(password, user.password)
-            if(!user) return false
+            if(!result) return false
 
             return user
     }
