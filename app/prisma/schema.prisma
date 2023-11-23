@@ -24,5 +24,4 @@ model User {
   username String
   password String 
   sessions Session[]
-
 }
