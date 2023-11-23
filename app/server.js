@@ -3,7 +3,6 @@ const express_session = require('express-session');
 const http = require('http');
 const socketIO = require('socket.io');
 var parseUrl = require('body-parser');
-const res = require('express/lib/response');
 const cookieParser =("cookie-parser")
 const app = express();
 const server = http.createServer(app);

@@ -2,10 +2,6 @@ const express = require('express');
 const sessions = require('express-session');
 var parseUrl = require('body-parser');
 const app = express.Router();
-
-
-
-var mySql = require ('mysql');
 const { test } = require('../classes/user');
 
 
