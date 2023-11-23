@@ -1,0 +1,119 @@
+body, html{
+    height: 100vh;
+    margin: 0;
+    
+}
+@font-face{
+    font-family: Poppins;
+    src: url("font/Poppins/Poppins-Regular.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+body {
+	background: linear-gradient(-45deg, #FF00C7, rgb(209, 53, 113), #23a6d5, #23d5ab);
+	background-size: 400% 400%;
+	animation: gradient 8s ease infinite;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    font-family: Poppins;
+}
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+.login-container{
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 141px;
+    background-color: #FFFFFF;
+    width: 500px;
+    height: 600px;
+    border-radius: 26px;
+}
+
+.login-container input{
+    text-align: center;
+}
+
+.login-container input:focus {
+    outline: none;
+}
+
+.username-input{
+    width: 65%;
+    border: none;
+    border-bottom: 2px solid;
+    border-color: #d9d9d9;
+    margin-top: 100px;
+    margin-bottom: 60px;
+
+}
+
+.user-image{
+    position: relative;
+    top: 6px;
+}
+
+.email-input{
+    width: 65%;
+    border: none;
+    border-bottom: 2px solid;
+    border-color: #d9d9d9;
+    margin-bottom: 60px;
+}
+.mail-image{
+    position: relative;
+    right: 362px;
+    top: 100px;
+}
+.password-input{
+    width: 65%;
+    border: none;
+    border-bottom: 2px solid;
+    border-color: #d9d9d9;
+    margin-bottom: 60px;
+}
+.password-image{
+    position: relative;
+    right: 349px;
+    top: 91px;
+}
+
+.submit-button{
+    margin-top: 80px;
+    background-color: #FFFFFF;
+    border-radius: 25px;
+    width: 171px;
+    height: 54px;
+    border: 1 px solid black;
+}
+.submit-button:hover{
+    background-color: #ececec;
+}
+
+.shape-1{
+display: flex;
+position: absolute;
+top: -250px;
+left: -350px;
+}
+.shape-2{
+display: flex;
+position: absolute;
+left: -250px;
+bottom: -180px;
+}
+.shape-3{
+display: flex;
+position: absolute;
+right: -500px;
+top: 100px
+}
