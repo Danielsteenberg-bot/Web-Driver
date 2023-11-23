@@ -1,9 +1,5 @@
 const express = require('express');
-const express_session = require('express-session');
 const http = require('http');
-const socketIO = require('socket.io');
-var parseUrl = require('body-parser');
-const cookieParser =("cookie-parser")
 const app = express();
 const server = http.createServer(app);
 
