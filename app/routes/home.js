@@ -9,6 +9,12 @@ router.route('/manage')
             title: "manage"
         })
     })
+router.route('/navbar')
+    .get((req, res) =>{
+        res.render('dashboard/navbar' ,{
+            title: "navbar"
+        })
+    })
 
 
 module.exports = router;
