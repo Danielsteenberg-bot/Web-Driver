@@ -1,6 +1,6 @@
 .navbar-top-bar {
     display: flex;
-    background-color: white;
+    background-color: transparent;
     color: #000000;
     padding: 10px;
     text-align: left;
@@ -43,14 +43,14 @@ a{
     position: relative;
     background-color: #d9d9d9;
     height: 40px;
-    padding-top: 20px;
+    padding-top: 8px;
     width: 100%; /* Ensure full width */
     cursor: pointer;
     margin-top: 10px;
 }
 
 .sign-out {
-    margin-top: 30px;
+  
     height: 40px;
     padding-top: 10px;
     color: black;
@@ -71,6 +71,8 @@ a{
 
 .signout-svg {
     stroke: black;
+    position: relative;
+    top: -10px
 }
 
 .sign-out:hover .signout-svg {

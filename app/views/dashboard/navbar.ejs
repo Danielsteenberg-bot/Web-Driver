@@ -6,44 +6,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="../public/style/main.css" rel="stylesheet">
     <link href="../public/style/navbar.css" rel="stylesheet">
-   
+
     <title>Document</title>
 </head>
 
 <body>
-        <div class="navbar-top-bar">
-            <div class="burger-menu" id="burger-menu">
-                <svg class="burger-menu" width="50" height="50" viewBox="0 0 124 103" fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <rect y="0.410645" width="124" height="12.2453" fill="black" />
-                    <rect y="45.3102" width="124" height="12.2453" fill="black" />
-                    <rect y="90.2098" width="124" height="12.2453" fill="black" />
-                </svg>
-            </div>
+    <div class="navbar-top-bar">
+        <div class="burger-menu" id="burger-menu">
+            <svg class="burger-menu" width="50" height="50" viewBox="0 0 124 103" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <rect y="0.410645" width="124" height="12.2453" fill="black" />
+                <rect y="45.3102" width="124" height="12.2453" fill="black" />
+                <rect y="90.2098" width="124" height="12.2453" fill="black" />
+            </svg>
         </div>
-        <div class="navbar" id="navbar">
-            <div class="tabs">
-                <div class="user-profile">Profile</div>
-               <a href="./manage.ejs"><div class="robot-view">Robot-view</div></a>
-                <div class="robot-view">test</div>
-
-                
-                    
-                </div>
-                <a href="../"><div class="sign-out"><svg class="signout-svg" width="29" height="29" viewBox="0 0 29 29" fill="none"
+    </div>
+    <div class="navbar" id="navbar">
+        <div class="tabs">
+            <a href="../accountmanage"><div class="user-profile">Profile</div></a>
+            <a href="../dashboard/manage">
+                <div class="robot-view">Robot-view</div>
+            </a>
+            <div class="robot-view">test</div>
+        </div>
+        <a href="../">
+            <div class="sign-out"><svg class="signout-svg" width="25" height="25" viewBox="0 0 29 29" fill="none"
                     xmlns="http://www.w3.org/2000/svg">
                     <path d="M15 14.8708H25.7743M23.5955 10L26.8877 14.8708L23.5955 19.4551" stroke-width="2" />
                     <path
                         d="M20.6966 8.80341V3.927C20.6966 2.82243 19.8012 1.927 18.6966 1.927H3.5C2.39543 1.927 1.5 2.82243 1.5 3.927V26C1.5 27.1046 2.39543 28 3.5 28H18.6966C19.8012 28 20.6966 27.1046 20.6966 26V22.2697"
                         stroke-width="2" />
-                </svg></div></a>
-            </div>
-        </div>
-    </body>
+                </svg></div>
+        </a>
+    </div>
+    </div>
+</body>
 
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
-    <script src="../public/functions/navbar.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+<script src="../public/functions/navbar.js"></script>
 
 
-    </html>
+</html>
