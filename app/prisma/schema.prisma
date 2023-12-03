@@ -15,8 +15,10 @@ model Session {
   id Int @id @default(autoincrement())
   user User @relation(fields: [userid], references: [id])
   userid Int
-
+  driving Driving_History @relation(fields: [drivingSession], references: [sessionID])
+  drivingSession Int
   @@index([userid])
+  @@index([drivingSession])
 }
 model User {
   id Int @id @default(autoincrement())
@@ -24,4 +26,11 @@ model User {
   username String
   password String 
   sessions Session[]
+}
+model Driving_History {
+  sessionID Int @id @default(autoincrement())
+  distance String
+  angle String
+  battery String
+  sessiondata Session[]
 }
