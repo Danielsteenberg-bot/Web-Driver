@@ -15,6 +15,7 @@ btns.forEach(btn => {
                 const direction = Array.from(classes).find(cls => cls !== 'movement');
         
                 socket.emit(direction, {direction, roomId})
+                console.log(`direction: ${direction}, Room: ${roomId}`);
             }
         }, 200)
     })
