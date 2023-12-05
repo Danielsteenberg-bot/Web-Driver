@@ -1,0 +1,112 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+:root {
+  --blue-color: #3fcaf6;
+  --pink-color: #ff00c7a6;
+  --grey-color: #9f9f9f;
+  --black-color: #000000;
+  --white-color: #ffffff;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 20vh;
+  width: 95%;
+}
+
+.top-bar {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  background-color: aqua;
+  border-radius: 1.5rem 1.5rem 0rem 0rem;
+  height: 35vh;
+}
+
+.top-bar-left {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  width: 50%;
+  margin-left: 2rem;
+}
+
+.top-bar-right {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  width: 50%;
+}
+
+.top-bar svg {
+  width: 20%;
+}
+
+.icon-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.btn-container {
+  display: flex;
+  flex-direction: column;
+  width: 20%;
+  height: 100%;
+  justify-content: center;
+}
+
+.connectBTN {
+  width: 80%;
+  height: 3rem;
+  font-size: 1.2rem;
+  border-radius: 1.5rem;
+}
+
+.bottom-bar {
+  width: 100%;
+  background-color: var(--grey-color);
+  border-top: var(--black-color) 1px solid;
+  border-radius: 0rem 0rem 1.5rem 1.5rem;
+  height: 60%;
+}
+
+.bottom-bar ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  list-style: none;
+  height: 100%;
+  width: 90%;
+}
+
+.cell {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.statsCell {
+  font-size: 2rem;
+  font-weight: 400;
+}
