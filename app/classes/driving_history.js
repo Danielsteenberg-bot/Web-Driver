@@ -11,13 +11,7 @@ const listener = (driving) => {
     console.log(driving);
 }
 
-socket.on("forward", listener);
-
-socket.on("left", listener);
-
-socket.on("right", listener);
-
-socket.on("backwards", listener);
+socket.on("forward", "left", "right", "backwards", listener);
 
 const driver = async(forward, left, right, backwards) => {
     const drivingData = await sessionLog(forward)
