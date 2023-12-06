@@ -40,5 +40,6 @@ const register = async(sessionID, distance, angle, battery) => {
     }
 
     module.exports = {
+        driver,
         register
     }
