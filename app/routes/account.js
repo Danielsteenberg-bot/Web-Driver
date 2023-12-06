@@ -6,6 +6,17 @@ const parseUrl = require('body-parser');
 
 let encodeUrl = parseUrl.urlencoded({ extended: false });
 
+// Functions
+const checkLogged = (req, res, next) => {
+    if (req.session.userId) {
+        res.redirect('/dashboard/manage')
+    }
+    else {
+        next()
+    }
+}
+
+// Routers
 router.route('/')
     .get((req, res) => {
         res.render('account/login', {
@@ -17,8 +28,8 @@ router.route('/')
         const user = await validate(data.login_username, data.login_password)
 
         if (user) {
-            console.log(user);
-            res.redirect('/dashboard/manage')
+            req.session.userId = user.id
+            res.redirect('/dashboard/control')
         }
 
     })
