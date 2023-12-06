@@ -1,0 +1,79 @@
+.navbar-top-bar {
+    display: flex;
+    background-color: white;
+    color: #000000;
+    padding: 10px;
+    text-align: left;
+    z-index: 1;
+    width: 100%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+.burger-menu {
+    width: auto;
+    z-index: 2;
+    cursor: pointer;
+}
+a{
+    text-decoration: none;
+}
+.navbar {
+    background-color: white;
+    color: black;
+    padding: 20px;
+    position: absolute;
+    top: 0px; 
+    left: 0px;  
+    width: 10%;
+    height: 100vh;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column; /* Ensure child elements stack vertically */
+    justify-content: space-between; /* Push elements to the top and bottom */
+    transition: transform 0.5s ease;
+}
+
+.user-profile,
+.robot-view,
+.sign-out {
+    color: black;
+    text-align: center;
+    position: relative;
+    background-color: #d9d9d9;
+    height: 40px;
+    padding-top: 20px;
+    width: 100%; /* Ensure full width */
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.sign-out {
+    margin-top: 30px;
+    height: 40px;
+    padding-top: 10px;
+    color: black;
+    background-color: #d9d9d9;
+    text-align: center;
+    cursor: pointer;
+    width: 100%; /* Ensure full width */
+    padding-top: 20px;
+}
+
+
+.tabs {
+    position: relative;
+    top: 300px;
+    text-decoration: none;
+    
+}
+
+.signout-svg {
+    stroke: black;
+}
+
+.sign-out:hover .signout-svg {
+    stroke: red;
+    transition: stroke 0.5s ease; 
+}

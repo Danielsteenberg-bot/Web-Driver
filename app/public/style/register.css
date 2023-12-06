@@ -1,18 +1,19 @@
 body, html{
-    height: 100vh;
+    height: 110%;
     margin: 0;
     
 }
 @font-face{
     font-family: Poppins;
-    src: url("font/Poppins/Poppins-Regular.ttf") format("truetype");
+    src: url("font/Poppins/Poppins-Regular.ttf") format("truetype"); /* Path to your font file */
     font-weight: normal;
     font-style: normal;
 }
-body {
+body{
 	background: linear-gradient(-45deg, #FF00C7, rgb(209, 53, 113), #23a6d5, #23d5ab);
 	background-size: 400% 400%;
 	animation: gradient 8s ease infinite;
+	height: 100vh;
     overflow-x: hidden;
     overflow-y: hidden;
     font-family: Poppins;
@@ -29,66 +30,80 @@ body {
 	}
 }
 
-.login-container{
+h2{
+    margin-bottom: 40px;
+}
+.login-container{   
     text-align: center;
     margin: 0 auto;
-    margin-top: 141px;
+    margin-top: 278px;
     background-color: #FFFFFF;
     width: 500px;
-    height: 600px;
+    height: 400px;
+    border-radius: 26px;
+}
+.register-container{
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 160px;
+    background-color: #FFFFFF;
+    width: 500px;
+    height: 500px;
     border-radius: 26px;
 }
 
-.login-container input{
+.register-container input{
     text-align: center;
 }
 
-.login-container input:focus {
+.register-container input:focus {
     outline: none;
 }
 
-.username-input{
+.register-container input {
+    text-align: center;
+    transition: border-color 0.7s ease; 
+}
+
+.username-input,
+.email-input,
+.password-input {
+    text-align: center;
+    display: flex;
+    margin: 0 auto;
+    margin-top: 10px;
     width: 65%;
     border: none;
     border-bottom: 2px solid;
     border-color: #d9d9d9;
-    margin-top: 100px;
-    margin-bottom: 60px;
+    margin-bottom: 40px;
+}
 
+.username-input:focus,
+.email-input:focus,
+.password-input:focus {
+    border-color: #007BFF; /* Change the border color when input is focused */
 }
 
 .user-image{
     position: relative;
-    top: 6px;
+    right: 200px;
+    top: 35px;
 }
 
-.email-input{
-    width: 65%;
-    border: none;
-    border-bottom: 2px solid;
-    border-color: #d9d9d9;
-    margin-bottom: 60px;
-}
 .mail-image{
     position: relative;
-    right: 362px;
-    top: 100px;
-}
-.password-input{
-    width: 65%;
-    border: none;
-    border-bottom: 2px solid;
-    border-color: #d9d9d9;
-    margin-bottom: 60px;
-}
-.password-image{
-    position: relative;
-    right: 349px;
-    top: 91px;
+    right: 200px;
+    top: 35px;
 }
 
+.password-image{
+    position: relative;
+    right: 200px;
+    top: 35px;
+}
 .submit-button{
-    margin-top: 80px;
+    margin-top: 10px;
     background-color: #FFFFFF;
     border-radius: 25px;
     width: 171px;
@@ -97,23 +112,32 @@ body {
 }
 .submit-button:hover{
     background-color: #ececec;
+    cursor: pointer;
 }
 
 .shape-1{
-display: flex;
-position: absolute;
-top: -250px;
-left: -350px;
+    z-index: 1;
+    display: flex;
+    position: absolute;
+    top: -250px;
+    left: -350px;
 }
 .shape-2{
-display: flex;
-position: absolute;
-left: -250px;
-bottom: -180px;
+    z-index: 1;
+    display: flex;
+    position: absolute;
+    left: -250px;
+    bottom: -180px;
 }
 .shape-3{
-display: flex;
-position: absolute;
-right: -500px;
-top: 100px
+    z-index: 1;
+    display: flex;
+    position: absolute;
+    right: -500px;
+    top: 100px
+}
+.navbar-top-bar{
+    height: 8%;
+    background-color: #d9d9d9;
+
 }
