@@ -2,17 +2,21 @@ const express = require('express');
 const session = require('express-session');
 const http = require('http');
 const app = express();
-const socketIO = require('socket.io');
 const server = http.createServer(app);
+const socketIO = require('socket.io');
+const io = socketIO(server)
 require('dotenv').config();
 
 
 //session setup
-app.use(session({
+const sessions = session({
     secret: 'ekweori324ijfg230',
     resave: false,
     saveUninitialized: true
-}));
+});
+
+app.use(sessions);
+io.engine.use(sessions)
 
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname));
@@ -30,13 +34,12 @@ server.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
 
-const io = socketIO(server)
-
 io.on('connection', (socket) => {
     const users = {};
 
     socket.on('join-room', (data) => {
-        const { userId, roomId } = data;
+        const { roomId } = data;
+        userId = socket.request.session.userId
 
         // Update the user's socket ID or add a new user to the room
         if (!users[roomId]) {
