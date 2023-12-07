@@ -4,7 +4,7 @@ const express = require('express');
 const app = express();
 const http = require('http');
 
-const register = async(sessionID, distance, angle, battery) => {
+const dHist = async(sessionID, distance, angle, battery) => {
     const sessionData = await sessionLog(sessionID)
     const sessionID = await prisma.user.create({
             data : {
@@ -25,5 +25,5 @@ const register = async(sessionID, distance, angle, battery) => {
     }
 
     module.exports = {
-        register
+        dHist
     }
