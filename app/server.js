@@ -68,7 +68,6 @@ io.on('connection', (socket) => {
         socket.on(direction, (data) => {
             const { direction, roomId } = data;
             console.log(data);
-            // Your logic here
         });
     });
 
