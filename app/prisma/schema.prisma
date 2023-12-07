@@ -45,6 +45,5 @@ model Driving_history {
   long Float
   connection Int  
 
-
   @@index([session_id])
 }
