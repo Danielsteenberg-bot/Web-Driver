@@ -4,6 +4,7 @@ const http = require('http');
 const app = express();
 const server = http.createServer(app);
 const socketIO = require('socket.io');
+const { test } = require('./classes/session');
 const io = socketIO(server)
 require('dotenv').config();
 
@@ -65,10 +66,12 @@ io.on('connection', (socket) => {
     const directions = ['left', 'right', 'up', 'down'];
 
     directions.forEach(direction => {
-        socket.on(direction, (data) => {
+        socket.on(direction, async (data) => {
             const { direction, roomId } = data;
-            console.log(data);
-            // Your logic here
+            const id = socket.request.session.userId
+
+            const session = await test(id, direction);
+            console.log(session);
         });
     });
 

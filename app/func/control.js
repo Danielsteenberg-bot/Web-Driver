@@ -31,8 +31,6 @@ btns.forEach(btn => {
     });
 });
 
-
-
 function emitDirection(btn) {
     const classes = btn.classList;
     const direction = Array.from(classes).find(cls => cls !== 'movement');
