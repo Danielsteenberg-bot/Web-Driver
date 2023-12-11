@@ -1,7 +1,21 @@
 #ifndef SETTINGS_H
 #define SETTINGS_H
 
+#define CMPS11_ADDRESS 0x60
+#define DISABLE_CMPS11 0
+
+#define GPS_PPS_PIN 2
+
+#define DRIVE_ACTION_DURATION 300
+
 #define DEVICE_ID 1
-#define AP_PASSWORD "test" 
+#define AP_PASSWORD "12345678" 
+
+#define FRONT_PING_PIN 11
+#define FRONT_ECHO_PIN 10
+#define LEFT_PING_PIN 9
+#define LEFT_ECHO_PIN 8
+#define RIGHT_PING_PIN 7
+#define RIGHT_ECHO_PIN 6
 
 #endif
