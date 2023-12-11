@@ -43,7 +43,8 @@ model Driving_history {
   battery Int
   lat Float 
   long Float
-  connection Int  
+  connection Int
+  velocity Int  
 
   @@index([session_id])
 }
