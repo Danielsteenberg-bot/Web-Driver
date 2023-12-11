@@ -43,7 +43,6 @@ io.on('connection', (socket) => {
         socket.on('join-room-user', (data) => {
             const { deviceId } = data;
             userId = socket.request.session.userId
-            socket.emit('gps', 51.505, -0.09);
             // Update the user's socket ID or add a new user to the room
             if (!users[deviceId]) {
                 users[deviceId] = {};
@@ -58,8 +57,8 @@ io.on('connection', (socket) => {
             socket.join(deviceId);
 
             // Emit a message to the user who just joined the room
-            socket.emit('joined-message', `Welcome to user ${userId} to deviceId: ${deviceId}`);
-
+            socket.emit('joined-message', `Welcome to user ${userId} to deviceId: ${deviceId}`,'gps', 51.505, -0.09);
+            
             // Emit a message to all users in the room except the newly joined user
             socket.to(deviceId).emit('joined-message', `${userId} has joined the room`);
 
