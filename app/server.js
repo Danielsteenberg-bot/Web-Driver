@@ -75,7 +75,8 @@ io.on('connection', (socket) => {
             if(pass == process.env.DEVICE_PASS){
                 socket.join(deviceId)
                 socket.emit('joined-message', `Welcome to ${pass} to deviceId: ${deviceId}`);
-            }
+            }}
+            )
             socket.on('gps', async (lat, long) => {
                 const session = await test(userId, lat, long);
                 const sessionTable = await prisma.user.create({
@@ -84,8 +85,8 @@ io.on('connection', (socket) => {
                         long
                     },
                     select: {
-                        lat: true,
-                        long: true
+                        lat:true,
+                        long:true
                     }
                 });
             });
@@ -99,14 +100,23 @@ io.on('connection', (socket) => {
                         right
                     },
                     select: {
-                        front: true,
-                        left: true,
-                        right: true
+                        front:true,
+                        left:true,
+                        right:true
                     }
                 });
             });
-    
-    
+            socket.on('rotation', async (angle) => {
+                const session = await test(userId, angle);
+                const rotation = await prisma.user.create({
+                    data: {
+                        angle
+                    },
+                    select: {
+                        angle:true
+                    }
+                });
+            });
 
     const directions = ['left', 'right', 'up', 'down'];
 
@@ -122,5 +132,5 @@ io.on('connection', (socket) => {
         });
     });
 
+};
 });
-
