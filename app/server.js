@@ -1,10 +1,11 @@
 const express = require('express');
-const session = require('cookie-session');
+const session = require('express-session');
 const http = require('http');
 const app = express();
 const server = http.createServer(app);
 const socketIO = require('socket.io');
 const { test } = require('./classes/session');
+const { on } = require('events');
 const io = socketIO(server)
 require('dotenv').config();
 
@@ -75,8 +76,36 @@ io.on('connection', (socket) => {
                 socket.join(deviceId)
                 socket.emit('joined-message', `Welcome to ${pass} to deviceId: ${deviceId}`);
             }
-        })
-    }
+            socket.on('gps', async (lat, long) => {
+                const session = await test(userId, lat, long);
+                const sessionTable = await prisma.user.create({
+                    data: {
+                        lat,
+                        long
+                    },
+                    select: {
+                        lat: true,
+                        long: true
+                    }
+                });
+            });
+            
+            socket.on('sonar', async (front, left, right) => {
+                const session = await test(userId, front, left, right);
+                const sonar = await prisma.user.create({
+                    data: {
+                        front,
+                        left,
+                        right
+                    },
+                    select: {
+                        front: true,
+                        left: true,
+                        right: true
+                    }
+                });
+            });
+    
     
 
     const directions = ['left', 'right', 'up', 'down'];
@@ -94,3 +123,4 @@ io.on('connection', (socket) => {
     });
 
 });
+
