@@ -4,21 +4,27 @@ const express = require('express');
 const app = express();
 const http = require('http');
 
-const dHist = async(sessionID, distance, angle, battery) => {
+const dHist = async(sessionID, distanceTraveled, angle, battery) => {
     const sessionData = await sessionLog(sessionID)
     const sessionID = await prisma.user.create({
             data : {
                 sessionID,
-                distance,
+                distanceTraveled,
                 angle,
-                battery
+                battery,
+                lat,
+                long,
+                connection
 
             },
             select : {
                 sessionID:true,
-                distance:true,
+                distanceTraveled:true,
                 angle:true,
-                battery:true
+                battery:true,
+                lat:true,
+                long:true,
+                connection:true
             }
         });
         return sessionData;
