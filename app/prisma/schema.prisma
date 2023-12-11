@@ -15,8 +15,12 @@ model Session {
   id Int @id @default(autoincrement())
   user User @relation(fields: [userid], references: [id])
   userid Int
+  device Device @relation(fields: [deviceid], references: [id])
+  deviceid Int
+  driving Driving_history[]
 
   @@index([userid])
+  @@index([deviceid])
 }
 model User {
   id Int @id @default(autoincrement())
@@ -24,4 +28,22 @@ model User {
   username String
   password String 
   sessions Session[]
+}
+
+model Device {
+  id Int @id @default(autoincrement())
+  sessions Session[]
+}
+
+model Driving_history {
+  session Session @relation(fields: [session_id], references: [id])
+  session_id Int @id
+  distanceTraveled Decimal 
+  angle Int
+  battery Int
+  lat Float 
+  long Float
+  connection Int  
+
+  @@index([session_id])
 }
