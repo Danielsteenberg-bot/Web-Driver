@@ -52,5 +52,4 @@ router.route('/register')
         console.log(user)
     });
 
-
 module.exports = router

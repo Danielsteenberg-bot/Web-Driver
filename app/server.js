@@ -1,9 +1,10 @@
 const express = require('express');
-const session = require('express-session');
+const session = require('cookie-session');
 const http = require('http');
 const app = express();
 const server = http.createServer(app);
 const socketIO = require('socket.io');
+const { test } = require('./classes/session');
 const io = socketIO(server)
 require('dotenv').config();
 
@@ -36,39 +37,59 @@ server.listen(port, () => {
 
 io.on('connection', (socket) => {
     const users = {};
+    let user = socket.request.session.userId
+    if (user) {
+        socket.on('join-room-user', (data) => {
+            const { deviceId } = data;
+            userId = socket.request.session.userId
 
-    socket.on('join-room', (data) => {
-        const { roomId } = data;
-        userId = socket.request.session.userId
+            // Update the user's socket ID or add a new user to the room
+            if (!users[deviceId]) {
+                users[deviceId] = {};
+            }
 
-        // Update the user's socket ID or add a new user to the room
-        if (!users[roomId]) {
-            users[roomId] = {};
-        }
+            users[deviceId][userId] = { socketId: socket.id };
 
-        users[roomId][userId] = { socketId: socket.id };
+            // Log the updated users information
+            console.log(users);
 
-        // Log the updated users information
-        console.log(users);
+            // Join the room
+            socket.join(deviceId);
 
-        // Join the room
-        socket.join(roomId);
+            // Emit a message to the user who just joined the room
+            socket.emit('joined-message', `Welcome to user ${userId} to deviceId: ${deviceId}`);
 
-        // Emit a message to the user who just joined the room
-        socket.emit('joined-message', `Welcome to user ${userId} to room ${roomId}`);
+            // Emit a message to all users in the room except the newly joined user
+            socket.to(deviceId).emit('joined-message', `${userId} has joined the room`);
 
-        // Emit a message to all users in the room except the newly joined user
-        socket.to(roomId).emit('joined-message', `${userId} has joined the room`);
-
-    });
+            socket.on("move", (direction) => {
+                console.log("client" + direction)
+                socket.to(deviceId).emit("move", direction)
+            })
+        });
+    }
+    else if(!user){
+        socket.on('join-room-device', (data) => {
+            const { pass, deviceId } = data
+            if(pass == process.env.DEVICE_PASS){
+                socket.join(deviceId)
+                socket.emit('joined-message', `Welcome to ${pass} to deviceId: ${deviceId}`);
+            }
+        })
+    }
+    
 
     const directions = ['left', 'right', 'up', 'down'];
 
     directions.forEach(direction => {
-        socket.on(direction, (data) => {
-            const { direction, roomId } = data;
-            console.log(data);
-            // Your logic here
+        socket.on(direction, async (data) => {
+            const { direction, deviceId } = data;
+            const id = socket.request.session.userId
+
+            
+            console.log(direction);
+            // const session = await test(id, direction);
+            // console.log(session);
         });
     });
 

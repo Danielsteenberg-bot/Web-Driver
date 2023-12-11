@@ -1,0 +1,53 @@
+
+.txt-spacer-wrapper{
+    width: 100%;
+    min-height: 100vh;
+
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+.txt-spacer h2{
+    width: 100%;
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+    text-align: center;
+
+}
+
+.fadeIn{
+        animation: fadeIn 1s ease-in-out forwards;
+}
+
+
+
+
+@media (max-width: 500px) {
+
+    
+    .txt-spacer h2 {
+        font-size: 1.5rem;
+        line-height: 180%;
+    }
+
+    .txt-spacer-container{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .txt-spacer-wrapper {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
