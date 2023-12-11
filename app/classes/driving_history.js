@@ -14,8 +14,8 @@ const dHist = async(sessionID, distanceTraveled, angle, battery) => {
                 battery,
                 lat,
                 long,
-                connection
-
+                connection,
+                //velocity
             },
             select : {
                 sessionID:true,
@@ -24,7 +24,8 @@ const dHist = async(sessionID, distanceTraveled, angle, battery) => {
                 battery:true,
                 lat:true,
                 long:true,
-                connection:true
+                connection:true,
+                //velocity:true
             }
         });
         return sessionData;
