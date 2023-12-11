@@ -43,7 +43,7 @@ io.on('connection', (socket) => {
         socket.on('join-room-user', (data) => {
             const { deviceId } = data;
             userId = socket.request.session.userId
-
+            socket.emit('gps', 51.505, -0.09);
             // Update the user's socket ID or add a new user to the room
             if (!users[deviceId]) {
                 users[deviceId] = {};
@@ -77,46 +77,51 @@ io.on('connection', (socket) => {
                 socket.emit('joined-message', `Welcome to ${pass} to deviceId: ${deviceId}`);
             }}
             )
-            socket.on('gps', async (lat, long) => {
-                const session = await test(deviceId, lat, long);
-                const sessionTable = await prisma.user.create({
-                    data: {
-                        lat,
-                        long
-                    },
-                    select: {
-                        lat:true,
-                        long:true
-                    }
+            function handleGPS(socket, userId, test, prisma) {
+                socket.on('gps', async (lat, long) => {
+                    const session = await test(userId, lat, long);
+                    const latLong = await prisma.user.update({
+                        where: { id: userId },
+                        data: {
+                            lat,
+                            long
+                        }
+                    });
                 });
-            });
+            };
             
-            socket.on('sonar', async (front, left, right) => {
-                const session = await test(deviceId, front, left, right);
-                const sonar = await prisma.user.create({
-                    data: {
-                        front,
-                        left,
-                        right
-                    },
-                    select: {
-                        front:true,
-                        left:true,
-                        right:true
-                    }
+            function handleSonar(socket, userId, test, prisma) {
+                socket.on('sonar', async (front, left, right) => {
+                    const session = await test(userId, front, left, right);
+                    const sonar = await prisma.user.update({
+                        where: { id: userId },
+                        data: {
+                            front,
+                            left,
+                            right
+                        }
+                    });
                 });
-            });
-            socket.on('rotation', async (angle) => {
-                const session = await test(deviceId, angle);
-                const rotation = await prisma.user.create({
-                    data: {
-                        angle
-                    },
-                    select: {
-                        angle:true
-                    }
+            };
+            
+            function handleRotation(socket, userId, test, prisma) {
+                socket.on('rotation', async (angle) => {
+                    const session = await test(userId, angle);
+                    const rotation = await prisma.user.update({
+                        where: { id: userId },
+                        data: {
+                            angle
+                        }
+                    });
                 });
-            });
+            };
+            
+            module.exports = {
+                handleRotation,
+                handleSonar,
+                handleGPS
+            }
+        
 
     const directions = ['left', 'right', 'up', 'down'];
 
@@ -131,6 +136,6 @@ io.on('connection', (socket) => {
             // console.log(session);
         });
     });
-
 };
 });
+
