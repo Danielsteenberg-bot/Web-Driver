@@ -85,7 +85,7 @@ io.on('connection', (socket) => {
                         where: { id: userId },
                         data: {
                             lat,
-                            long
+                            long                       
                         }
                     });
                 });
@@ -107,6 +107,7 @@ io.on('connection', (socket) => {
             
             function handleRotation(socket, userId, test, prisma) {
                 socket.on('rotation', async (angle) => {
+                    console.log(`Received GPS coordinates: Latitude = ${lat}, Longitude = ${long}`);
                     const session = await test(userId, angle);
                     const rotation = await prisma.user.update({
                         where: { id: userId },
@@ -116,7 +117,6 @@ io.on('connection', (socket) => {
                     });
                 });
             };
-            
             module.exports = {
                 handleRotation,
                 handleSonar,
