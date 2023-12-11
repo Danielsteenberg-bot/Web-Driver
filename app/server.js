@@ -78,7 +78,7 @@ io.on('connection', (socket) => {
             }}
             )
             socket.on('gps', async (lat, long) => {
-                const session = await test(userId, lat, long);
+                const session = await test(deviceId, lat, long);
                 const sessionTable = await prisma.user.create({
                     data: {
                         lat,
@@ -92,7 +92,7 @@ io.on('connection', (socket) => {
             });
             
             socket.on('sonar', async (front, left, right) => {
-                const session = await test(userId, front, left, right);
+                const session = await test(deviceId, front, left, right);
                 const sonar = await prisma.user.create({
                     data: {
                         front,
@@ -107,7 +107,7 @@ io.on('connection', (socket) => {
                 });
             });
             socket.on('rotation', async (angle) => {
-                const session = await test(userId, angle);
+                const session = await test(deviceId, angle);
                 const rotation = await prisma.user.create({
                     data: {
                         angle
