@@ -8,15 +8,13 @@ const latLong = async(lat, long) => {
     const lat = await latitude(lat);
     const long = await prisma.user.create({
         data:{
-        lat,
-        long
+            lat,
+            long
         },
         select: {
             lat:true,
             long:true
         }
-
-
     });
     return(lat)
 }
