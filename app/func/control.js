@@ -70,7 +70,7 @@ function emitDirection(btn) {
     });
 
     socket.on('rotation', async (angle) => {
-        console.log('rotation');
+        console.log('rotation', angle);
         const session = await test(userId, angle);
         const rotation = await prisma.user.update({
             where: { id: userId },
@@ -79,5 +79,3 @@ function emitDirection(btn) {
             }
         });
     });
-    
-
