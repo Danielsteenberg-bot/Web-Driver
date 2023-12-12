@@ -77,20 +77,5 @@ io.on('connection', (socket) => {
             }
         })
     }
-    
-
-    const directions = ['left', 'right', 'up', 'down'];
-
-    directions.forEach(direction => {
-        socket.on(direction, async (data) => {
-            const { direction, deviceId } = data;
-            const id = socket.request.session.userId
-
-            
-            console.log(direction);
-            // const session = await test(id, direction);
-            // console.log(session);
-        });
-    });
 
 });
