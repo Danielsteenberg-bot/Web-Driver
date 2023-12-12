@@ -2,21 +2,27 @@
 #define WIFI_H
 
 #include <WiFiS3.h>
+#include <Arduino.h>
 
 #include "settings.h"
 #include "queue.h"
 #include "cooldown.h"
+
+#define CONNECT_MESSAGE "0"+String(DEVICE_ID)+"\n"
+#define PING_MESSAGE "8\n"
+#define PONG_MESSAGE "9\n"
 
 typedef struct Message {
     uint8_t type;
     char message[50];
 } Message;
 
-void wifi_begin();
-void wifi_print_status();
-void wifi_handle_client(void (*handler)(const char*));
+WiFiClient* wifi_handle_connection(void (*handler)(const char*, WiFiClient* client));
 
-extern WiFiClient *client;
+void wifi_begin_client();
+void wifi_begin_server();
+
+extern WiFiClient client;
 extern WiFiServer server;
 extern Queue<Message, 50> queue;
 

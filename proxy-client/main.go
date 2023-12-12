@@ -1,19 +1,18 @@
 package main
 
 import (
-	"bytes"
 	"fmt"
+	"net"
 	"os"
 	"os/exec"
-	"proxy-client/sic"
 	"regexp"
+	"strconv"
 	"strings"
 	"time"
 )
 
 var (
 	ssidRegex = regexp.MustCompile(`(?m)SSID \d+ : (.+)\n`)
-	comma     = []byte(",")
 )
 
 func findNetworks() []string {
@@ -53,96 +52,64 @@ func connectNetwork(ssid string) bool {
 }
 
 func main() {
-	socket := sic.New()
-	arduino := &Arduino{}
+	if len(os.Args) < 2 {
 
-	socket.On("move", func(payload ...[]byte) {
+		networks := findNetworks()
 
-		if len(payload) == 0 {
-			return
+		var ssid string
+
+		for _, network := range networks {
+			if strings.Index(network, "web-driver-") != 0 {
+				continue
+			}
+
+			ssid = network
+			break
 		}
 
-		fmt.Println("socket >", string(payload[0]))
-
-		var direction string
-
-		fmt.Println(string(payload[0]))
-
-		switch string(payload[0]) {
-		case "up":
-			direction = "F"
-		case "down":
-			direction = "B"
-		case "left":
-			direction = "L"
-		case "right":
-			direction = "R"
+		if ssid == "" {
+			fmt.Println("[WIFI] no web-driver found")
+			os.Exit(0)
 		}
 
-		err := arduino.Write([]byte("1" + direction + "\n"))
+		fmt.Printf("[WIFI] network found: %s\n", ssid)
+
+		if !connectNetwork(ssid) {
+			os.Exit(0)
+		}
+
+		time.Sleep(1 * time.Second)
+
+		device, _ := strings.CutPrefix(ssid, "web-driver-")
+		id, _ := strconv.Atoi(device)
+		ArduinoConnectAccessPoint(id)
+
+	} else if os.Args[1] == "server" {
+
+		server, err := net.Listen("tcp", ":8888")
 
 		if err != nil {
-			fmt.Println("[ARDUINO] [WRITE] [ERR]", err)
-		}
-	})
-
-	socket.On("joined-message", func(payload ...[]byte) {
-		fmt.Println("joined-message", string(bytes.Join(payload, []byte(","))))
-	})
-
-	err := socket.Connect("ws://localhost:3000/socket.io", func() {
-		fmt.Println("[WS] connected")
-
-		socket.Emit("join-room-device", []byte("{\"deviceId\":\"1\",\"pass\":\"test\"}"))
-	})
-
-	if err != nil {
-		fmt.Println("[WS] [ERROR]", err)
-	}
-
-	networks := findNetworks()
-
-	var ssid string
-
-	for _, network := range networks {
-		if strings.Index(network, "web-driver-") != 0 {
-			continue
+			fmt.Println(err)
+			os.Exit(1)
 		}
 
-		ssid = network
-		break
+		defer server.Close()
+
+		fmt.Println("Listening on", server.Addr())
+
+		go func() {
+			for {
+				conn, err := server.Accept()
+
+				if err != nil {
+					fmt.Println(err)
+					continue
+				}
+
+				go ArduinoHandleClient(conn)
+			}
+		}()
 	}
-
-	if ssid == "" {
-		fmt.Println("[WIFI] no web-driver found")
-		os.Exit(0)
-	}
-
-	fmt.Printf("[WIFI] network found: %s\n", ssid)
-
-	if !connectNetwork(ssid) {
-		os.Exit(0)
-	}
-
-	time.Sleep(1 * time.Second)
-
-	arduino.Connect(func(message []byte) {
-
-		if len(message) < 1 {
-			return
-		}
-
-		fmt.Println("arduino >", string(message))
-
-		switch ArduinoMessageType(message[0] - '0') {
-		case GPS:
-			socket.Emit("gps", bytes.Split(message[1:], comma)...)
-		case SONAR:
-			socket.Emit("sonar", bytes.Split(message[1:], comma)...)
-		case ROTATION:
-			socket.Emit("rotation", bytes.Split(message[1:], comma)...)
-		}
-	})
 
 	select {}
 }

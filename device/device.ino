@@ -25,9 +25,21 @@ unsigned long right_time;
 unsigned long forward_time;
 unsigned long backward_time;
 
-WiFiServer server(80);
 Queue<Message, 50> queue;
-WiFiClient *client;
+WiFiClient client;
+WiFiServer server(80);
+
+unsigned int original_rotation = 9999;
+
+unsigned int normalize_rotation(unsigned int angle) {
+    while (angle < 0) {
+        angle += 3600;
+    }
+    while (angle >= 3600) {
+        angle -= 3600;
+    }
+    return angle;
+}
 
 void read_sonar() {
     Message message = { .type = 3 };
@@ -64,36 +76,70 @@ void read_rotation() {
   rotation <<= 8;
   rotation += low_byte;
 
+  if (original_rotation == 9999) {
+    original_rotation = rotation;
+  }
+
+  rotation = normalize_rotation(rotation - original_rotation);
+
   Message message = { .type = 2 };
   snprintf(message.message, sizeof(message.message), "%d.%d", rotation / 10, rotation % 10);
   queue.add(message);
 }
 
-void setup() {
-  pinMode(LED_BUILTIN, OUTPUT);
+void read_velocity() {
+  if (DISABLE_CMPS11) return;
+ 
+  Wire.beginTransmission(CMPS11_ADDRESS);
+  Wire.write(14);                    
+  Wire.endTransmission();
 
+  Wire.requestFrom(CMPS11_ADDRESS, 2);       
+  while(Wire.available() < 2);     
+
+  unsigned char high_byte = Wire.read();
+  unsigned char low_byte = Wire.read();
+  
+  unsigned int velocity = high_byte;             
+  velocity <<= 8;
+  velocity += low_byte;
+
+  Message message = { .type = 4 };
+  snprintf(message.message, sizeof(message.message), "%d", velocity);
+  queue.add(message);
+}
+
+void setup() {
   left_motor.attach(13);
   right_motor.attach(12);
   
   left_motor.writeMicroseconds(LEFT_STILL);
   right_motor.writeMicroseconds(RIGHT_STILL);
   
-  Serial.begin(9600);
+  Serial.begin(115200);
   while (!Serial);
 
-  wifi_begin();
+  #if WIFI_CLIENT
+    wifi_begin_client();
+  #else 
+    wifi_begin_server();
+  #endif
+  
   Wire.begin();
   gps_serial.begin(9600);
 }
 
 void loop() {
+  // sets the motor speed based on the last action recieved
   drive();
 
-  read_sonar();
-  read_rotation(); 
+  // read all sensors
+  read_rotation();
+  read_velocity(); 
   read_gps();
+  read_sonar();
 
-  wifi_handle_client([](const char *message) {
+  WiFiClient* client = wifi_handle_connection([](const char *message, WiFiClient* client) {
     int size = sizeof(message);
 
     if (size < 2) {
@@ -101,23 +147,33 @@ void loop() {
     }
 
     uint8_t _type = message[0] - '0';
-
+    
     if (_type == 1) { 
-      switch (message[1]) {
-      case 'F':
-        forward_time = millis();
-        break;
-      case 'B':
-        backward_time = millis();
-        break;
-      case 'L':
-        left_time = millis();
-        break;
-      case 'R':
-        right_time  = millis();
-        break;
+      for (size_t i = 0; i < size-1; i++) {
+        switch (message[i+1]) {
+          case 'F':
+            forward_time = millis();
+            break;
+          case 'B':
+            backward_time = millis();
+            break;
+          case 'L':
+            left_time = millis();
+            break;
+          case 'R':
+            right_time  = millis();
+            break;
+          }
       }
+
       drive();
+    
+    } else if (_type == 8) {
+      Serial.println("[PROXY] recieved ping");
+      client->println(PONG_MESSAGE); 
+    
+    } else if (_type == 9) {
+      Serial.println("[PROXY] recieved pong");
     }
   });
 }

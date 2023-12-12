@@ -1,13 +1,43 @@
 #include "wifi.h"
 
-void wifi_begin() {
+void wifi_begin_client() {
+  
   if (WiFi.status() == WL_NO_MODULE) {
     Serial.println("communication with wifi module failed");
+    while(true);
   }
 
   String v = WiFi.firmwareVersion();
   if (v < WIFI_FIRMWARE_LATEST_VERSION) {
     Serial.println("please upgrade the firmware");
+    while(true);
+  }
+
+  Serial.print("trying to connect to wifi: ");
+  Serial.println(WIFI_SSID);
+  
+  Start:
+    int status = WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
+    
+    if (status != WL_CONNECTED) {
+      delay(10000);
+      goto Start;
+    }
+
+  Serial.print("connected to wifi: ");
+  Serial.println(WIFI_SSID);
+}
+
+void wifi_begin_server() {
+  if (WiFi.status() == WL_NO_MODULE) {
+    Serial.println("communication with wifi module failed");
+    while(true);
+  }
+
+  String v = WiFi.firmwareVersion();
+  if (v < WIFI_FIRMWARE_LATEST_VERSION) {
+    Serial.println("please upgrade the firmware");
+    while(true);
   }
 
   WiFi.config(IPAddress(192,168,8,8));
@@ -19,49 +49,49 @@ void wifi_begin() {
   Serial.println(ssid);
 
   uint8_t status = WiFi.beginAP(ssid, AP_PASSWORD);
+
   if (status != WL_AP_LISTENING) {
     Serial.println("creating access point failed");
+    while(true);
   }
-
+  
   delay(10000);
-
   server.begin();
-  wifi_print_status();
-}
 
-void wifi_print_status() {
+  Serial.println("created access point");
   Serial.print("ssid: ");
   Serial.println(WiFi.SSID());
-
-  IPAddress ip = WiFi.localIP();
   Serial.print("ip address: ");
-  Serial.println(ip);
+  Serial.println(WiFi.localIP());
 }
 
 String message = "";
 
-void wifi_handle_client(void (*handler)(const char*)) {
-  WiFiClient client = server.available();
+WiFiClient* wifi_handle_connection(void (*handler)(const char*, WiFiClient* client)) {
+  
+  #if WIFI_CLIENT
+    if (!client.connected()) { 
+     client.connect(PROXY_IP, PROXY_PORT); 
+     client.print(CONNECT_MESSAGE);
+    }
+  #else
+    WiFiClient client = server.available();
+  #endif
 
-  if (!client) { 
-    COOLDOWN(200, { digitalWrite(LED_BUILTIN, LOW); });  
-    return;
+  if (!client || !client.connected()) { 
+    return NULL;
   }
-
-  digitalWrite(LED_BUILTIN, HIGH);
 
   while (client.available() > 0) {
     char byte = client.read();
 
     if (byte == '\n') {
-        handler(message.c_str());
+        handler(message.c_str(), &client);
         message = "";
         continue;
     }
 
     message += byte;
-    
-    Serial.println(message);
   }
 
   Message next = queue.next();
@@ -72,4 +102,6 @@ void wifi_handle_client(void (*handler)(const char*)) {
     client.write(message);
     next = queue.next();
   }
+
+  return &client;
 }
