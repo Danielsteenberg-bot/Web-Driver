@@ -85,9 +85,3 @@ function handleRotation(socket, userId, test, prisma) {
         });
     });
 };
-
-module.exports = {
-    handleGPS,
-    handleSonar,
-    handleRotation
-};
