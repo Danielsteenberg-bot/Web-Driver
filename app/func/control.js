@@ -46,7 +46,6 @@ function emitDirection(btn) {
 
 }
 
-function handleGPS(socket, userId, test, prisma) {
     socket.on('gps', async (lat, long) => {
         const session = await test(userId, lat, long);
         const latLong = await prisma.user.update({
@@ -57,10 +56,8 @@ function handleGPS(socket, userId, test, prisma) {
             }
         });
     });
-};
 
-function handleSonar(socket, userId, test, prisma) {
-    socket.on('sonar', async (front, left, right) => {
+   socket.on('sonar', async (front, left, right) => {
         const session = await test(userId, front, left, right);
         const sonar = await prisma.user.update({
             where: { id: userId },
@@ -71,9 +68,7 @@ function handleSonar(socket, userId, test, prisma) {
             }
         });
     });
-};
 
-function handleRotation(socket, userId, test, prisma) {
     socket.on('rotation', async (angle) => {
         console.log('rotation');
         const session = await test(userId, angle);
@@ -84,4 +79,4 @@ function handleRotation(socket, userId, test, prisma) {
             }
         });
     });
-};
+
