@@ -52,9 +52,4 @@ router.route('/register')
         console.log(user)
     });
 
-   router.route('/accountmanage')
-    .get((req, res) =>{
-        res.render('account/accountmanage') 
-    })
-
 module.exports = router
