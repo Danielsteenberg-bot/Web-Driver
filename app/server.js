@@ -63,7 +63,7 @@ io.on('connection', (socket) => {
             socket.to(deviceId).emit('joined-message', `${userId} has joined the room`);
 
             socket.on("move", (direction) => {
-                console.log("client" + direction)
+                console.log(": "+ direction)
                 socket.to(deviceId).emit("move", direction)
             })
         });

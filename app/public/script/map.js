@@ -6,7 +6,8 @@ const clearBTN = document.querySelector('.clearBTN');
 const saveBTN = document.querySelector('.saveBTN');
 const arrowKeys = document.querySelectorAll('.arrow-key');
 
-let distance = 0;   
+
+let distance = 0;
 let checkpoints = [];
 let drivesession = [];
 
@@ -33,12 +34,12 @@ const ball = {
 };
 
 const trail = [];
-for (let i = 0; i < 30; i++) {  
-    trail.push({x: ball.x, y: ball.y - i * 2});
+for (let i = 0; i < 30; i++) {
+    trail.push({ x: ball.x, y: ball.y - i * 2 });
 }
 
 function draw() {
-    
+
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = 'rgba(255, 255, 255, 0.1)';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -47,13 +48,13 @@ function draw() {
         trail[i].y += ball.speed;
     }
 
-    trail.push({x: ball.x, y: ball.y});
+    trail.push({ x: ball.x, y: ball.y });
 
-    if (trail.length > 50) { 
+    if (trail.length > 50) {
         trail.length = 35;
     }
 
-    for (let i = trail.length - 1; i >= 0; i--) {  
+    for (let i = trail.length - 1; i >= 0; i--) {
         ctx.beginPath();
         ctx.arc(trail[i].x, trail[i].y, ball.radius, 0, Math.PI * 2);
         ctx.fillStyle = 'rgba(0, 0, 0, 0.2)';
@@ -68,59 +69,144 @@ function draw() {
     requestAnimationFrame(draw);
 }
 
+// R L F B
+// document.addEventListener('keydown', (event) => {
+//     switch (event.key) {
+//         case 'ArrowUp':
+//             distance++;
+//             ball.speed = 7;
+//             ball.dy = -ball.speed;
+//             socket.emit('move', "F")
+//             break;
 
-document.addEventListener('keydown', (event) => {
-    switch (event.key) {
-        case 'ArrowUp':
-            distance++;
-            ball.speed = 7;
-            ball.dy = -ball.speed;
-            arrowKeys[0].classList.toggle("active");
-            break;
-            
-        case 'ArrowDown':
-            distance++;
-            ball.speed = 3;
-            ball.dy = ball.speed;
-            arrowKeys[2].classList.toggle("active");
-            break;
+//         case 'ArrowDown':
+//             distance++;  
+//             ball.speed = 3;
+//             ball.dy = ball.speed;
+//             socket.emit('move', "B")
 
-        case 'ArrowLeft':
-            distance++;
-            ball.speed = 6;
-            ball.dx = -ball.speed;
-            arrowKeys[1].classList.toggle("active");
+//             break;
 
-            break;
-        case 'ArrowRight':
-            distance++;
-            ball.speed = 6;
-            ball.dx = ball.speed;
-            arrowKeys[3].classList.toggle("active");
-            break;
+//         case 'ArrowLeft':
+//             distance++;
+//             ball.speed = 6;
+//             ball.dx = -ball.speed;
+//             socket.emit('move', "L")
+//             break;
+//         case 'ArrowRight':
+//             distance++;
+//             ball.speed = 6;
+//             ball.dx = ball.speed;
+//             socket.emit('move', "R")
+//             break;
+//     }
+// });
+
+// document.addEventListener('keyup', (event) => {
+//     ball.speed = 5;
+//     switch (event.key) {
+//         case 'ArrowUp':
+//         case 'ArrowDown':
+//             ball.dy = 0;
+//         break;
+
+//         case 'ArrowLeft':
+//         case 'ArrowRight':
+//             ball.dx = 0;
+//         break;
+//     }
+// });
+const pressedKeys = {}
+onkeydown = (event) => {
+    pressedKeys[event.key] = true;
+    HandleKeyDown()
+}
+onkeyup = (event) => {
+    delete pressedKeys[event.key]
+    removeActive()
+    HandleKeyDown()
+}
+
+function HandleKeyDown() {
+    const keys = Object.keys(pressedKeys)
+    let combination = ''
+
+    keys.forEach(key => {
+        switch (key) {
+            case 'ArrowUp':
+                // console.log("F");
+                checkActive(0)
+                combination += 'F'
+                break;
+
+            case 'ArrowLeft':
+                // console.log("L");
+                checkActive(1);
+                combination += 'L'
+                break;
+
+            case 'ArrowDown':
+                // console.log("B");
+                checkActive(2)
+                combination += 'B'
+                break;
+
+            case 'ArrowRight':
+                // console.log("R");
+                checkActive(3)
+                combination += 'R'
+                break;
+            case 'w':
+                // console.log("F");
+                checkActive(0)
+                combination += 'F'
+                break;
+
+            case 'a':
+                // console.log("L");
+                checkActive(1)
+                combination += 'L'
+                break;
+
+            case 's':
+                // console.log("B");
+                checkActive(2)
+                combination += 'B'
+                break;
+
+            case 'd':
+                // console.log("R");
+                checkActive(3)
+                combination += 'R'
+                break;
+        }
+    })
+
+    if (combination.length > 0) {
+        const set = new Set(combination.split(''))
+        const filteredCombination = [...set].join('')
+        socket.emit('move', filteredCombination)
     }
-});
 
-document.addEventListener('keyup', (event) => {
-    ball.speed = 5;
-    switch (event.key) {
-        case 'ArrowUp':
-        case 'ArrowDown':
-            ball.dy = 0;
-        break;
+}
 
-        case 'ArrowLeft':
-        case 'ArrowRight':
-            ball.dx = 0;
-        break;
+function removeActive() {
+    arrowKeys[0].classList.remove("active");
+    arrowKeys[1].classList.remove("active");
+    arrowKeys[2].classList.remove("active");
+    arrowKeys[3].classList.remove("active");
+}
+
+function checkActive(key) {
+    if (!arrowKeys[key].classList.contains('active')) {
+        arrowKeys[key].classList.toggle("active");
     }
-});
-
+}
 function updateBallPosition() {
     ball.x += ball.dx;
     ball.y += ball.dy;
-    console.log(`ball.x: ${ball.x += ball.dx} ball.y: ${ball.y} `)
-    console.log(ball.dy);
+    // console.log(`ball.x: ${ball.x += ball.dx} ball.y: ${ball.y} `)
+    // console.log(ball.dy);
 
 
 }
@@ -169,11 +255,11 @@ saveBTN.addEventListener('click', () => {
         checkpoints = [];
         clicked = false;
     }
- });
+});
 
 
 clearBTN.addEventListener('click', () => {
-    console.log(checkpoints)
+    // console.log(checkpoints)
     clicked = true;
     distance = 0;
     if (clicked == true) {
