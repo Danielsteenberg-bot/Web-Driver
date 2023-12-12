@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     socket.emit('join-room-user', { deviceId });
     socket.emit('join-room-device', { pass: "test", deviceId });
     socket.on('rotation', (angle) => console.log(`Received rotation: ${angle}`));
+    socket.emit('ready');
 });
 
 
