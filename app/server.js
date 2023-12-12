@@ -71,10 +71,16 @@ io.on('connection', (socket) => {
     else if(!user){
         socket.on('join-room-device', (data) => {
             const { pass, deviceId } = data
-            if(pass == process.env.DEVICE_PASS){
-                socket.join(deviceId)
-                socket.emit('joined-message', `Welcome to ${pass} to deviceId: ${deviceId}`);
+            console.log("device:", deviceId)
+            
+            if(pass != process.env.DEVICE_PASS) {
+                socket.disconnect();
+                return      
             }
+            
+            socket.join(deviceId)
+            socket.emit('joined-message', `Welcome to device: ${deviceId}`);
+            
         })
     }
 
