@@ -1,7 +1,7 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+:root{
+  --grey-color: #525252;
+    --form-color: #4B4B4B;
+    --yellow-color: #DCAD05;
 }
 @font-face{
     font-family: Poppins;
@@ -11,20 +11,9 @@
 }
 
 body {
-  background-color: #525252;
-  height: 100vh;
-  overflow-x: hidden;
-  overflow-y: hidden;
-  font-family: Poppins;
-}
-@keyframes gradient {
-  0% {
-    background-position: 0% 50%;
+    background-color: (var(--grey-color));
+    height: 100vh;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    font-family: Poppins;
   }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}

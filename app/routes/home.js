@@ -13,9 +13,16 @@ const checkLogged = (req, res, next) => {
 }
 
 // Routers
+router.route('/')
+    .get((req, res) => {
+        res.render('dashboard/dashboard', {
+            title: 'dashboard'
+        })
+    })
+
 router.route('/manage')
     .get((req, res) => {
-        
+
         res.render('dashboard/manage', {
             title: "manage"
         })
@@ -24,17 +31,17 @@ router.route('/manage')
 router.route('/control')
     .get((req, res) => {
         res.render('dashboard/control', {
-            userId: req.session.userId 
+            userId: req.session.userId
         })
+    
     })
 
 
 router.route('/navbar')
-    .get((req, res) =>{
-        res.render('dashboard/navbar') 
+    .get((req, res) => {
+        res.render('dashboard/navbar', {
+            title: "navbar"
+        })
     })
-
-
-
 
 module.exports = router;

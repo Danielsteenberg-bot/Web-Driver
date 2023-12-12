@@ -12,6 +12,7 @@
     <script src="https://kit.fontawesome.com/7c9eddd821.js" crossorigin="anonymous"></script>
 </head>
 <body>
+    
 
     <%- include('../dashboard/navbar.ejs') %>
 
@@ -25,20 +26,19 @@
                 </div>
                 <div class="top-bar-right">
                     <div class="icon-container">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="88" height="61" viewBox="0 0 88 61" fill="none">
-                            <path d="M70.4656 40.4914C70.4656 43.3957 60.499 37.3363 44.9613 37.3363C29.4235 37.3363 17.3535 43.3957 17.3535 40.4914C17.3535 37.5872 29.4235 32.0776 44.9613 32.0776C60.499 32.0776 70.4656 37.5872 70.4656 40.4914Z" fill=""/>
-                            <circle cx="44.1726" cy="52.0603" r="8.93966" fill="#000000"/>
-                            <path d="M87.819 13.9442C87.819 18.7574 71.3396 8.71513 45.6485 8.71513C19.9573 8.71513 0 18.7574 0 13.9442C0 9.13097 19.9573 0 45.6485 0C71.3396 0 87.819 9.13097 87.819 13.9442Z" fill="#000000"/>
-                            <path d="M80.4566 28.8935C80.4566 32.8769 66.7403 24.566 45.3567 24.566C23.973 24.566 7.36182 32.8769 7.36182 28.8935C7.36182 24.9102 23.973 17.3535 45.3567 17.3535C66.7403 17.3535 80.4566 24.9102 80.4566 28.8935Z" fill="#000000"/>
-                            </svg>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="137" height="61" viewBox="0 0 137 61" fill="none">
-                                <rect x="2.5" y="2.5" width="129" height="56" rx="14.5" stroke="#000000" stroke-width="5"/>
-                                <rect x="17" y="17" width="99" height="28" fill="#000000"/>
-                                <rect x="133" y="17" width="4" height="28" fill="#000000"/>
-                                </svg>
+                        <svg class="wifiIcon" xmlns="http://www.w3.org/2000/svg" width="88" height="61" viewBox="0 0 88 61" fill="#9f9f9f">
+                            <path d="M70.4656 40.4914C70.4656 43.3957 60.499 37.3363 44.9613 37.3363C29.4235 37.3363 17.3535 43.3957 17.3535 40.4914C17.3535 37.5872 29.4235 32.0776 44.9613 32.0776C60.499 32.0776 70.4656 37.5872 70.4656 40.4914Z" fill="#9f9f9f"/>
+                            <circle cx="44.1726" cy="52.0603" r="8.93966" fill="#9f9f9f"/>
+                            <path d="M87.819 13.9442C87.819 18.7574 71.3396 8.71513 45.6485 8.71513C19.9573 8.71513 0 18.7574 0 13.9442C0 9.13097 19.9573 0 45.6485 0C71.3396 0 87.819 9.13097 87.819 13.9442Z" fill="#9f9f9f"/>
+                            <path d="M80.4566 28.8935C80.4566 32.8769 66.7403 24.566 45.3567 24.566C23.973 24.566 7.36182 32.8769 7.36182 28.8935C7.36182 24.9102 23.973 17.3535 45.3567 17.3535C66.7403 17.3535 80.4566 24.9102 80.4566 28.8935Z" fill="#9f9f9f"/>
+                        </svg>
+                        <svg class="batteryIcon" xmlns="http://www.w3.org/2000/svg" width="137" height="61" viewBox="0 0 137 61" fill="none">
+                            <rect x="2.5" y="2.5" width="129" height="56" rx="14.5" stroke="#9f9f9f" stroke-width="5"/>
+                            <rect x="17" y="17" width="99" height="28" fill="#9f9f9f"/>
+                            <rect x="133" y="17" width="4" height="28" fill="#9f9f9f"/>
+                        </svg>
                     </div>
-
-                        </div>
+                </div>
                         <div class="btn-container">
                             <button class="connectBTN">Connect</button>
                         </div>
@@ -48,21 +48,18 @@
                     <div class="cell">
                         <li class="statsCell">Stats: </li>
                     </div>
-                    <div class="cell">
-                        <li>Last drive KM: 12 km</li>
-                    </div>
-                    <div class="cell">
-                        <li>Average KM: 25km pr charge</li>
-                    </div>
-                    <div class="cell">
-                        <li>Last Driven: 09-01-2021</li>
-                    </div>
+                    <% const dummyData = [
+                        { label: "Last drive KM", value: "12 km" },
+                        { label: "Average", value: "25km pr charge" },
+                        { label: "Last Driven", value: "09-01-2021" }
+                    ]; %>
+                    <% dummyData.forEach(data => { %>
+                        <div class="cell">
+                            <li><%= data.label %>: <%= data.value %></li>
+                        </div>
+                    <% }); %>
                 </ul>
             </div>
     </div>
-    
-
-
-    
-</body>
-</html>
+    </body>
+    </html>
