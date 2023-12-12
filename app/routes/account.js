@@ -52,4 +52,10 @@ router.route('/register')
         console.log(user)
     });
 
+    const socket = rotation();
+
+socket.on('rotation', (angle) => {
+    console.log(`Received rotation: ${angle}`);
+});
+
 module.exports = router
