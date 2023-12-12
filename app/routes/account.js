@@ -52,7 +52,4 @@ router.route('/register')
         console.log(user)
     });
 
-    const socket = rotation();
-
-
 module.exports = router
