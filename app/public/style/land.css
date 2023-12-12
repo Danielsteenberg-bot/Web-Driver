@@ -1,0 +1,135 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+:root {
+    --primary-color: #FFD369;
+    --secondary-color: #222831;
+    --background-color: #393E46;
+    --red-color: #CD1818;
+    --green-color: #8EAC50;
+    --white-color: #EEEEEE;
+    --main-font: 'press start 2p';
+    --secondary-font: 'Montserrat';
+}
+
+
+.section-land{
+    background-color: var(--secondary-color);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-attachment: fixed;
+
+}
+
+.landing-container{
+    max-width: 85vw;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.landing-main h1{
+    color: var(--primary-color);
+    font-size: 4rem;
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.landing-main h3{
+    color: var(--primary-color);
+    font-family: var(--secondary-font);
+    font-size: 1.2rem;
+    min-width: 50%;
+    width: 40%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    line-height: 150%;
+    margin-top: 1rem;
+    animation: forwards fadeIn 0.5s ease-in-out;
+    animation-delay: 0.3s;
+}
+
+.arrow{
+    color: var(--primary-color);
+    font-size: 2rem;
+    animation: arrow 1s infinite;
+    margin-bottom: 2rem;
+}
+
+.square{
+    width: 250px;
+    height: 250px;
+    background-color: white;
+    opacity: 2;
+}
+
+/* .fade-out{
+    background-color: black;
+    animation: fadeOut 1s ease-in-out forwards;
+} */
+
+
+
+@media (max-width: 500px) {
+    .landing-main h1 {
+        font-size: 3rem;
+    }
+
+    .landing-main h3 {
+        font-size: 1rem;
+        width: 100%;
+    }
+
+    .arrow {
+        font-size: 1.5rem;
+    }
+
+    .square {
+        width: 150px;
+        height: 150px;
+    }
+}
+
+
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0.5;
+    }
+}
+
+
+@keyframes arrow {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(20px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+/* @keyframes fadeIn {
+    0% {
+        transform: translateY(15px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0px);
+        opacity: 1;
+    }
+}
+ */
