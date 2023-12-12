@@ -108,6 +108,7 @@ io.on('connection', (socket) => {
             
             function handleRotation(socket, userId, test, prisma) {
                 socket.on('rotation', async (angle) => {
+                    console.log('rotation');
                     const session = await test(userId, angle);
                     const rotation = await prisma.user.update({
                         where: { id: userId },
