@@ -13,6 +13,13 @@ const checkLogged = (req, res, next) => {
 }
 
 // Routers
+router.route('/')
+    .get((req, res) => {
+        res.render('dashboard/dashboard', {
+            title: 'dashboard'
+        })
+    })
+
 router.route('/manage')
     .get((req, res) => {
 

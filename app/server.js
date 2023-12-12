@@ -63,7 +63,7 @@ io.on('connection', (socket) => {
             socket.to(deviceId).emit('joined-message', `${userId} has joined the room`);
 
             socket.on("move", (direction) => {
-                console.log("client" + direction)
+                console.log(": "+ direction)
                 socket.to(deviceId).emit("move", direction)
             })
         });
@@ -77,20 +77,5 @@ io.on('connection', (socket) => {
             }
         })
     }
-    
-
-    const directions = ['left', 'right', 'up', 'down'];
-
-    directions.forEach(direction => {
-        socket.on(direction, async (data) => {
-            const { direction, deviceId } = data;
-            const id = socket.request.session.userId
-
-            
-            console.log(direction);
-            // const session = await test(id, direction);
-            // console.log(session);
-        });
-    });
 
 });
