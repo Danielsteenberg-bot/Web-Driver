@@ -5,6 +5,7 @@ const app = express();
 const server = http.createServer(app);
 const socketIO = require('socket.io');
 const { test } = require('./classes/session');
+const { emit } = require('nodemon');
 const io = socketIO(server)
 require('dotenv').config();
 
@@ -80,7 +81,8 @@ io.on('connection', (socket) => {
             
             socket.join(deviceId)
             socket.emit('joined-message', `Welcome to device: ${deviceId}`);
-            
+            socket.on("rotation", (rotation) => socket.to(deviceId).emit("rotation", rotation))
+            socket.on("sonar", (f, l, r) => socket.to(deviceId).emit("sonar", f, l, r))
         })
     }
 

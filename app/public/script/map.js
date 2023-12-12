@@ -6,12 +6,15 @@ const clearBTN = document.querySelector('.clearBTN');
 const saveBTN = document.querySelector('.saveBTN');
 const arrowKeys = document.querySelectorAll('.arrow-key');
 
-
 let distance = 0;
 let checkpoints = [];
 let drivesession = [];
 
+let rotation = 0;
+let sonar = [0, 0, 0];
 
+socket.on("rotation", (_rotation) => { rotation = _rotation; console.log(_rotation) })
+socket.on("sonar", (f, l, r) => { sonar = [f, l, r]; })
 
 let start = {
     x: canvas.width / 2,
@@ -22,8 +25,7 @@ let cp1 = { x: 0, y: 0 };
 let cp2 = { x: 0, y: 0 };
 let end = { x: 0, y: 0 };
 
-
-const ball = {
+const car = {
     x: canvas.width / 2,
     y: canvas.height / 2,
     radius: 15,
@@ -35,20 +37,50 @@ const ball = {
 
 const trail = [];
 for (let i = 0; i < 30; i++) {
-    trail.push({ x: ball.x, y: ball.y - i * 2 });
+    trail.push({ x: car.x, y: car.y - i * 2 });
+}
+
+// Function to calculate rotated points
+function rotatePoint(x, y, centerX, centerY, angle) {
+    const rad = angle * Math.PI / 180;
+    const rotatedX = Math.cos(rad) * (x - centerX) - Math.sin(rad) * (y - centerY) + centerX;
+    const rotatedY = Math.sin(rad) * (x - centerX) + Math.cos(rad) * (y - centerY) + centerY;
+    return [ rotatedX, rotatedY ];
+}
+
+// Reusable function to draw the triangle
+function drawTriangle(ctx, x, y, size, angle) {
+    
+    // Calculate rotated vertices
+    const top = rotatePoint(x, y - size, x, y, angle);
+    const bottomLeft = rotatePoint(x - size / 2, y + size / 2, x, y, angle);
+    const bottomRight = rotatePoint(x + size / 2, y + size / 2, x, y, angle);
+
+    ctx.beginPath();
+    
+    ctx.lineWidth = 5;
+
+    ctx.moveTo(top[0], top[1]);
+    ctx.lineTo(bottomLeft[0], bottomLeft[1]);
+    ctx.lineTo(bottomRight[0], bottomRight[1]);
+    
+    ctx.fillStyle = 'rgba(255, 255, 255)';
+    ctx.fill();
+
+    ctx.closePath();
+    ctx.stroke();
 }
 
 function draw() {
-
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = 'rgba(255, 255, 255, 0.1)';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     for (let i = 0; i < trail.length; i++) {
-        trail[i].y += ball.speed;
+        trail[i].y += car.speed;
     }
 
-    trail.push({ x: ball.x, y: ball.y });
+    trail.push({ x: car.x, y: car.y });
 
     if (trail.length > 50) {
         trail.length = 35;
@@ -56,66 +88,16 @@ function draw() {
 
     for (let i = trail.length - 1; i >= 0; i--) {
         ctx.beginPath();
-        ctx.arc(trail[i].x, trail[i].y, ball.radius, 0, Math.PI * 2);
+        ctx.arc(trail[i].x, trail[i].y, car.radius, 0, Math.PI * 2);
         ctx.fillStyle = 'rgba(0, 0, 0, 0.2)';
         ctx.fill();
     }
 
-    ctx.beginPath();
-    ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
-    ctx.fillStyle = ball.color;
-    ctx.fill();
+    drawTriangle(ctx, car.x, car.y, 30, 360 - rotation);
 
     requestAnimationFrame(draw);
 }
 
-// R L F B
-// document.addEventListener('keydown', (event) => {
-//     switch (event.key) {
-//         case 'ArrowUp':
-//             distance++;
-//             ball.speed = 7;
-//             ball.dy = -ball.speed;
-//             socket.emit('move', "F")
-//             break;
-
-//         case 'ArrowDown':
-//             distance++;  
-//             ball.speed = 3;
-//             ball.dy = ball.speed;
-//             socket.emit('move', "B")
-
-//             break;
-
-//         case 'ArrowLeft':
-//             distance++;
-//             ball.speed = 6;
-//             ball.dx = -ball.speed;
-//             socket.emit('move', "L")
-//             break;
-//         case 'ArrowRight':
-//             distance++;
-//             ball.speed = 6;
-//             ball.dx = ball.speed;
-//             socket.emit('move', "R")
-//             break;
-//     }
-// });
-
-// document.addEventListener('keyup', (event) => {
-//     ball.speed = 5;
-//     switch (event.key) {
-//         case 'ArrowUp':
-//         case 'ArrowDown':
-//             ball.dy = 0;
-//         break;
-
-//         case 'ArrowLeft':
-//         case 'ArrowRight':
-//             ball.dx = 0;
-//         break;
-//     }
-// });
 const pressedKeys = {}
 onkeydown = (event) => {
     pressedKeys[event.key] = true;
@@ -133,48 +115,25 @@ function HandleKeyDown() {
 
     keys.forEach(key => {
         switch (key) {
-            case 'ArrowUp':
+            case 'ArrowUp', 'w':
                 // console.log("F");
                 checkActive(0)
                 combination += 'F'
                 break;
 
-            case 'ArrowLeft':
+            case 'ArrowLeft', 'a':
                 // console.log("L");
                 checkActive(1);
                 combination += 'L'
                 break;
 
-            case 'ArrowDown':
+            case 'ArrowDown', 's':
                 // console.log("B");
                 checkActive(2)
                 combination += 'B'
                 break;
 
-            case 'ArrowRight':
-                // console.log("R");
-                checkActive(3)
-                combination += 'R'
-                break;
-            case 'w':
-                // console.log("F");
-                checkActive(0)
-                combination += 'F'
-                break;
-
-            case 'a':
-                // console.log("L");
-                checkActive(1)
-                combination += 'L'
-                break;
-
-            case 's':
-                // console.log("B");
-                checkActive(2)
-                combination += 'B'
-                break;
-
-            case 'd':
+            case 'ArrowRight', 'd':
                 // console.log("R");
                 checkActive(3)
                 combination += 'R'
@@ -203,8 +162,8 @@ function checkActive(key) {
     }
 }
 function updateBallPosition() {
-    ball.x += ball.dx;
-    ball.y += ball.dy;
+    car.x += car.dx;
+    car.y += car.dy;
     // console.log(`ball.x: ${ball.x += ball.dx} ball.y: ${ball.y} `)
     // console.log(ball.dy);
 
@@ -217,7 +176,7 @@ function drawRoute() {
     ctx.lineWidth = 10;
 
     if (Math.floor(distance) % 1 === 0) {
-        checkpoints.push({ x: ball.x, y: ball.y });
+        checkpoints.push({ x: car.x, y: car.y });
     }
 
     for (let i = 0; i < checkpoints.length; i++) {
@@ -232,7 +191,7 @@ function update() {
     draw();
     drawRoute();
     requestAnimationFrame(update);
-    infoSpeed.innerHTML = `${ball.speed}m/s`;
+    infoSpeed.innerHTML = `${car.speed}m/s`;
     infoDist.innerHTML = `${distance}m`;
 }
 
@@ -246,8 +205,8 @@ saveBTN.addEventListener('click', () => {
 
     if (clicked == true) {
         start = {
-            x: ball.x,
-            y: ball.y,
+            x: car.x,
+            y: car.y,
         };
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.fillStyle = 'rgba(255, 255, 255, 0.1)';
@@ -264,8 +223,8 @@ clearBTN.addEventListener('click', () => {
     distance = 0;
     if (clicked == true) {
         start = {
-            x: ball.x,
-            y: ball.y,
+            x: car.x,
+            y: car.y,
         };
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.fillStyle = 'rgba(255, 255, 255, 0.1)';
@@ -274,8 +233,6 @@ clearBTN.addEventListener('click', () => {
         clicked = false;
     }
 });
-
-
 
 
 update();
