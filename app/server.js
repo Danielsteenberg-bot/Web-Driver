@@ -43,7 +43,7 @@ io.on('connection', (socket) => {
         socket.on('join-room-user', (data) => {
             const { deviceId } = data;
             userId = socket.request.session.userId
-            socket.on('rotation', (angle) => {console.log(`Recieved rotation: ${angle}`)});
+            socket.emit('rotation', (angle) => {console.log(`Recieved rotation: ${angle}`)});
             setInterval(() => {
                 socket.emit('rotation', 45);
             }, 1000);
