@@ -46,8 +46,6 @@ io.on('connection', (socket) => {
             setInterval(() => {
                 socket.emit('rotation', 45);
             }, 1000);
-
-            socket.on('rotation', (angle) => console.log(`Received rotation: ${angle}`));
             // Update the user's socket ID or add a new user to the room
             if (!users[deviceId]) {
                 users[deviceId] = {};
