@@ -76,6 +76,12 @@ io.on('connection', (socket) => {
             if(pass == process.env.DEVICE_PASS){
                 socket.join(deviceId)
                 socket.emit('joined-message', `Welcome to ${pass} to deviceId: ${deviceId}`);
+                function emitRotation(socket, angle, interval) {
+                    setInterval(() => {
+                        socket.emit('rotation', angle);
+                    }, interval);
+                };
+                emitRotation(socket, 45, 1000);
             }}
             )
 
@@ -118,13 +124,6 @@ io.on('connection', (socket) => {
                     });
                 });
             };
-
-            function emitRotation(socket, angle, interval) {
-                setInterval(() => {
-                    socket.emit('rotation', angle);
-                }, interval);
-            };
-            emitRotation(socket, 45, 1000);
 
             module.exports = {
                 handleGPS,
