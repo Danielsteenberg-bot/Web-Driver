@@ -57,7 +57,7 @@ function emitDirection(btn) {
         });
     });
 
-   socket.on('sonar', async (front, left, right) => {
+    socket.on('sonar', async (front, left, right) => {
         const session = await test(userId, front, left, right);
         const sonar = await prisma.user.update({
             where: { id: userId },

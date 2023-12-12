@@ -90,8 +90,8 @@ io.on('connection', (socket) => {
 
             
             console.log(direction);
-            // const session = await test(id, direction);
-            // console.log(session);
+            const session = await test(id, direction);
+            console.log(session);
         });
     });
 };
