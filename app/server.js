@@ -42,9 +42,11 @@ io.on('connection', (socket) => {
     if (user) {
         socket.on('join-room-user', (data) => {
             const { deviceId } = data;
-            socket.emit('gps', 51.505, -0.09);
             userId = socket.request.session.userId
-            
+            socket.on('rotation', (angle) => {console.log(`Recieved rotation: ${angle}`)});
+            setInterval(() => {
+                socket.emit('rotation', 45);
+            }, 1000);
             // Update the user's socket ID or add a new user to the room
             if (!users[deviceId]) {
                 users[deviceId] = {};
@@ -75,13 +77,7 @@ io.on('connection', (socket) => {
             const { pass, deviceId } = data
             if(pass == process.env.DEVICE_PASS){
                 socket.join(deviceId)
-                socket.emit('joined-message', `Welcome to ${pass} to deviceId: ${deviceId}`);
-                function emitRotation(socket, angle, interval) {
-                    setInterval(() => {
-                        socket.emit('rotation', angle);
-                    }, interval);
-                };
-                emitRotation(socket, 45, 1000);
+                socket.emit('joined-message', `Welcome to ${pass} to deviceId: ${deviceId}`);   
             }}
             )
 
