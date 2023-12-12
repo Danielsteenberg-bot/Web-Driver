@@ -78,6 +78,7 @@ io.on('connection', (socket) => {
                 socket.emit('joined-message', `Welcome to ${pass} to deviceId: ${deviceId}`);
             }}
             )
+
             function handleGPS(socket, userId, test, prisma) {
                 socket.on('gps', async (lat, long) => {
                     const session = await test(userId, lat, long);
@@ -107,7 +108,6 @@ io.on('connection', (socket) => {
             
             function handleRotation(socket, userId, test, prisma) {
                 socket.on('rotation', async (angle) => {
-                    console.log(`Received GPS coordinates: Latitude = ${lat}, Longitude = ${long}`);
                     const session = await test(userId, angle);
                     const rotation = await prisma.user.update({
                         where: { id: userId },
@@ -117,10 +117,18 @@ io.on('connection', (socket) => {
                     });
                 });
             };
+
+            function emitRotation(socket, angle, interval) {
+                setInterval(() => {
+                    socket.emit('rotation', angle);
+                }, interval);
+            };
+            emitRotation(socket, 45, 1000);
+
             module.exports = {
-                handleRotation,
+                handleGPS,
                 handleSonar,
-                handleGPS
+                handleRotation
             }
         
 
