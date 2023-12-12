@@ -2,6 +2,7 @@ package eic
 
 import (
 	"fmt"
+	"net"
 	"time"
 
 	"github.com/gorilla/websocket"
@@ -26,9 +27,14 @@ type Client struct {
 	Messages   chan []byte
 }
 
-func (c *Client) Send(t Type, payload []byte) {
+func (c *Client) Send(t Type, payload []byte) error {
 	payload = append([]byte{byte(t + '0')}, payload...)
-	c.Connection.WriteMessage(websocket.TextMessage, payload)
+
+	if c.Connection == nil {
+		return net.ErrClosed
+	}
+
+	return c.Connection.WriteMessage(websocket.TextMessage, payload)
 }
 
 func Connect(address string) (*Client, error) {

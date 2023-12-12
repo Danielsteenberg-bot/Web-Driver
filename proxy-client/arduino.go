@@ -10,7 +10,7 @@ import (
 type ArduinoMessageType uint8
 
 type Arduino struct {
-	Connection *net.Conn
+	Connection net.Conn
 }
 
 const (
@@ -23,15 +23,15 @@ const (
 	DRIVE_ACTION = iota + 1
 )
 
-func (a *Arduino) Write(buffer []byte) {
+func (a *Arduino) Write(buffer []byte) error {
 
 	if a.Connection == nil {
-		return
+		return net.ErrClosed
 	}
 
-	conn := *a.Connection
+	conn := a.Connection
 	_, err := conn.Write(buffer)
-	fmt.Println(err)
+	return err
 }
 
 func (a *Arduino) Connect(handler func([]byte)) {
@@ -42,25 +42,24 @@ func (a *Arduino) Connect(handler func([]byte)) {
 		return
 	}
 
-	a.Connection = &c
+	a.Connection = c
+	reader := bufio.NewReader(a.Connection)
 
 	reconnect := func() {
-		c.Close()
+		a.Connection.Close()
 
 		for {
 			c, err := net.Dial("tcp", "192.168.8.8:80")
 
 			if err == nil {
-				a.Connection = &c
+				a.Connection = c
+				reader = bufio.NewReader(a.Connection)
 				return
 			}
 
 			time.Sleep(500 * time.Millisecond)
 		}
 	}
-
-	// Create a buffer reader to read data from the connection
-	reader := bufio.NewReader(c)
 
 	go func() {
 		for {

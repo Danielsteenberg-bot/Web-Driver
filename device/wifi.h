@@ -18,6 +18,6 @@ void wifi_handle_client(void (*handler)(const char*));
 
 extern WiFiClient *client;
 extern WiFiServer server;
-extern Queue<Message, 50> out_queue;
+extern Queue<Message, 50> queue;
 
 #endif

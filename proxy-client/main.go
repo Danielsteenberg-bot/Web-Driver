@@ -56,30 +56,44 @@ func main() {
 	socket := sic.New()
 	arduino := &Arduino{}
 
-	socket.On("up", func(payload ...[]byte) {
-		arduino.Write([]byte("1F"))
-	})
+	socket.On("move", func(payload ...[]byte) {
 
-	socket.On("down", func(payload ...[]byte) {
-		arduino.Write([]byte("1B"))
-	})
+		if len(payload) == 0 {
+			return
+		}
 
-	socket.On("left", func(payload ...[]byte) {
-		arduino.Write([]byte("1L"))
-	})
+		fmt.Println("socket >", string(payload[0]))
 
-	socket.On("right", func(payload ...[]byte) {
-		arduino.Write([]byte("1R"))
+		var direction string
+
+		fmt.Println(string(payload[0]))
+
+		switch string(payload[0]) {
+		case "up":
+			direction = "F"
+		case "down":
+			direction = "B"
+		case "left":
+			direction = "L"
+		case "right":
+			direction = "R"
+		}
+
+		err := arduino.Write([]byte("1" + direction + "\n"))
+
+		if err != nil {
+			fmt.Println("[ARDUINO] [WRITE] [ERR]", err)
+		}
 	})
 
 	socket.On("joined-message", func(payload ...[]byte) {
-		fmt.Println("join-message", string(bytes.Join(payload, []byte(","))))
+		fmt.Println("joined-message", string(bytes.Join(payload, []byte(","))))
 	})
 
 	err := socket.Connect("ws://localhost:3000/socket.io", func() {
 		fmt.Println("[WS] connected")
 
-		socket.Emit("join-room-device", []byte("{\"deviceId\":1,\"pass\":\"test\"}"))
+		socket.Emit("join-room-device", []byte("{\"deviceId\":\"1\",\"pass\":\"test\"}"))
 	})
 
 	if err != nil {
@@ -117,6 +131,8 @@ func main() {
 		if len(message) < 1 {
 			return
 		}
+
+		fmt.Println("arduino >", string(message))
 
 		switch ArduinoMessageType(message[0] - '0') {
 		case GPS:

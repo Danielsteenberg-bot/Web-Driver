@@ -20,20 +20,19 @@ NewPing sonar_right(RIGHT_PING_PIN, RIGHT_ECHO_PIN, 300);
 Servo left_motor;
 Servo right_motor;
 
-long left_time;
-long right_time;
-long forward_time;
-long backward_time;
+unsigned long left_time;
+unsigned long right_time;
+unsigned long forward_time;
+unsigned long backward_time;
 
 WiFiServer server(80);
+Queue<Message, 50> queue;
 WiFiClient *client;
-Queue<Message, 50> out_queue;
 
 void read_sonar() {
     Message message = { .type = 3 };
     snprintf(message.message, sizeof(message.message), "%d,%d,%d", sonar_front.ping_cm(), sonar_left.ping_cm(), sonar_right.ping_cm());
-    // Serial.println(message.message);
-    out_queue.add(message);
+    queue.add(message);
   }
     
 void read_gps() {
@@ -43,8 +42,7 @@ void read_gps() {
     if (gps_data.valid.location) {
       Message message = { .type = 1 };
       snprintf(message.message, sizeof(message.message), "%.6f,%.6f", gps_data.latitude(), gps_data.longitude());
-      // Serial.println(message.message);
-      out_queue.add(message);
+      queue.add(message);
     }
   }
 }
@@ -68,8 +66,7 @@ void read_rotation() {
 
   Message message = { .type = 2 };
   snprintf(message.message, sizeof(message.message), "%d.%d", rotation / 10, rotation % 10);
-  // Serial.println(message.message);
-  out_queue.add(message);
+  queue.add(message);
 }
 
 void setup() {
@@ -78,11 +75,11 @@ void setup() {
   left_motor.attach(13);
   right_motor.attach(12);
   
+  left_motor.writeMicroseconds(LEFT_STILL);
+  right_motor.writeMicroseconds(RIGHT_STILL);
+  
   Serial.begin(9600);
   while (!Serial);
-
-  left_motor.writeMicroseconds(E);
-  right_motor.writeMicroseconds(1700);
 
   wifi_begin();
   Wire.begin();
@@ -90,6 +87,8 @@ void setup() {
 }
 
 void loop() {
+  drive();
+
   read_sonar();
   read_rotation(); 
   read_gps();
@@ -98,28 +97,27 @@ void loop() {
     int size = sizeof(message);
 
     if (size < 2) {
-      continue;
+      return;
     }
 
-    uint8_t type = message[0] - '0'
-    
-    if (type == 1) { 
-        switch (message[1]) {
-        case 'F':
-          forward_time = millis();
-          break;
-        case 'B':
-          backward_time = millis();
-          break;
-        case 'L':
-          left_time = millis();
-          break;
-        case 'R':
-          right_time  = millis();
-          break;
-        }
+    uint8_t _type = message[0] - '0';
+
+    if (_type == 1) { 
+      switch (message[1]) {
+      case 'F':
+        forward_time = millis();
+        break;
+      case 'B':
+        backward_time = millis();
+        break;
+      case 'L':
+        left_time = millis();
+        break;
+      case 'R':
+        right_time  = millis();
+        break;
+      }
+      drive();
     }
-    
   });
-
 }

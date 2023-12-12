@@ -2,6 +2,7 @@ package sic
 
 import (
 	"bytes"
+	"net"
 	"proxy-client/eic"
 )
 
@@ -41,7 +42,12 @@ func (s *Socket) On(name string, handler Handler) {
 	s.events[name] = handlers
 }
 
-func (s *Socket) Emit(name string, arguments ...[]byte) {
+func (s *Socket) Emit(name string, arguments ...[]byte) error {
+
+	if s.client == nil {
+		return net.ErrClosed
+	}
+
 	packet := &Packet{
 		Type:      EVENT,
 		Namespace: "/",
@@ -61,7 +67,7 @@ func (s *Socket) Emit(name string, arguments ...[]byte) {
 
 	packet.Payload = buffer.Bytes()
 
-	s.client.Send(eic.MESSAGE, encode(packet))
+	return s.client.Send(eic.MESSAGE, encode(packet))
 }
 
 func (s *Socket) Connect(address string, handler func()) error {

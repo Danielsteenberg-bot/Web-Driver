@@ -50,7 +50,6 @@ void wifi_handle_client(void (*handler)(const char*)) {
 
   digitalWrite(LED_BUILTIN, HIGH);
 
-
   while (client.available() > 0) {
     char byte = client.read();
 
@@ -61,14 +60,16 @@ void wifi_handle_client(void (*handler)(const char*)) {
     }
 
     message += byte;
+    
+    Serial.println(message);
   }
 
-  Message next = out_queue.next();
+  Message next = queue.next();
   
   while (next.type != 0) {
     char message[50];
     snprintf(message, sizeof(message), "%d%s\n", next.type, next.message);
     client.write(message);
-    next = out_queue.next();
+    next = queue.next();
   }
 }
