@@ -1,3 +1,8 @@
+:root{
+  --grey-color: #525252;
+    --form-color: #4B4B4B;
+    --yellow-color: #DCAD05;
+}
 @font-face{
     font-family: Poppins;
     src: url("font/Poppins/Poppins-Regular.ttf") format("truetype");
@@ -6,28 +11,28 @@
 }
 
 body {
-    background: linear-gradient(
-      -45deg,
-      #ff00c7,
-      rgb(209, 53, 113),
-      #23a6d5,
-      #23d5ab
-    );
-    background-size: 400% 400%;
-    animation: gradient 12s ease infinite;
+    background-color: var(--grey-color);
     height: 100vh;
     overflow-x: hidden;
     overflow-y: hidden;
     font-family: Poppins;
   }
-  @keyframes gradient {
-    0% {
-      background-position: 0% 50%;
-    }
-    50% {
-      background-position: 100% 50%;
-    }
-    100% {
-      background-position: 0% 50%;
-    }
-  }
+  .svg-shape-4{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 300px;
+    height: 300px;
+}
+.svg-shape-5{
+    position: absolute;
+    bottom: -10px;
+    left: 0px;
+
+
+}
+.svg-shape-6{
+    position: absolute;
+    right: -300px;
+    top: -200px;
+}

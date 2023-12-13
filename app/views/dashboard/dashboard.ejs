@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="../../public/style/map.css">
+    <script src="/socket.io/socket.io.js"></script>
+
+
+    <script defer src="../../public/script/map.js"></script>
+    <script src="../../public/script/join.js"></script>
+
+
+
+    <script src="https://kit.fontawesome.com/7c9eddd821.js" crossorigin="anonymous"></script>
+
+</head>
+<body>
+    
+
+
+    <div class="main-container">
+        <div class="dashboard-container">
+            <div class="map">
+                <canvas class="canvasMap" width="600" height="400"></canvas>
+                </div>
+                <div class="save">
+                    <button class="saveBTN">Save</button>
+                </div>
+                <div class="clear">
+                    <button class="clearBTN">Delete</button>
+                </div>
+            <div class="controller">
+                <div class="arrow-key-row">
+                    <div class="arrow-key arrow-key-up" data-direction="up">
+                        <i class=" fa-solid fa-arrow-up"></i>
+                    </div>
+                </div>
+                <div class="arrow-key-row">
+                    <div class="arrow-key arrow-key-left" data-direction="left">
+                        <i class="fa-solid fa-arrow-left"></i>
+                    </div>
+                    <div class="arrow-key arrow-key-down" data-direction="down">
+                        <i class="fa-solid fa-arrow-down"></i>
+                    </div>
+                    <div class="arrow-key arrow-key-right" data-direction="right">
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="data-container">
+                <div class="data-item">
+                    <div class="data-wrapper">
+                        <div class="item">
+                            <h3 class="infoTXT">Speed: <span class="infoSpeed" id="data-speed"></span></h3>
+                        </div>
+                    </div>
+                </div>
+            <div class="data-item">
+                <div class="data-wrapper">
+                    <div class="item">
+                        <h3 class="infoTXT">Travel: <span class="infoDist" id="data-speed"></span></h3>
+                </div>
+            </div>
+        </div>
+    </div>
+            <div class="icon">
+                <div class="icon-container">
+                    <div class="icon-wrapper">
+                        <i class="fa-solid fa-wifi"></i>
+                            <i class="fa-solid fa-battery-full"></i>
+                                </div>
+                            <div class="session-container">
+                        <h3>Session ID: <span>01</span></h3>
+                    </div>
+                </div>
+            </div>
+          </div>
+    </div>
+</body>
+</html>
