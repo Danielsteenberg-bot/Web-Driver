@@ -32,76 +32,61 @@ app.use('/dashboard', require('./routes/home'))
 
 
 const port = process.env.PORT || 3000;
+server.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
+});
+
 io.on('connection', (socket) => {
     const users = {};
-    let user = socket.request.session.userId;
+    let user = socket.request.session.userId
     let rotation = [];
     if (user) {
         socket.on('join-room-user', (data) => {
-            setInterval(() => {
-                socket.emit('rotation', 45);
-            }, 1000);
+                setInterval(() => {
+                    socket.emit('rotation', 45);
+                }, 1000);
             const { deviceId } = data;
-            const userId = socket.request.session.userId;
-
-            socket.on('rotation', async (angle) => {
-                rotation.push(angle);
-                console.log("successful socket");
-            });
-
-            setInterval(async () => {
-                const userId = socket.request.session.userId;
-                if (userId) {
-                    await prisma.user.update({
-                        where: { id: userId },
-                        data: {
-                            rotation
-                        }
-                    });
-                }
-                post(rotation);
-                console.log("successful post");
-            }, 10000);
-        });
-
-        // Update the user's socket ID or add a new user to the room
-        if (!users[deviceId]) {
-            users[deviceId] = {};
-        }
-
-        users[deviceId][userId] = { socketId: socket.id };
-
-        // Log the updated users information
-        console.log(users);
-
-        // Join the room
-        socket.join(deviceId);
-
-        // Emit a message to the user who just joined the room
-        socket.emit('joined-message', `Welcome to user ${userId} to deviceId: ${deviceId}`);
-
-        // Emit a message to all users in the room except the newly joined user
-        socket.to(deviceId).emit('joined-message', `${userId} has joined the room`);
-
-        socket.on("move", (direction) => {
-            console.log(": " + direction);
-            socket.to(deviceId).emit("move", direction);
-        });
-    } else if (!user) {
-        socket.on('join-room-device', (data) => {
-            const { pass, deviceId } = data;
-            console.log("device:", deviceId);
-
-            if (pass != process.env.DEVICE_PASS) {
-                socket.disconnect();
-                return;
+            userId = socket.request.session.userId
+            // Update the user's socket ID or add a new user to the room
+            if (!users[deviceId]) {
+                users[deviceId] = {};
             }
 
+            users[deviceId][userId] = { socketId: socket.id };
+
+            // Log the updated users information
+            console.log(users);
+
+            // Join the room
             socket.join(deviceId);
-            socket.emit('joined-message', `Welcome to device: ${deviceId}`);
+
+            // Emit a message to the user who just joined the room
+            socket.emit('joined-message', `Welcome to user ${userId} to deviceId: ${deviceId}`);
+            
+            // Emit a message to all users in the room except the newly joined user
+            socket.to(deviceId).emit('joined-message', `${userId} has joined the room`);
+
+            socket.on("move", (direction) => {
+                console.log(": "+ direction)
+                socket.to(deviceId).emit("move", direction)
+            })
         });
     }
+    else if(!user){
+        socket.on('join-room-device', (data) => {
+            const { pass, deviceId } = data
+            console.log("device:", deviceId)
+            
+            if(pass != process.env.DEVICE_PASS) {
+                socket.disconnect();
+                return      
+            }
+            
+            socket.join(deviceId)
+            socket.emit('joined-message', `Welcome to device: ${deviceId}`);
+            
+        })
+    }
+
 });
-
-
 
