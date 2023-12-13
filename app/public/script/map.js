@@ -12,7 +12,7 @@ let distance = 0;
 let checkpoints = [];
 let drivesession = [];
 
-let data = 0;
+let data = [];
 
 let start = {
     x: canvas.width / 2,
