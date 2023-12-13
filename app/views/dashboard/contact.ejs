@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../public/style/main.css" rel="stylesheet">
+    <link href="../public/style/contact.css" rel="stylesheet">
+    <title>Document</title>
+</head>
+
+<body>
+    <%- include('./navbar.ejs') %>
+        <div class="contact-outer">
+            <div class="wrapper-contact-info">
+
+
+                <h2>Contact us!</h2>
+                <div class="contact-info">
+                    <div class="phone-contact-div">
+                        <svg class="phone-svg" width="35" height="35" viewBox="0 0 44 44" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M34.3982 25.8914H32.9502L32.2262 26.0724L31.6833 26.4344L31.1403 26.7964L30.4163 27.5204L28.9683 28.7873L27.8824 29.8733L26.9774 30.4163L26.2534 30.0543L24.0814 28.7873L21.3665 26.6154L19.0136 24.4434L16.2986 21.3665L15.0317 19.3756L13.5837 17.0226L13.9457 15.9367L15.7557 14.4887L17.5656 12.4977L18.2896 10.1448L16.1176 7.06787L13.7647 4.71493L11.9548 3.08597L10.5068 2.181L9.42081 2H8.87783L8.33484 2.181L6.1629 3.80995L4.71493 5.25792L2.90498 7.06787L2 9.05882L2.181 11.5928L3.62896 17.2036L6.34389 22.6335L10.8688 28.9683L15.9367 33.6742L20.6425 37.2941L27.5204 40.914L32.5882 42L35.1222 41.638L36.7511 40.914L42 35.3032V33.6742L34.3982 25.8914Z"
+                                stroke="white" stroke-width="3" />
+                        </svg>
+                        <h3>+31 6 123456789</h3>
+                    </div>
+                    <div class="email-contact-div">
+                        <svg class="mail-svg" width="40" height="35" viewBox="0 0 54 44" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M3.1254 2.93897L2.80386 3.12676L2.16077 4.06573L2 35.4272V37.6808L2.64309 40.3099M3.1254 2.93897L18.7203 22.2817M3.1254 2.93897L4.09003 2.37559L5.21543 2H31.2604H47.9807L49.5884 2.56338L50.3119 3.12676M51.0354 41.4366L52 39.7465V35.615L51.6785 7.8216V5.19249L51.0354 3.69014L50.3119 3.12676M51.0354 41.4366L48.9453 42H46.0514H40.9068H31.4212H25.955H12.6109H5.53698L3.44695 41.4366L2.64309 40.3099M51.0354 41.4366L42.836 31.8592L34.4759 22.0939M2.64309 40.3099L18.7203 22.2817M18.7203 22.2817L22.9003 26.7887L25.1511 27.9155H26.2765H27.5627L29.9743 26.7887L31.7428 25.662L32.8682 23.9718L34.4759 22.0939M34.4759 22.0939L50.3119 3.12676"
+                                stroke="white" stroke-width="3" />
+                        </svg>
+
+                        <h3>Webdrive@gmail.com</h3>
+                    </div>
+                </div>
+                
+                <h3 class="socials-h3">Our socials:</h3>
+                <div class="social-links">
+                    <div class="instagram">
+                        <svg class="insta-svg" width="40" height="40" viewBox="0 0 45 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M6 2.5L4 4L3 5.5L2 7L1 9V11.5V30V35.5L2.5 39.5L5 42.5L8.5 44.5L11 45H25.5H36L39.5 43.5L43 39.5L44.5 35.5V17.5V9L43 6L41.5 4L39.5 2.5L37.5 1.5L35 1H28H15H11L8 1.5L6 2.5Z" stroke="black"/>
+                        <circle cx="37" cy="8" r="2" stroke="black" stroke-width="2"/>
+                        <circle cx="23.5" cy="22.5" r="12" stroke="black"/>
+                        </svg>
+                    </div>
+                    <div class="facebook">
+                        <svg class="facebook-svg" width="50" height="50" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <rect width="60" height="60" rx="15" fill="url(#pattern0)"/>
+                            <defs>
+                            <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
+                            <use xlink:href="#image0_391_33" transform="translate(-0.0571031) scale(0.00278552)"/>
+                            </pattern>
+                            <image id="image0_391_33" width="400" height="359" xlink:href="data:image/png;base64,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D+h3AgKzYP58AaH/CQjMApewaAMBgVnQ3USHfudvOQARAQEgIiAARAQEgIiAABAREAAiAgJAREAAiAgIABEBASAiIABEBASAiIAAEBEQACICAkBEQACICAgAEQEBICIgAEQEBICIgAAQERAAIgICQERAAIgICAARAQEgIiAARAY6nc5EXdNCY2NjZd++fXXqLePj4+UvP/NXdWqWlSsvLQ8+9GCdmmF4eLisX7++TvDbCUjL3Xff/eWeu++pE2127QeuLSMjP64T/HYuYQGTVq1aVVdwZgQEmCQgTJWAAJNWrVpZV3BmBASY5BMIUyUgwCQBYaoEBCiDg4Nl+fLldYIzIyBAWbFi+WREYCoEBCgrXb4iICCA/Q8iAgIICBEBAdwDQkRAAJ9AiAgIICBEBARabv78+WXZsmV1gjMnINBy3d8ugYSAQMu5B4SUgEDL2f8gJSDQcitX+govGQGBlnMPCCkBgZZzCYuUgEDLCQgpAYEWW7hwYVmwYEGdYGoEBFrM/gfTISDQYu4BYToEBFrM/gfTISDQYgLCdAgItJg9EKZDQKDFfAJhOgQEWmpgYMBjTJgWAYGWWrZsaTn//PPrBFMnINBSvsLLdAkItJT9D6ZLQKClBITpEhBoKV/hZboEBFrKJxCmS0CgpQSE6RIQaKGhoaGyYsWKOkFGQKCFVqxYXubNm1cnyAgItJB7QJgJAgItZP+DmSAg0EKegcVMEBBoIfeAMBMEBFrIJSxmgoBACwkIM2Gg0+lM1DUt9PLLL5f9+/fXqbeMjY2VzZ/cUqdmec97VpXv/MN36tR71q1bV1eQExB61ksvvVR+//3X1KlZ1q79vTK6e7RO0J9cwgIgIiAARAQEgIiAABAREAAiAgJAREAAiAgIABEBASAiIABEBASAiIAAEBEQACICAkBEQACICAgAEQEBICIgAEQEBICIgAAQERAAIgICQERAAIgICAARAQEgIiAARAQEgIiAABAREAAiAgJAREAAiAgIABEBASAiIABEBASAiIAAEBEQACICAkBEQACICAgAEQEBICIgAEQEBICIgAAQERAAIgICQERAAIgICAARAQEgIiAARAQEgIiAABAREAAiAgJAREAAiAgIABEBASAiIABEBASAiIAAEBEQACICAkBEQACICAgAEQEBICIgAEQEBICIgAAQERAAIgICQERAAIgICAARAQEgIiAARAQEgIiAABAREAAiAgJAREAAiAgIABEBASAiIABEBASAiIAAEBEQACICAkBEQACICAgAEQEBICIgAEQEBICIgAAQERAAIgICQERAAIgICAARAQEgIiAARAQEgIiAABAREAAiAgJAREAAiAgIABEBASAiIABEBASAiIAAEBEQACICAkBEQACICAgAEQEBICIgAEQEBIDIQKfTmahrADhjPoEAEBEQACICAkBEQACICAgAEQEBICIgAEQEBICIgAAQERAAIgICQERAAIgICAARAQEgIiAARAQEgIiAABAREAAiAgJAREAAiAgIABEBASAiIABEBASAiIAAEBEQACICAkBEQACICAgAEQEBICIgAEQEBICIgAAQERAAIgICQERAAIgICAARAQEgIiAARAQEgIiAABAREAAiAgJAREAAiAgIABEBASBQyn8A+o7r/iMEt2oAAAAASUVORK5CYII="/>
+                            </defs>
+                            </svg>                        
+                    </div>
+                    <div class="twitter">
+                        <svg class="twitter-svg" width="39" height="39" viewBox="0 0 37 39" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M11.5 1.5H3L28 37.5H36L11.5 1.5Z" stroke="black"/>
+                            <path d="M35.5 0.5H34L2 38H3.5L35.5 0.5Z" stroke="black"/>
+                            </svg>
+                    </div>
+                </div>
+
+            </div>
+            <form class="contact-form" method="post">
+
+
+
+                <div class="wrapper-form-contact">
+                    <h2 class="h2-wrapper"> Tell us about your experience!</h2>
+                    <input class="input-name-contact" type="text" name="name_contact_form"
+                        placeholder="please enter your name">
+                    <textarea class="input-textarea-contact" placeholder="Write about your experience here!"></textarea>
+                    <button type="submit" class="submitbtn-contact">Send message</button>
+                </div>
+            </form>
+        </div>
+</body>
+
+</html>

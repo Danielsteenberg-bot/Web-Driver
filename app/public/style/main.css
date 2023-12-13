@@ -10,11 +10,10 @@
     font-style: normal;
 }
 
-body {
+body{
     background-color: var(--grey-color);
     height: 100vh;
     overflow-x: hidden;
-    overflow-y: hidden;
     font-family: Poppins;
   }
   .svg-shape-4{
@@ -26,10 +25,8 @@ body {
 }
 .svg-shape-5{
     position: absolute;
-    bottom: -10px;
+    bottom: -0px;
     left: 0px;
-
-
 }
 .svg-shape-6{
     position: absolute;
