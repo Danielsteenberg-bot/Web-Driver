@@ -11,10 +11,17 @@ let checkpoints = [];
 let drivesession = [];
 
 let rotation = 0;
-let sonar = [0, 0, 0];
+let sonar_front = 0;
+let sonar_left = 0;
+let sonar_right = 0;
 
-socket.on("rotation", (_rotation) => { rotation = _rotation; console.log(_rotation) })
-socket.on("sonar", (f, l, r) => { sonar = [f, l, r]; })
+
+socket.on("rotation", (x) => { rotation = x; console.log(x); })
+socket.on("sonar", (front, left, right) => { 
+    sonar_front = front;
+    sonar_left = left;
+    sonar_right =  right;
+ })
 
 let start = {
     x: canvas.width / 2,
