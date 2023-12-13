@@ -365,6 +365,6 @@ setInterval(async() => {
     console.log("successful post");
 }, 10000);
 
-data();
+
 
 
