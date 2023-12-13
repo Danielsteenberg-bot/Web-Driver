@@ -1,5 +1,3 @@
-const {PrismaClient} = require("@prisma/client");
-const prisma = new PrismaClient()
 const canvas = document.querySelector('.canvasMap');
 const ctx = canvas.getContext('2d');
 const infoSpeed = document.querySelector('.infoSpeed');
@@ -347,29 +345,29 @@ clearBTN.addEventListener('click', () => {
 //     post(sonar);
 // }, 10000);
 
-let rotation = [];
+// let rotation = [];
 
-socket.on('rotation', async (angle) => {
-    rotation.push(angle);
-    console.log("successful socket");
-});
+// socket.on('rotation', async (angle) => {
+//     rotation.push(angle);
+//     console.log("successful socket");
+// });
 
-setInterval(async() => {
-    const userId = socket.id;
-    const session = await prisma.user.findFirst({
-        where: { id: userId },
-    });
-    if (session) {
-        await prisma.user.update({
-            where: { id: userId },
-            data: {
-                rotation
-            }
-        });
-    }
-    post(rotation);
-    console.log("successful post");
-}, 10000);
+// setInterval(async() => {
+//     const userId = socket.id;
+//     const session = await prisma.user.findFirst({
+//         where: { id: userId },
+//     });
+//     if (session) {
+//         await prisma.user.update({
+//             where: { id: userId },
+//             data: {
+//                 rotation
+//             }
+//         });
+//     }
+//     post(rotation);
+//     console.log("successful post");
+// }, 10000);
 
 
 

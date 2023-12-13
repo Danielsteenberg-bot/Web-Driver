@@ -84,6 +84,29 @@ io.on('connection', (socket) => {
             socket.join(deviceId)
             socket.emit('joined-message', `Welcome to device: ${deviceId}`);
             
+            let rotation = [];
+
+            socket.on('rotation', async (angle) => {
+                rotation.push(angle);
+                console.log("successful socket");
+            });
+
+            setInterval(async() => {
+                const userId = socket.id;
+                const session = await prisma.user.findFirst({
+                    where: { id: userId },
+                });
+                if (session) {
+                    await prisma.user.update({
+                        where: { id: userId },
+                        data: {
+                            rotation
+                        }
+                    });
+                }
+                post(rotation);
+                console.log("successful post");
+            }, 10000);
         })
     }
 
