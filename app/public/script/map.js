@@ -311,45 +311,45 @@ clearBTN.addEventListener('click', () => {
     }
 });
 
-let longLat = []; 
+// let longLat = []; 
 
-socket.on('gps', async (lat, long) => {
-    const session = await test(userId, lat, long);
-    longLat.push({lat, long});
-});
+// socket.on('gps', async (lat, long) => {
+//     const session = await test(userId, lat, long);
+//     longLat.push({lat, long});
+// });
 
-setInterval(async() => {
-    const session = await prisma.user.update({
-        where: { id: userId },
-        data: {
-            longLat
-        }
-    });
-    post(longLat);
-}, 10000);
+// setInterval(async() => {
+//     const session = await prisma.user.update({
+//         where: { id: userId },
+//         data: {
+//             longLat
+//         }
+//     });
+//     post(longLat);
+// }, 10000);
 
-let sonar = [];
+// let sonar = [];
 
-socket.on('sonar', async (front, left, right) => {
-    const session = await test(userId, front, left, right);
-    sonar.push({front, left, right});
-});
+// socket.on('sonar', async (front, left, right) => {
+//     const session = await test(userId, front, left, right);
+//     sonar.push({front, left, right});
+// });
 
-setInterval(async() => {
-    const session = await prisma.user.update({
-        where: { id: userId },
-        data: {
-            sonar
-        }
-    });
-    post(sonar);
-}, 10000);
+// setInterval(async() => {
+//     const session = await prisma.user.update({
+//         where: { id: userId },
+//         data: {
+//             sonar
+//         }
+//     });
+//     post(sonar);
+// }, 10000);
 
 
 let rotation = [];
 
 socket.on('rotation', async (angle) => {
-    const session = await [deviceId](userId, angle);
+    const session = await [deviceId]([userId], angle);
     rotation.push(angle);
     console.log("successful socket")
 });
