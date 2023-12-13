@@ -28,15 +28,6 @@ router.route('/manage')
         })
     })
 
-router.route('/control')
-    .get((req, res) => {
-        res.render('dashboard/control', {
-            userId: req.session.userId
-        })
-    
-    })
-
-
 router.route('/navbar')
     .get((req, res) => {
         res.render('dashboard/navbar', {
