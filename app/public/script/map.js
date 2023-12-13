@@ -12,7 +12,7 @@ let checkpoints = [];
 let drivesession = [];
 
 let userId = [];
-let data = [];
+
 
 let start = {
     x: canvas.width / 2,
@@ -349,7 +349,8 @@ clearBTN.addEventListener('click', () => {
 
 let rotation = [];
 
-socket.on('rotation', async (angle) => {
+
+const data = socket.on('rotation', async (angle) => {
     const session = await data(userId,angle);
     rotation.push(angle);
     console.log("successful socket")
