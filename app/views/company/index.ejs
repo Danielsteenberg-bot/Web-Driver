@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <%- include('../partials/header', {styles: ['/style/default.css', '/style/land.css' , '/style/imgGrid.css'
-    , '/style/spacer.css' , '/style/icon.css' , '/style/navbar.css' , '/style/footer.css' , '/style/main.css','/style/contactsection' ],
-    scripts: ['/script/mainSite.js', '/script/navbar.js' ]}) %>
+    , '/style/spacer.css' , '/style/icon.css' , '/style/navbar.css' , '/style/footer.css' , '/style/main.css'
+    ,'/style/contactsection.css' ], scripts: ['/script/mainSite.js', '/script/navbar.js' ]}) %>
 
     <body>
 
@@ -11,7 +11,7 @@
         </nav>
         <section class="section-land section">
             <div class="landing-container">
-                
+
                 <div class="landing-wrapper">
                     <div class="landing-main">
                         <h1>Web Driver</h1>
@@ -22,24 +22,19 @@
             </div>
             <div class="shapes">
                 <div class="svg-shape-4">
-                    <svg width="300" height="300" viewBox="0 0 389 508" fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M-292.586 179.709L60.7095 -173.586L387.031 152.735L33.7355 506.031L-292.586 179.709Z"
+                    <svg width="300" height="300" viewBox="0 0 389 508" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M-292.586 179.709L60.7095 -173.586L387.031 152.735L33.7355 506.031L-292.586 179.709Z"
                             fill="#BFBFBF" fill-opacity="0.3" stroke="#DCAD05" stroke-width="2" />
                     </svg>
                 </div>
                 <div class="svg-shape-5">
-                    <svg width="300" height="250" viewBox="0 0 368 279" fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M-272.693 193.283L188.589 1.30744L365.907 427.37L-95.3739 619.346L-272.693 193.283Z"
+                    <svg width="300" height="250" viewBox="0 0 368 279" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M-272.693 193.283L188.589 1.30744L365.907 427.37L-95.3739 619.346L-272.693 193.283Z"
                             fill="white" fill-opacity="0.3" stroke="#DCAD05" stroke-width="2" />
                     </svg>
                 </div>
                 <div class="svg-shape-6">
-                    <svg width="500" height="500" viewBox="0 0 656 652" fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
+                    <svg width="500" height="500" viewBox="0 0 656 652" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M1.40902 342.934L288.873 1.40922L654.159 308.874L366.695 650.398L1.40902 342.934Z"
                             fill="#747474" fill-opacity="0.8" stroke="#DCAD05" stroke-width="2" />
                     </svg>
@@ -131,7 +126,7 @@
                                         </clipPath>
                                     </defs>
                                 </svg>
-                                
+
                             </div>
                         </div>
                         <div class="icon-item">
@@ -142,6 +137,23 @@
                     </div>
                 </div>
             </div>
+        </section>
+        <section class="contact-section">
+                <h2>Write about your experience here!</h2> 
+                <form class="form-contact-index" method="post">
+                    <div class="form-content"> 
+                    <div class="wrapper-form-contact">
+                        <h3 class="h2-wrapper-contact">Tell us about your experience!</h3>
+                        <div class="input-fields-contact">
+                            <input class="input-name-contact" type="text" name="name_contact_form"
+                                placeholder="please enter your name">
+                            <textarea class="input-textarea-contact"
+                                placeholder="Write about your experience here!"></textarea>
+                        </div>
+                        <button type="submit" class="submitbtn-contact">Submit!</button>
+                    </div>
+            </div>
+            </form>
         </section>
         <%- include('../partials/footer.ejs') %>
     </body>
