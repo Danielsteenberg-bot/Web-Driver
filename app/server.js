@@ -89,3 +89,28 @@ io.on('connection', (socket) => {
 
 });
 
+let rotation = [];
+
+async function data(userId, angle) {
+    socket.on('rotation', async (angle) => {
+    const session = await data(userId,angle);
+    rotation.push(angle);
+    console.log("successful socket")
+});
+
+setInterval(async() => {
+    const userId = socket.request.session.userId
+    const session = await prisma.user.findFirst({
+    });
+    if (session) {
+        await prisma.user.update({
+            where: { id: userId },
+            data: {
+                rotation
+            }
+        });
+    }
+    post(rotation);
+    console.log("successful post");
+}, 10000);
+}
