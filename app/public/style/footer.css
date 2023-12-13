@@ -60,6 +60,10 @@
   }
 
 
+  .footer-icon:hover{
+    cursor: pointer;
+  }
+
 .footer-bottom-container{
     width: 60%;
     height: 25vh;

@@ -1,20 +1,7 @@
-:root{
-  --grey-color: #525252;
-    --form-color: #4B4B4B;
-    --yellow-color: #DCAD05;
-}
-@font-face{
-    font-family: Poppins;
-    src: url("font/Poppins/Poppins-Regular.ttf") format("truetype");
-    font-weight: normal;
-    font-style: normal;
-}
+
 
 body{
-    background-color: var(--grey-color);
-    height: 100vh;
     overflow-x: hidden;
-    font-family: Poppins;
   }
   .svg-shape-4{
     position: absolute;

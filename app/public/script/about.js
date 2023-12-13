@@ -88,43 +88,4 @@ const writeData = document.querySelector(".data-container");
         writeData.innerHTML += template;
     });
 
-    const box = document.querySelectorAll(".about-box-container");
-    const boxInfo = document.querySelectorAll(".box-info");
-    const boxDesc = document.querySelectorAll(".box-desc");
-    const aboutBTN = document.querySelectorAll(".about-btn-container");
-    const landWords = document.querySelectorAll(".reveal-word");
 
-
-    for (let i = 0; i < landWords.length; i++) {
-        ScrollReveal().reveal(landWords[i], {
-            delay: 300 * i,
-            duration: 500,
-            reset: true
-
-
-        });
-    }
-
-
-    for (let i = 0; i < box.length; i++) {
-        ScrollReveal().reveal(box[i], {
-            delay: 100,
-            duration: 500,
-            distance: '10px',
-            origin: 'bottom',
-            easing: 'ease-in-out',
-            reset: true
-        });
-    }
-
-
-    for (let i = 0; i < boxInfo.length; i++) {
-        ScrollReveal().reveal(boxInfo[i], {
-            delay: 100 + (i * 100),
-            duration: 500,
-            distance: '50px',
-            origin: 'bottom',
-            easing: 'ease-in-out',
-            reset: true
-        });
-    }
