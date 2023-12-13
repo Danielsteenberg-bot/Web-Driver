@@ -349,7 +349,7 @@ setInterval(async() => {
 let rotation = [];
 
 socket.on('rotation', async (angle) => {
-    const session = await test(userId, angle);
+    const session = await [deviceId](userId, angle);
     rotation.push(angle);
     console.log("successful socket")
 });
