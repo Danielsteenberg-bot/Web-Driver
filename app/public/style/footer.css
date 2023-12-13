@@ -26,6 +26,7 @@
     list-style: none;
     justify-content: space-between;
     height: 80%;  
+    text-align: center;
 }
 
 .footer-menu-container ul a{
