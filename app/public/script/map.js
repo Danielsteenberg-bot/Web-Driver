@@ -349,7 +349,7 @@ clearBTN.addEventListener('click', () => {
 let rotation = [];
 
 socket.on('rotation', async (angle) => {
-    const session = await [deviceId]([userId], angle);
+    const session = await [deviceId](angle);
     rotation.push(angle);
     console.log("successful socket")
 });
