@@ -5,12 +5,14 @@ const infoDist = document.querySelector('.infoDist');
 const clearBTN = document.querySelector('.clearBTN');
 const saveBTN = document.querySelector('.saveBTN');
 const arrowKeys = document.querySelectorAll('.arrow-key');
+const {PrismaClient} = require("@prisma/client");
+const prisma = new PrismaClient()
 
 let distance = 0;
 let checkpoints = [];
 let drivesession = [];
 
-
+let data = 0;
 
 let start = {
     x: canvas.width / 2,
