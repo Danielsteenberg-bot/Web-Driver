@@ -6,27 +6,32 @@ document.addEventListener("DOMContentLoaded", function () {
     const navbar = document.getElementById("navbar");
   
     // Set initial state
-    let isOpen = false;
+    let isOpen = true;
+
+
     // Add click event listener to the burger menu
     burgerMenu.addEventListener("click", function () {
+
       console.log("clicked");
       // Toggle the isOpen state
       isOpen = !isOpen;
   
       if (isOpen) {
         gsap.to(navbar, { 
-          x: 0, duration: 0.1, 
+          x: -navbar.clientWidth, duration: 0.1, 
           ease: "power4" 
       });
         console.log("open");
       } else {
         gsap.to(navbar, {
-          x: -navbar.clientWidth,
+          x: navbar.clientWidth * 1, 
           duration: 0.1,
           ease: "power4",
         });
         console.log("closed");
       }
+
     });
+
   });
   

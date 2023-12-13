@@ -28,8 +28,8 @@ a{
     padding: 20px;
     position: absolute;
     top: 0px; 
-    left: 0px;  
-    width: 15%;
+    left: -25%;  
+    width: 25%;
     height: 100vh;
     box-sizing: border-box;
     display: flex;

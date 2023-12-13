@@ -1,7 +1,8 @@
-/* var rellax = new Rellax('.grid-item');
- */const icons = document.querySelectorAll('.icon-item');
+const icons = document.querySelectorAll('.icon-item');
  const footerIcons = document.querySelectorAll('.footer-item');
  const footerBottom = document.querySelectorAll('.footer-bottom-item');
+
+ console.log("hej")
  
  
  
@@ -66,7 +67,7 @@
      ScrollReveal().reveal(icons[i], {
          delay: 100 + (i * 100),
          duration: 1000,
-         distance: '300px',
+         distance: '100px',
          origin: 'bottom',
          easing: 'ease-in-out',
          reset: true
@@ -123,3 +124,4 @@
      easing: 'ease-in-out',
      reset: true
  });
+
