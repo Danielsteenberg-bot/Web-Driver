@@ -25,20 +25,22 @@ unsigned long right_time;
 unsigned long forward_time;
 unsigned long backward_time;
 
-Queue<Message, 50> queue;
+Queue<Message, 25> queue;
 WiFiClient client;
 WiFiServer server(80);
 
-unsigned int original_rotation = 9999;
+unsigned int original_rotation;
 
-unsigned int normalize_rotation(unsigned int angle) {
-    while (angle < 0) {
-        angle += 3600;
+float acceleration_scale = 9.80665f * 2.0f/32768.0f;
+
+unsigned int normalize_rotation(int rotation) {
+    while (rotation < 0) {
+        rotation += 3600;
     }
-    while (angle >= 3600) {
-        angle -= 3600;
+    while (rotation >= 3600) {
+        rotation -= 3600;
     }
-    return angle;
+    return rotation;
 }
 
 void read_sonar() {
@@ -59,8 +61,8 @@ void read_gps() {
   }
 }
 
-void read_rotation() {
-  if (DISABLE_CMPS11) return;
+unsigned int read_rotation() {
+  if (DISABLE_CMPS11) return 0;
  
   Wire.beginTransmission(CMPS11_ADDRESS);
   Wire.write(2);                    
@@ -76,18 +78,19 @@ void read_rotation() {
   rotation <<= 8;
   rotation += low_byte;
 
-  if (original_rotation == 9999) {
-    original_rotation = rotation;
-  }
-
   rotation = normalize_rotation(rotation - original_rotation);
 
   Message message = { .type = 2 };
   snprintf(message.message, sizeof(message.message), "%d.%d", rotation / 10, rotation % 10);
   queue.add(message);
+
+  return rotation;
 }
 
-void read_velocity() {
+float velocity = 0;
+unsigned long last_velocity_time = 0;
+
+void read_acceleration() {
   if (DISABLE_CMPS11) return;
  
   Wire.beginTransmission(CMPS11_ADDRESS);
@@ -97,15 +100,13 @@ void read_velocity() {
   Wire.requestFrom(CMPS11_ADDRESS, 2);       
   while(Wire.available() < 2);     
 
-  unsigned char high_byte = Wire.read();
-  unsigned char low_byte = Wire.read();
-  
-  unsigned int velocity = high_byte;             
-  velocity <<= 8;
-  velocity += low_byte;
+  byte high_byte = Wire.read();
+  byte low_byte = Wire.read();
+
+  int16_t acceleration = ((int16_t)high_byte <<8) + (int16_t)low_byte;
 
   Message message = { .type = 4 };
-  snprintf(message.message, sizeof(message.message), "%d", velocity);
+  snprintf(message.message, sizeof(message.message), "%.4f", ((float)acceleration) *acceleration_scale );
   queue.add(message);
 }
 
@@ -116,6 +117,9 @@ void setup() {
   left_motor.writeMicroseconds(LEFT_STILL);
   right_motor.writeMicroseconds(RIGHT_STILL);
   
+  Wire.begin();
+  original_rotation = read_rotation();
+
   Serial.begin(115200);
   while (!Serial);
 
@@ -125,7 +129,6 @@ void setup() {
     wifi_begin_server();
   #endif
   
-  Wire.begin();
   gps_serial.begin(9600);
 }
 
@@ -135,7 +138,7 @@ void loop() {
 
   // read all sensors
   read_rotation();
-  read_velocity(); 
+  // read_acceleration();
   read_gps();
   read_sonar();
 
@@ -167,7 +170,7 @@ void loop() {
       }
 
       drive();
-    
+
     } else if (_type == 8) {
       Serial.println("[PROXY] recieved ping");
       client->println(PONG_MESSAGE); 

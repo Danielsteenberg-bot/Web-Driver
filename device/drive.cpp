@@ -1,5 +1,49 @@
 #include "drive.h"    
 
+void turn_left() {
+    left_motor.writeMicroseconds(LEFT_BACKWARD);
+    right_motor.writeMicroseconds(RIGHT_FORWARD);
+}
+
+void turn_right() {
+    left_motor.writeMicroseconds(LEFT_FORWARD);
+    right_motor.writeMicroseconds(RIGHT_BACKWARD);
+}
+
+void drive_straight(bool backward) {
+    left_motor.writeMicroseconds(backward ? LEFT_BACKWARD : LEFT_FORWARD);
+    right_motor.writeMicroseconds(backward ? RIGHT_BACKWARD : RIGHT_FORWARD);
+}
+
+void still() {
+    left_motor.writeMicroseconds(LEFT_STILL);
+    right_motor.writeMicroseconds(RIGHT_STILL);
+}
+
+long left_switch;
+bool left_turn;
+
+void drive_left(bool backward) {
+    if (millis() - left_switch > DRIVE_TO_SIDE_SWITCH_TIME) {
+        left_switch = millis();
+        left_turn = !left_turn;
+    }
+
+    if (left_turn) { turn_left(); } else { drive_straight(backward); };
+}
+
+long right_switch;
+bool right_turn;
+
+void drive_right(bool backward) {
+    if (millis() - right_switch > DRIVE_TO_SIDE_SWITCH_TIME) {
+        right_switch = millis();
+        right_turn = !right_turn;
+    }
+    
+    if (right_turn) { turn_right(); } else { drive_straight(backward); };
+}
+
 void drive() {
     long now = millis();
 
@@ -16,47 +60,22 @@ void drive() {
     });
 
     if (backward && forward) {
-        left_motor.writeMicroseconds(LEFT_STILL);
-        right_motor.writeMicroseconds(RIGHT_STILL);
-        return;
-    } 
+        still();
 
-    if (left && right) {
-        left_motor.writeMicroseconds(backward ? LEFT_BACKWARD : LEFT_FORWARD);
-        right_motor.writeMicroseconds(backward ? RIGHT_BACKWARD : RIGHT_FORWARD);
-        return;
-    }
+    } else if (left && right) {
+        drive_straight(backward);
+
+    } else if (left) {
+        if (!backward && !forward) { turn_left(); } else { drive_left(backward); }   
     
-    if (left) {
-        if (!backward && !forward) {
-            left_motor.writeMicroseconds(LEFT_BACKWARD);
-            right_motor.writeMicroseconds(RIGHT_FORWARD);
-            return;
-        }   
-        
-        left_motor.writeMicroseconds(backward ? LEFT_HALF_BACKWARD: LEFT_HALF_FORWARD);
-        right_motor.writeMicroseconds(backward ? RIGHT_BACKWARD : RIGHT_FORWARD ) ;
-        return;
-    } 
-
-    if (right) {
-        if (!backward && !forward) {
-            left_motor.writeMicroseconds(LEFT_FORWARD);
-            right_motor.writeMicroseconds(RIGHT_BACKWARD);
-            return;
-        }   
-        
-        left_motor.writeMicroseconds(backward ? LEFT_BACKWARD : LEFT_FORWARD );
-        right_motor.writeMicroseconds(backward ? RIGHT_HALF_BACKWARD : RIGHT_HALF_FORWARD );
-        return;
-    } 
-
-    if (forward || backward) {
-        left_motor.writeMicroseconds(backward ? LEFT_BACKWARD : LEFT_FORWARD );
-        right_motor.writeMicroseconds(backward ? RIGHT_BACKWARD : RIGHT_FORWARD );
-        return;
+    } else if (right) {
+        if (!backward && !forward) { turn_right(); } else { drive_right(backward); }   
+   
+    } else if (forward || backward) {
+        drive_straight(backward);
+    
+    } else {
+        still();
     }
-
-    left_motor.writeMicroseconds(LEFT_STILL);
-    right_motor.writeMicroseconds(RIGHT_STILL);
 }
+

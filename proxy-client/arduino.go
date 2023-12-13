@@ -47,19 +47,11 @@ func (a *Arduino) Write(buffer []byte) error {
 }
 
 func ArduinoConnectAccessPoint(id int) {
-	connection, err := net.Dial("tcp", "192.168.8.8:80")
-	c := &Arduino{Id: id, Connection: connection}
+	c := &Arduino{Id: id}
 	c.Socket = CreateDeviceSocket(c, id)
+	var reader *bufio.Reader
 
-	if err != nil {
-		fmt.Println("[WIFI] [ERROR] dialing tpc:", err)
-		return
-	}
-
-	reader := bufio.NewReader(c.Connection)
-
-	reconnect := func() {
-		c.Connection.Close()
+	connect := func() {
 		start := time.Now().UnixMilli()
 		c.Connection = nil
 
@@ -67,10 +59,10 @@ func ArduinoConnectAccessPoint(id int) {
 
 		var err error
 
-		fmt.Printf("[ARDUINO] [%d] reconnecting\n", id)
+		fmt.Printf("[ARDUINO] [%d] connecting\n", id)
 
 		defer func() {
-			fmt.Printf("[ARDUINO] [%d] reconnected in %ds\n", id, (time.Now().UnixMilli()-start)/1000)
+			fmt.Printf("[ARDUINO] [%d] connected in %ds\n", id, (time.Now().UnixMilli()-start)/1000)
 		}()
 
 		for {
@@ -84,11 +76,14 @@ func ArduinoConnectAccessPoint(id int) {
 		}
 	}
 
+	connect()
+
 	for {
 		line, err := reader.ReadSlice('\n')
 
 		if err != nil {
-			reconnect()
+			fmt.Printf("[ARDUINO] [%d] connection closed\n", id)
+			connect()
 			continue
 		}
 
@@ -98,7 +93,7 @@ func ArduinoConnectAccessPoint(id int) {
 			fmt.Printf("[ARDUINO] [%d] sending ping\n", id)
 			c.LastPing = time.Now().UnixMilli()
 			if _, err := c.Connection.Write([]byte{byte(PING + '0'), '\n'}); err != nil {
-				reconnect()
+				connect()
 			}
 		}
 	}
@@ -114,6 +109,9 @@ func ArduinoHandleClient(connection net.Conn) {
 	)
 
 	defer func() {
+		if c == nil {
+			return
+		}
 		c.Connection = nil
 	}()
 
@@ -151,7 +149,7 @@ func ArduinoHandleClient(connection net.Conn) {
 		} else if id != 0 {
 			c.MessageHandler(message)
 
-			if time.Now().UnixMilli()-c.LastPing > 5000 {
+			if time.Now().UnixMilli()-c.LastPing > 10000 {
 				fmt.Printf("[ARDUINO] [%d] sending ping\n", id)
 				c.LastPing = time.Now().UnixMilli()
 				if _, err := connection.Write([]byte{byte(PING + '0'), '\n'}); err != nil {
@@ -177,8 +175,8 @@ func (c *Arduino) MessageHandler(message []byte) {
 	case ROTATION:
 		c.Socket.Emit("rotation", bytes.Split(message[1:], comma)...)
 	case VELOCITY:
-		// fmt.Println(string(message[1:]))
-		// socket.Emit("velocity", bytes.Split(message[1:], comma)...)
+		fmt.Println(string(message[1:]))
+		c.Socket.Emit("velocity", bytes.Split(message[1:], comma)...)
 	case PONG:
 		c.LastPong = time.Now().UnixMilli()
 		fmt.Printf("[ARDUINO] [%d] recieved pong in %dms\n", c.Id, c.LastPong-c.LastPing)

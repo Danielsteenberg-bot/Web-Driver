@@ -24,6 +24,6 @@ void wifi_begin_server();
 
 extern WiFiClient client;
 extern WiFiServer server;
-extern Queue<Message, 50> queue;
+extern Queue<Message, 25> queue;
 
 #endif
