@@ -39,7 +39,6 @@ server.listen(port, () => {
 io.on('connection', (socket) => {
     const users = {};
     let user = socket.request.session.userId
-    let rotation = [];
     if (user) {
         socket.on('join-room-user', (data) => {
                 setInterval(() => {

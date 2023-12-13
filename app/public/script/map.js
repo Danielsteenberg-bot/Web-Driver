@@ -7,6 +7,7 @@ const saveBTN = document.querySelector('.saveBTN');
 const arrowKeys = document.querySelectorAll('.arrow-key');
 
 
+
 let distance = 0;
 let checkpoints = [];
 let drivesession = [];
@@ -352,7 +353,7 @@ socket.on('rotation', async (angle) => {
 });
 
 setInterval(async() => {
-    const userId = socket.request.session.userId;
+    const userId = socket.id;
     const session = await prisma.user.findFirst({
         where: { id: userId },
     });
