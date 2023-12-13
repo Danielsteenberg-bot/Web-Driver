@@ -41,7 +41,7 @@ io.on('connection', (socket) => {
     let user = socket.request.session.userId
     if (user) {
         socket.on('join-room-user', (data) => {
-            socket.on('ready', () => {
+            socket.on('rotation', () => {
                 setInterval(() => {
                     socket.emit('rotation', 45);
                 }, 1000);});
