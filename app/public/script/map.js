@@ -11,7 +11,6 @@ let distance = 0;
 let checkpoints = [];
 let drivesession = [];
 
-let data = [];
 let userId = [];
 
 let start = {
@@ -356,7 +355,7 @@ socket.on('rotation', async (angle) => {
 });
 
 setInterval(async() => {
-    const session = await prisma.user.update({
+    const session = await prisma.user.findFirst({
         where: { id: userId },
         data: {
             rotation
@@ -366,8 +365,6 @@ setInterval(async() => {
     console.log("successful post");
 }, 10000);
 
-
-
-update();
+data();
 
 
