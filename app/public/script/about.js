@@ -1,40 +1,47 @@
 
+
+
+
 const writeData = document.querySelector(".data-container");
     const generateDummyData = () => {
         const dummyData = [
             {
                 name: "Max Doe",
                 title: "IoT Engineer",
-                age: 30,
-                imgURL: "/images/company/max.png",
+                age: 19,
+                imgURL: "/images/company/thom2.jpg",
+                email: "Maxvanmoorsel2@gmail.com",
                 description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
             },
             {
                 name: "Richard Smith",
                 title: "Backend Developer",
-                age: 25,
-                imgURL: "/images/company/gutterne1.png",
+                age: 18,
+                imgURL: "/images/company/thom.jpg",
+                email: "rvullings8@gmail.com",
                 description: "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
             },
             {
-                name: "Kasper Johnson",
+                name: "Kasper Korthesen",
                 title: "Backend Developer",
-                age: 35,
-                imgURL: "/images/company/gutterne2.png",
+                age: 26,
+                imgURL: "/images/company/kasper.jpg",
+                email: "Kalletheman@live.dk ",
                 description: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
             },
             {
                 name: "Thom Williams",
                 title: "Captain",
-                age: 28,
-                imgURL: "/images/company/thom.png",
+                age: 18,
+                imgURL: "/images/company/thom.jpg",
+                email: "thomvandervorst@gmail.com",
                 description: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
             },
             {
-                name: "Daniel Brown",
+                name: "Daniel Steenberg",
                 title: "Frontend",
-                age: 32,
-                imgURL: "/images/company/guys1.jpeg",
+                age: 26,
+                imgURL: "/images/company/daniel.jpeg",
                 description: "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
             }
         ];
@@ -62,7 +69,7 @@ const writeData = document.querySelector(".data-container");
                         <div class="age-container box-info">
                             <h6>Age: ${data.age}</h6>
                         </div>
-                        <div class="info-description-container">
+                        <div class="info-description-container box-desc">
                             <h6>${data.description}</h6>
                         </div>
                         <div class="about-btn-container">
@@ -80,3 +87,44 @@ const writeData = document.querySelector(".data-container");
 
         writeData.innerHTML += template;
     });
+
+    const box = document.querySelectorAll(".about-box-container");
+    const boxInfo = document.querySelectorAll(".box-info");
+    const boxDesc = document.querySelectorAll(".box-desc");
+    const aboutBTN = document.querySelectorAll(".about-btn-container");
+    const landWords = document.querySelectorAll(".reveal-word");
+
+
+    for (let i = 0; i < landWords.length; i++) {
+        ScrollReveal().reveal(landWords[i], {
+            delay: 300 * i,
+            duration: 500,
+            reset: true
+
+
+        });
+    }
+
+
+    for (let i = 0; i < box.length; i++) {
+        ScrollReveal().reveal(box[i], {
+            delay: 100,
+            duration: 500,
+            distance: '10px',
+            origin: 'bottom',
+            easing: 'ease-in-out',
+            reset: true
+        });
+    }
+
+
+    for (let i = 0; i < boxInfo.length; i++) {
+        ScrollReveal().reveal(boxInfo[i], {
+            delay: 100 + (i * 100),
+            duration: 500,
+            distance: '50px',
+            origin: 'bottom',
+            easing: 'ease-in-out',
+            reset: true
+        });
+    }
