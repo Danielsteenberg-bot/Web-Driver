@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+:root {
+    --primary-color: #FFD369;
+    --secondary-color: #222831;
+    --background-color: #393E46;
+    --red-color: #CD1818;
+    --green-color: #8EAC50;
+    --main-font: 'press start 2p';
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--main-font);
+
+}
+
+html {
+    scroll-behavior: smooth;
+  }
+
+
+
+body{
+    background-color: var(--background-color);
+}
+
