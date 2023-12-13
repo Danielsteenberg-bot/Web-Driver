@@ -66,7 +66,7 @@
      ScrollReveal().reveal(icons[i], {
          delay: 100 + (i * 100),
          duration: 1000,
-         distance: '300px',
+         distance: '100px',
          origin: 'bottom',
          easing: 'ease-in-out',
          reset: true
