@@ -1,0 +1,158 @@
+.contact-form {
+    
+    right: 0px;
+    margin-top: 50px;
+    width: 30%;
+    height: 500px;
+    background-color: #636363;
+    border: 2px solid var(--yellow-color);
+    border-radius: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+.input-fields-contact {
+    width: 100%; 
+    text-align: center;
+
+}
+
+.contact-form input,
+.contact-form textarea {
+    margin: 10px; 
+    border: none;
+    border-bottom: 2px solid white;
+    background-color: transparent;
+    color: white;
+    width: 100%; 
+    box-sizing: border-box; 
+    text-align: center;
+}
+
+.input-textarea-contact {
+    resize: none; 
+    height: 50px;
+}
+.h2-wrapper{
+    position: relative;
+    bottom: 50px;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    outline: none;
+    border-bottom: var(--yellow-color) 2px solid;
+}
+
+.contact-form input:hover,
+.contact-form textarea:hover{
+    border-bottom: 2px solid var(--yellow-color);
+}
+.wrapper-form-contact{
+    width: 80%;
+    
+}
+.submitbtn-contact{
+    margin-top: 30px;
+    background-color: #31373E;
+    color: white;
+    border-radius: 15px;
+    width: 171px;
+    height: 54px;
+    border: 1px solid #d9d9d9;
+}
+.submitbtn-contact:hover{
+    border: 2px solid var(--yellow-color);
+    cursor: pointer;
+}
+.wrapper-contact-info{
+width: 60%;
+height: 600px;
+background-color: #4B4B4B;
+text-align: center;
+color: #FFFFFF;
+border-radius: 75px;
+}
+.wrapper-contact-info h2{
+    margin-top: 40px;
+}
+.contact-outer{
+    margin: 0 auto;
+    width: 60%;
+    height: 600px;
+    background-color: #4B4B4B;
+    display: flex;
+    border-radius: 55px;
+    margin-top: 140px;
+}
+.phone-contact-div{
+    display: flex;
+    flex-direction: row;
+}
+.phone-svg{
+    position: relative;
+    top: 20px;
+    padding-left: 30%;
+    padding-right: 15px;
+}
+.email-contact-div{
+    display: flex;
+    flex-direction: row;
+}
+.mail-svg{
+    position: relative;
+    top: 15px;
+    padding-left: 30%;
+    padding-right: 15px;
+}
+.contact-info{
+    position: relative;
+    top: 100px;
+}
+
+.social-links{
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    top: 175px;
+    justify-content: space-evenly;
+}
+.instagram{
+    background-color: white;
+    padding: 10px;
+    border-radius: 25%;
+    width: 30px;
+    height: 30px;
+    position: relative;
+    top: 10px;
+}
+.insta-svg{
+    position: relative;
+    top: -5px;
+    right: 5px;
+}
+.facebook{
+    position: relative;
+    top: 10px;
+}
+.twitter{
+    position: relative;
+    background-color: #FFFFFF;
+    width: 50px;
+    height: 50px;
+    top: 10px;
+    border-radius: 10px;
+
+}
+.twitter-svg{
+    position: relative;
+    top: 4px;
+}
+.socials-h3{
+    position: relative;
+    top: 130px;
+}
