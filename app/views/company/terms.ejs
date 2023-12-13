@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('../partials/header', {styles: ['/style/terms.css', '/style/navbar.css', '/style/footer.css', '/style/main.css'], scripts: ['/script/navbar.js']}) %>    
+
+    <body>
+    <nav>
+        <%- include('../partials/nav.ejs') %>
+    </nav>
+<div class="terms-container">
+    <header>
+        <h1>Terms of Service</h1>
+    </header>
+
+    <section>
+        <h2>Acceptance of Terms</h2>
+        <p>By accessing or using our website, you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our website.</p>
+    </section>
+
+    <section>
+        <h2>Intellectual Property</h2>
+        <p>All content on this website, including text, graphics, logos, button icons, images, audio clips, and software, is the property of our company and protected by international copyright laws.</p>
+    </section>
+
+    <section>
+        <h2>Disclaimer</h2>
+        <p>This website and its content are provided on an "as is" basis without any warranties, express or implied. We do not guarantee the accuracy, completeness, or reliability of the content.</p>
+    </section>
+
+    <section>
+        <h2>Changes to Terms</h2>
+        <p>We reserve the right to modify or replace these Terms of Service at any time. It is your responsibility to check this page periodically for changes. Your continued use of the website after any modifications constitutes acceptance of the new terms.</p>
+    </section>
+</div>
+
+    <%- include('../partials/footer.ejs') %>
+
+
+
+</body>
+</html>

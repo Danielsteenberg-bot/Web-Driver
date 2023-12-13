@@ -1,34 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%- title %></title>
-
-    <!-- Css -->
-    <link rel="stylesheet" href="../../public/style/style.css">
-    <link rel="stylesheet" href="../../public/style/css/land.css">
-    <link rel="stylesheet" href="../../public/style/css/imgGrid.css">
-    <link rel="stylesheet" href="../../public/style/css/icon.css">
-    <link rel="stylesheet" href="../../public/style/css/footer.css">
-    <link rel="stylesheet" href="../../public/style/css/spacer.css">
-
-
-
-    <!-- Script -->
-    <script defer src="script.js"></script>
-    <script defer src="scripts/grid.js"></script>
-
-
-    <!-- Random  -->
-    <script src="https://kit.fontawesome.com/7c9eddd821.js" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/rellax/1.12.1/rellax.min.js"></script>
-    <script src="https://unpkg.com/scrollreveal"></script>
-
-
-
-</head>
+    <%- include('../partials/header', {styles: ['/style/default.css', '/style/land.css', '/style/imgGrid.css', '/style/spacer.css', '/style/icon.css', '/style/navbar.css', '/style/footer.css'], scripts: ['/script/mainSite.js', '/script/navbar.js']}) %>    
+ 
 <body>
+
+    <nav>
+        <%- include('../partials/nav.ejs') %>
+    </nav>
 <section class="section-land section">
     <div class="landing-container">
         <div class="landing-wrapper">
@@ -132,36 +110,5 @@
         </div>
     </div>
 </section>
-<footer>
-    <div class="footer-container">
-        <div class="footer-menu-container">
-            <ul>
-                <li class="footer-item"><a href="#">Home</a></li>
-                <li class="footer-item"><a href="#">About</a></li>
-                <li class="footer-item"><a href="#">Contact</a></li>
-            </ul>
-        </div>
-        <div class="footer-icons-container">
-            <div class="footer-icon footer-icon-left">
-                <i class="fab fa-facebook-f"></i>
-            </div>
-            <div class="footer-icon footer-icon-right">
-                <i class="fab fab fa-twitter"></i>
-            </div>
-        </div>
-        <div class="footer-bottom-container">
-            <ul>
-                <li class="footer-bottom-item"><a href="#">Team</a></li>
-                <li class="footer-bottom-item"><a href="#">Privacy</a></li>
-                <li class="footer-bottom-item"><a href="#">Terms</a></li>
-            </ul>
-        </div>
-        <div class="copy-container">
-            <p>&copy; 2023 Web Driver</p>
-        </div>
-    </div>
-</footer>
-
-
+<%- include('../partials/footer.ejs') %>
 </body>
-</html>
