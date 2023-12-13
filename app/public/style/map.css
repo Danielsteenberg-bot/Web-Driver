@@ -1,14 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
-
-
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
 
 :root {
-    --primary-color: #FFD369;
+    --primary-color: #ffd369;
     --secondary-color: #222831;
-    --background-color: #393E46;
-    --red-color: #CD1818;
-    --green-color: #8EAC50;
-    --main-font: 'press start 2p';
+    --background-color: #393e46;
+    --red-color: #cd1818;
+    --green-color: #8eac50;
+    --main-font: "press start 2p";
 }
 
 * {
@@ -28,7 +26,7 @@ body {
     border-radius: 25px;
 }
 
-.main-container{
+.main-container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -63,24 +61,20 @@ body {
     border: 2px solid var(--primary-color);
 }
 
-
-
-.save{
+.save {
     grid-area: map;
     height: 100%;
     transform: translateX(calc(-100% * 2.625));
 }
 
-.clear{
+.clear {
     grid-area: map;
     height: 100%;
 
     transform: translateX(calc(100% * 2.625));
-
 }
 
-
-.saveBTN{
+.saveBTN {
     margin: -2px;
     height: 50px;
     width: 100px;
@@ -91,7 +85,7 @@ body {
     border-bottom-left-radius: 0px;
 }
 
-.clearBTN{
+.clearBTN {
     margin: -2px;
     height: 50px;
     width: 100px;
@@ -101,7 +95,6 @@ body {
     border-radius: 25px;
     border-bottom-right-radius: 0px;
 }
-
 
 .controller {
     grid-area: controller;
@@ -127,8 +120,8 @@ body {
     border: 1px solid var(--primary-color);
     border-bottom: 4px solid var(--primary-color);
     transition: background-color 250ms ease-out;
-    position:relative;
-    top:0px;
+    position: relative;
+    top: 0px;
 }
 
 .arrow-key:hover {
@@ -136,19 +129,18 @@ body {
     transition: all 0.1s ease-in-out;
 }
 
-
-.arrow-key:active{
-    background-color:var(--background-color);
-    border-width:2px;
-    position:relative;
-    top:2px;
+.arrow-key:active {
+    background-color: var(--background-color);
+    border-width: 2px;
+    position: relative;
+    top: 2px;
 }
 
- .active{
-    background-color:var(--background-color);
-    border-width:2px;
-    position:relative;
-    top:2px;
+.active {
+    background-color: var(--background-color);
+    border-width: 2px;
+    position: relative;
+    top: 2px;
 }
 .arrow-key-row {
     display: flex;
@@ -161,59 +153,52 @@ body {
     font-size: 2rem;
     color: var(--primary-color);
 }
-    
-    
-.data-container{
-        grid-area: data-container;
-        width: 100%;
-        height: 100%;
-        display: flex ;
-        flex-direction: column;
-        justify-content: space-around; 
-        gap: 1rem;
 
-      }
-      
+.data-container {
+    grid-area: data-container;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    gap: 1rem;
+}
+
 .data-item {
-     background-color: var(--secondary-color);
-     width: 100%;
-     height: 50%;
-     border-radius: 25px;
-     display: flex;
-     justify-content: center;
-     align-items: center;
-     border: 2px solid var(--primary-color);
+    background-color: var(--secondary-color);
+    width: 100%;
+    height: 50%;
+    border-radius: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid var(--primary-color);
+}
 
-     }
+.data-wrapper {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--background-color);
+    border-radius: 25px;
+}
 
-.data-wrapper{
-        height: 100%;
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        background-color: var(--background-color);
-        border-radius: 25px;
-    }
+.infoTXT {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+}
 
-
-.infoTXT{
-        font-size: 1.5rem;
-        color: var(--primary-color);
-    }
-  
 .icon {
-     grid-area: icon; 
-     background-color: var(--background-color);
-     width: 600px;
-     height: 100%;
-     border-radius: 25px;
-     border: 2px solid var(--primary-color);
-
-    }
-  
-
+    grid-area: icon;
+    background-color: var(--background-color);
+    width: 600px;
+    height: 100%;
+    border-radius: 25px;
+    border: 2px solid var(--primary-color);
+}
 
 .icon i {
     font-size: 3rem;
@@ -223,12 +208,12 @@ body {
     color: var(--green-color);
 }
 
-.icon h3{
+.icon h3 {
     font-size: 1.5rem;
     color: var(--primary-color);
 }
 
-.icon-container{
+.icon-container {
     display: flex;
     flex-direction: row-reverse;
     justify-content: space-between;
@@ -239,7 +224,7 @@ body {
     margin: auto;
 }
 
-.session-container{
+.session-container {
     width: 30%;
     display: flex;
     flex-direction: row-reverse;
@@ -247,5 +232,4 @@ body {
 
 .arrow-key .arrow-key-down {
     border: none;
-
 }

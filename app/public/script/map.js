@@ -35,7 +35,7 @@ const ball = {
 
 const trail = [];
 for (let i = 0; i < 30; i++) {
-    trail.push({ x: ball.x, y: ball.y - i * 2 });
+    // trail.push({ x: ball.x, y: ball.y - i * 2 });
 }
 
 function draw() {
@@ -45,7 +45,7 @@ function draw() {
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     for (let i = 0; i < trail.length; i++) {
-        trail[i].y += ball.speed;
+        // trail[i].y += bal    l.speed;
     }
 
     trail.push({ x: ball.x, y: ball.y });
@@ -116,6 +116,34 @@ function draw() {
 //         break;
 //     }
 // });
+const directionToMovement = {
+    'up': 'F',
+    'down': 'B',
+    'left': 'L',
+    'right': 'R',
+}
+
+arrowKeys.forEach(key => {
+    let mouseTimer
+
+    key.addEventListener('mousedown', () => {
+        const direction = key.dataset.direction;
+
+        // Check if the direction is valid
+        if (directionToMovement.hasOwnProperty(direction)) {
+            mouseTimer = setInterval(() => {
+                socket.emit('move', directionToMovement[direction]);
+            }, 10);
+        }
+    });
+
+    key.addEventListener('mouseup', () => {
+        clearInterval(mouseTimer);
+    });
+    
+})
+
+
 const pressedKeys = {}
 onkeydown = (event) => {
     pressedKeys[event.key] = true;
