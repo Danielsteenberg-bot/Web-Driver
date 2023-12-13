@@ -1,51 +1,36 @@
 const canvas = document.querySelector('.canvasMap');
-const ctx = canvas.getContext('2d');
 const infoSpeed = document.querySelector('.infoSpeed');
 const infoDist = document.querySelector('.infoDist');
 const clearBTN = document.querySelector('.clearBTN');
 const saveBTN = document.querySelector('.saveBTN');
 const arrowKeys = document.querySelectorAll('.arrow-key');
+const ctx = canvas.getContext('2d');
 
 let distance = 0;
-let checkpoints = [];
-let drivesession = [];
-
 let rotation = 0;
 let sonar_front = 0;
 let sonar_left = 0;
 let sonar_right = 0;
 
 
-socket.on("rotation", (x) => { rotation = x; console.log(x); })
+
+socket.on("rotation", (_rotation) => { rotation = 360 - _rotation; })
 socket.on("sonar", (front, left, right) => { 
     sonar_front = front;
     sonar_left = left;
-    sonar_right =  right;
- })
+    sonar_right = right;
+})
 
 let start = {
     x: canvas.width / 2,
     y: canvas.height / 2,
 };
 
-let cp1 = { x: 0, y: 0 };
-let cp2 = { x: 0, y: 0 };
-let end = { x: 0, y: 0 };
-
 const car = {
     x: canvas.width / 2,
     y: canvas.height / 2,
-    radius: 15,
-    color: '#EEEEEE',
-    speed: 5,
-    dx: 0,
-    dy: 0
+    speed: 0,
 };
-
-const trail = [];
-for (let i = 0; i < 30; i++) {
-    trail.push({ x: car.x, y: car.y - i * 2 });
-}
 
 // Function to calculate rotated points
 function rotatePoint(x, y, centerX, centerY, angle) {
@@ -53,6 +38,60 @@ function rotatePoint(x, y, centerX, centerY, angle) {
     const rotatedX = Math.cos(rad) * (x - centerX) - Math.sin(rad) * (y - centerY) + centerX;
     const rotatedY = Math.sin(rad) * (x - centerX) + Math.cos(rad) * (y - centerY) + centerY;
     return [ rotatedX, rotatedY ];
+}
+
+function drawFront(ctx, distance, rotation) {
+    if (distance == 0) {
+        return
+    }
+
+    ctx.beginPath();
+    ctx.lineWidth = 5;
+
+    let p1 = rotatePoint(car.x-15, car.y - distance - 40, car.x, car.y, rotation)
+    let p2 = rotatePoint(car.x+15, car.y - distance - 40, car.x, car.y, rotation)
+
+    ctx.moveTo(p1[0], p1[1]);
+    ctx.lineTo(p2[0], p2[1]);
+
+    ctx.closePath();
+    ctx.stroke();
+}
+
+function drawRight(ctx, distance, rotation) {
+    if (distance == 0) {
+        return
+    }
+
+    ctx.beginPath();
+    ctx.lineWidth = 5;
+
+    let p1 = rotatePoint(car.x + 25 + distance, car.y - 30, car.x, car.y, rotation)
+    let p2 = rotatePoint(car.x + 25 + distance, car.y, car.x, car.y, rotation)
+
+    ctx.moveTo(p1[0], p1[1]);
+    ctx.lineTo(p2[0], p2[1]);
+
+    ctx.closePath();
+    ctx.stroke();
+}
+
+function drawLeft(ctx, distance, rotation) {
+    if (distance == 0) {
+        return
+    }
+
+    ctx.beginPath();
+    ctx.lineWidth = 5;
+
+    let p1 = rotatePoint(car.x - 25 - distance, car.y - 30, car.x, car.y, rotation)
+    let p2 = rotatePoint(car.x - 25 - distance, car.y, car.x, car.y, rotation)
+
+    ctx.moveTo(p1[0], p1[1]);
+    ctx.lineTo(p2[0], p2[1]);
+
+    ctx.closePath();
+    ctx.stroke();
 }
 
 // Reusable function to draw the triangle
@@ -82,45 +121,33 @@ function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = 'rgba(255, 255, 255, 0.1)';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
+ 
+    drawTriangle(ctx, car.x, car.y, 30, rotation);
 
-    for (let i = 0; i < trail.length; i++) {
-        trail[i].y += car.speed;
-    }
-
-    trail.push({ x: car.x, y: car.y });
-
-    if (trail.length > 50) {
-        trail.length = 35;
-    }
-
-    for (let i = trail.length - 1; i >= 0; i--) {
-        ctx.beginPath();
-        ctx.arc(trail[i].x, trail[i].y, car.radius, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(0, 0, 0, 0.2)';
-        ctx.fill();
-    }
-
-    drawTriangle(ctx, car.x, car.y, 30, 360 - rotation);
+    drawFront(ctx, sonar_front, rotation)
+    drawLeft(ctx, sonar_left, rotation)
+    drawRight(ctx, sonar_right, rotation)
 
     requestAnimationFrame(draw);
 }
 
-const pressedKeys = {}
+const keys = {}
+
 onkeydown = (event) => {
-    pressedKeys[event.key] = true;
-    HandleKeyDown()
+    keys[event.key] = true;
 }
 onkeyup = (event) => {
-    delete pressedKeys[event.key]
-    removeActive()
-    HandleKeyDown()
+    keys[event.key] = false;
+    removeActive();
 }
 
-function HandleKeyDown() {
-    const keys = Object.keys(pressedKeys)
-    let combination = ''
+function handle_keys() {
+    let combination = ""
 
-    keys.forEach(key => {
+    Object.keys(keys).forEach(key => {
+        
+        if (!keys[key]) return;
+
         switch (key) {
             case 'ArrowUp', 'w':
                 // console.log("F");
@@ -146,14 +173,18 @@ function HandleKeyDown() {
                 combination += 'R'
                 break;
         }
+
+        sendMove(combination)
     })
 
+}
+
+async function sendMove(combination) {
     if (combination.length > 0) {
         const set = new Set(combination.split(''))
         const filteredCombination = [...set].join('')
         socket.emit('move', filteredCombination)
     }
-
 }
 
 function removeActive() {
@@ -168,79 +199,14 @@ function checkActive(key) {
         arrowKeys[key].classList.toggle("active");
     }
 }
-function updateBallPosition() {
-    car.x += car.dx;
-    car.y += car.dy;
-    // console.log(`ball.x: ${ball.x += ball.dx} ball.y: ${ball.y} `)
-    // console.log(ball.dy);
-
-
-}
-
-function drawRoute() {
-    ctx.beginPath();
-    ctx.moveTo(start.x, start.y);
-    ctx.lineWidth = 10;
-
-    if (Math.floor(distance) % 1 === 0) {
-        checkpoints.push({ x: car.x, y: car.y });
-    }
-
-    for (let i = 0; i < checkpoints.length; i++) {
-        ctx.lineTo(checkpoints[i].x, checkpoints[i].y);
-    }
-
-    ctx.stroke();
-}
 
 function update() {
-    updateBallPosition();
     draw();
-    drawRoute();
-    requestAnimationFrame(update);
     infoSpeed.innerHTML = `${car.speed}m/s`;
     infoDist.innerHTML = `${distance}m`;
+    requestAnimationFrame(update);
+    handle_keys();
 }
-
-
-saveBTN.addEventListener('click', () => {
-    clicked = true;
-    drivesession.push({
-        distance: distance,
-        checkpoints: checkpoints,
-    });
-
-    if (clicked == true) {
-        start = {
-            x: car.x,
-            y: car.y,
-        };
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = 'rgba(255, 255, 255, 0.1)';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        checkpoints = [];
-        clicked = false;
-    }
-});
-
-
-clearBTN.addEventListener('click', () => {
-    // console.log(checkpoints)
-    clicked = true;
-    distance = 0;
-    if (clicked == true) {
-        start = {
-            x: car.x,
-            y: car.y,
-        };
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = 'rgba(255, 255, 255, 0.1)';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        checkpoints = [];
-        clicked = false;
-    }
-});
-
 
 update();
 

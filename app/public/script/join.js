@@ -9,5 +9,3 @@ socket.on('joined-message', (data) => {
     const message = data;
     console.log(message);
 });
-
-window.socket = socket

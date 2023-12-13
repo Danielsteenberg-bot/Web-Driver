@@ -1,5 +1,4 @@
-const {PrismaClient, Prisma } = require("@prisma/client");
-const { hash } = require("bcrypt");
+const {PrismaClient } = require("@prisma/client");
 
 const prisma = new PrismaClient();
 const buffer = new Map();
@@ -46,9 +45,11 @@ setInterval(async () => {
         data.push(history)
     })
     
+    console.log("buffer size: " + data.length)
+
     buffer.clear();
-    let x = await prisma.drivingHistory.createMany({data: data});
-    console.log(x)
+    // let x = await prisma.drivingHistory.createMany({data: data});
+    // console.log(x)
 }, 5000)
 
 module.exports = {

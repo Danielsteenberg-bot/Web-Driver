@@ -81,7 +81,7 @@ io.on('connection', (socket) => {
             socket.emit('joined-message', `Welcome to device: ${deviceId}`);
             
             socket.on("gps", (lat, long) => {
-                socket.to(deviceId).emit("rotation", lat, long)
+                socket.to(deviceId).emit("gps", lat, long)
                 AddGps(5, Date.now(), lat, long); 
             })
 

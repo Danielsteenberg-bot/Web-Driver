@@ -61,6 +61,9 @@ void read_gps() {
   }
 }
 
+unsigned int last_rotation;
+unsigned long last_rotation_time;
+
 unsigned int read_rotation() {
   if (DISABLE_CMPS11) return 0;
  
@@ -78,10 +81,25 @@ unsigned int read_rotation() {
   rotation <<= 8;
   rotation += low_byte;
 
+  unsigned long now = millis();
+
+  // if (last_rotation == 0) {
+  //   last_rotation = rotation;
+  // }
+
+  // if (abs(rotation - last_rotation) > 450 && now - last_rotation_time < 100) {
+  //   rotation = last_rotation;
+  // } else {
+  //   last_rotation = rotation;
+  // } 
+
+  // last_rotation_time = now;
+
   rotation = normalize_rotation(rotation - original_rotation);
 
   Message message = { .type = 2 };
   snprintf(message.message, sizeof(message.message), "%d.%d", rotation / 10, rotation % 10);
+  Serial.println(message.message);
   queue.add(message);
 
   return rotation;
