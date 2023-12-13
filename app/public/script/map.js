@@ -351,6 +351,7 @@ let rotation = [];
 socket.on('rotation', async (angle) => {
     const session = await test(userId, angle);
     rotation.push(angle);
+    console.log("successful socket")
 });
 
 setInterval(async() => {
@@ -361,6 +362,7 @@ setInterval(async() => {
         }
     });
     post(rotation);
+    console.log("successful post");
 }, 10000);
 
 

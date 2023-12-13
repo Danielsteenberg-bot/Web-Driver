@@ -41,10 +41,9 @@ io.on('connection', (socket) => {
     let user = socket.request.session.userId
     if (user) {
         socket.on('join-room-user', (data) => {
-            socket.on('rotation', () => {
                 setInterval(() => {
                     socket.emit('rotation', 45);
-                }, 1000);});
+                }, 1000);
             const { deviceId } = data;
             userId = socket.request.session.userId
             // Update the user's socket ID or add a new user to the room
