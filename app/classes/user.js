@@ -42,7 +42,6 @@ const validate = async (loginName, password) => {
     return false
 } 
 
-update();
 module.exports = {
     validate,
     register
