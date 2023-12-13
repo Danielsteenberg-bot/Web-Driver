@@ -1,3 +1,5 @@
+const {PrismaClient} = require("@prisma/client");
+const prisma = new PrismaClient()
 const canvas = document.querySelector('.canvasMap');
 const ctx = canvas.getContext('2d');
 const infoSpeed = document.querySelector('.infoSpeed');
