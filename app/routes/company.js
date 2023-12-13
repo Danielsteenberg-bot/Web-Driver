@@ -11,16 +11,20 @@ router.route('/')
 
 router.route('/privacy')
     .get((req, res) => {
-
         res.render('company/privacy', {
             title: "Privacy policy"
         })
     })
 router.route('/terms')
     .get((req, res) => {
-
         res.render('company/terms', {
             title: "Terms of Serice"
+        })
+    })
+router.route('/about')
+    .get((req, res) => {
+        res.render('company/about', {
+            title: "About Us"
         })
     })
 

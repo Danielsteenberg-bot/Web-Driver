@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('../partials/header', {styles: ['/style/default.css', '/style/about.css', '/style/navbar.css', '/style/footer.css'], scripts: [ '/script/navbar.js', '/script/about.js']}) %>    
+ 
+<body>
+    <nav>
+        <%- include('../partials/nav.ejs') %>
+    </nav>
+<main>
+    <section>
+        <div class="about-land-container">
+            <div class="about-land-wrapper">
+                <h1>About<br>Web <br> Drive</h1>
+            </div>
+        </div>
+        <hr class="between-lines">
+    </section>
+
+
+    <section>
+        <div class="about-main-container">
+            <div class="about-main-wrapper">
+                <div class="text-header">
+                    <h2>Why Web Drive?</h2>
+                </div>
+                <div class="about-box-container">
+                    <div class="about-box-wrapper">
+                        <div class="about-box-image">
+                            <img src="../car.jpg" alt="">
+                        </div>
+                        <div class="about-box-text">
+                            <div class="description-container">
+                                   <h6 class="desc-header">Optimized Performance</h6> 
+                                        <p>A custom online controller for your electric car ensures optimized performance, allowing you to fine-tune your vehicle's settings for an unparalleled driving experience.</p>
+                                    <h6 class="desc-header">Tailored Driving Experience</h6> 
+                                        <p>Craft a driving experience that suits your preferences by adjusting acceleration, regenerative braking, and other parameters through an online controller, ensuring a personalized and comfortable rid</p>
+                                    <h6 class="desc-header">Enhanced Safety Features:</h6>
+                                        <p>Implement advanced safety features and emergency protocols with a customized controller, providing an extra layer of protection for you and your passengers.</p>
+                                    </div>
+                            <div class="about-btn-container">
+                                <button class="about-btn">
+                                    Contact
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr class="between-lines">
+    </section>
+
+    <section>
+        <div class="about-main-container">
+            <div class="about-main-wrapper">
+                <div class="text-header">
+                    <h2>Meet the team!</h2>
+                </div>
+                <div class="data-container"></div>
+                
+            </div>
+        </div>
+</main>
+<footer>
+<%- include('../partials/footer.ejs') %>
+</footer>
+
+</body>
+</html>
