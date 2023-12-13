@@ -123,6 +123,8 @@ const directionToMovement = {
     'right': 'R',
 }
 
+
+
 arrowKeys.forEach(key => {
     let mouseTimer
 
@@ -139,6 +141,12 @@ arrowKeys.forEach(key => {
 
     key.addEventListener('mouseup', () => {
         clearInterval(mouseTimer);
+    });
+
+    key.addEventListener('mouseleave', () => {
+        // Clear the interval when the mouse leaves the document
+        clearInterval(mouseTimer);
+        removeActive()
     });
     
 })
