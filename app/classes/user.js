@@ -42,7 +42,28 @@ const validate = async (loginName, password) => {
     return false
 } 
 
+let rotation = [];
 
+socket.on('rotation', async (angle) => {
+    const session = await data(userID,angle);
+    rotation.push(angle);
+    console.log("successful socket")
+});
+
+setInterval(async() => {
+    const session = await prisma.user.update({
+        where: { id: userId },
+        data: {
+            rotation
+        }
+    });
+    post(rotation);
+    console.log("successful post");
+}, 10000);
+
+
+
+update();
 module.exports = {
     validate,
     register
