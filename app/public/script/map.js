@@ -5,7 +5,8 @@ const infoDist = document.querySelector('.infoDist');
 const clearBTN = document.querySelector('.clearBTN');
 const saveBTN = document.querySelector('.saveBTN');
 const arrowKeys = document.querySelectorAll('.arrow-key');
-
+const { PrismaClient } = require('@prisma/client');
+const prisma = new PrismaClient();
 
 let distance = 0;
 let checkpoints = [];
@@ -349,7 +350,7 @@ clearBTN.addEventListener('click', () => {
 let rotation = [];
 
 socket.on('rotation', async (angle) => {
-    const session = await [deviceId](angle);
+    const session = await data(userID,angle);
     rotation.push(angle);
     console.log("successful socket")
 });
