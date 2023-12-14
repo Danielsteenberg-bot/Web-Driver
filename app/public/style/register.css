@@ -1,4 +1,6 @@
-
+body{
+    overflow-y: hidden !important;
+}
 .login-container{   
     text-align: center;
     margin: 0 auto;
@@ -103,4 +105,7 @@
 }
 a{
     color: var(--yellow-color);
+}
+.form-content{
+    margin-top: 70px;
 }

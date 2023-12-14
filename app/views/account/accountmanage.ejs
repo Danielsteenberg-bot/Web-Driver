@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../public/style/main.css" rel="stylesheet">
+    <link href="../public/style/accountmanage.css" rel="stylesheet">
+
+    <title>Manage account</title>
+</head>
+
+<body>
+    <%- include('../dashboard/navbar.ejs') %>
+    <form class="form-manage" method="post">
+        <div class="h2-wrapper">
+            <h1>Manage account</h1>
+        </div>
+        <div class="inputs-wrapper">
+            <svg class="username-svg" width="25" height="25" viewBox="0 0 51 58" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M25.5 29C29.3646 29 33.0709 27.4723 35.8036 24.753C38.5362 22.0338 40.0714 18.3456 40.0714 14.5C40.0714 10.6544 38.5362 6.96623 35.8036 4.24695C33.0709 1.52767 29.3646 0 25.5 0C21.6354 0 17.9291 1.52767 15.1964 4.24695C12.4638 6.96623 10.9286 10.6544 10.9286 14.5C10.9286 18.3456 12.4638 22.0338 15.1964 24.753C17.9291 27.4723 21.6354 29 25.5 29ZM20.2975 34.4375C9.08438 34.4375 0 43.4773 0 54.6355C0 56.4934 1.51406 58 3.38103 58H47.619C49.4859 58 51 56.4934 51 54.6355C51 43.4773 41.9156 34.4375 30.7025 34.4375H20.2975Z" fill="black"/>
+                </svg>
+                 <input type="text" name="manage_username" placeholder="enter new username">
+                 <svg class="email-svg" width="25" height="25" viewBox="0 0 64 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M6 0C2.6875 0 0 2.6875 0 6C0 7.8875 0.8875 9.6625 2.4 10.8L29.6 31.2C31.025 32.2625 32.975 32.2625 34.4 31.2L61.6 10.8C63.1125 9.6625 64 7.8875 64 6C64 2.6875 61.3125 0 58 0H6ZM0 14V40C0 44.4125 3.5875 48 8 48H56C60.4125 48 64 44.4125 64 40V14L36.8 34.4C33.95 36.5375 30.05 36.5375 27.2 34.4L0 14Z" fill="black"/>
+                    </svg>
+                    
+            <input type="email" name="manage_email" placeholder="enter new email">
+            <svg class="password-svg" width="17" height="26" viewBox="0 0 17 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M16 11.8636V25.5H1V11.8636V9L1.5 6.5L3.64706 2.48864L8.5 1L12 2L14.5294 4.76136L15.7059 7.60227L16 9.5L16 11.8636Z" fill="white"/>
+                <path d="M1 11.8636H16M1 11.8636V25.5H16V11.8636M1 11.8636V9L1.5 6.5L3.64706 2.48864L8.5 1L12 2L14.5294 4.76136L15.7059 7.60227L16 9.5L16 11.8636" stroke="black"/>
+                <circle cx="8.5" cy="18.5" r="1.5" fill="black"/>
+                <path d="M8.5 19V22" stroke="black"/>
+                </svg>
+                  
+            <input type="password" name="manage_password" placeholder="enter new password">
+        </div>
+        <button class="submitbtn">Save</button>
+    </form>
+</body>
+
+</html>

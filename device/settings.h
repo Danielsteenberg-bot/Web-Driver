@@ -17,6 +17,13 @@
 #define WIFI_PASSWORD "83:511Nx"
 
 #define DEVICE_ID 1
-#define AP_PASSWORD "test" 
+#define AP_PASSWORD "12345678" 
+
+#define FRONT_PING_PIN 11
+#define FRONT_ECHO_PIN 10
+#define LEFT_PING_PIN 9
+#define LEFT_ECHO_PIN 8
+#define RIGHT_PING_PIN 7
+#define RIGHT_ECHO_PIN 6
 
 #endif
