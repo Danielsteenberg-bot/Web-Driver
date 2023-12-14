@@ -4,16 +4,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="../public/style/main.css" rel="stylesheet">
-    <link href="../public/style/register.css" rel="stylesheet">
+
     <title><%= title %></title>
 </head>
 
 <body>
+    <%- include('../partials/header', {styles: ['/style/default.css', '/style/contact.css' , '/style/contactsection.css'
+    , '/style/spacer.css' , '/style/icon.css' , '/style/navbar.css' , '/style/footer.css' , '/style/main.css'
+    ,'/style/contactsection.css', '/style/register.css' ], scripts: ['/script/mainSite.js', '/script/navbar.js' ]}) %>
 
     <form method="post" class="login-container">
 
         <h2>Login</h2>
+        <div class="form-content">
         <svg class="user-image"="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg"
             xmlns:xlink="http://www.w3.org/1999/xlink">
             <rect width="25" height="25" fill="url(#pattern0)" />
@@ -44,29 +47,26 @@
 
         <button type="submit" class="submit-button">Sign up!</button>
         </div>
-
-
-
-        <div class="svg-shape-4">
-            <svg width="300" height="300" viewBox="0 0 389 508" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M-292.586 179.709L60.7095 -173.586L387.031 152.735L33.7355 506.031L-292.586 179.709Z"
-                    fill="#BFBFBF" fill-opacity="0.3" stroke="#DCAD05" stroke-width="2" />
-            </svg>
-        </div>
-        <div class="svg-shape-5">
-            <svg width="300" height="250" viewBox="0 0 368 279" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M-272.693 193.283L188.589 1.30744L365.907 427.37L-95.3739 619.346L-272.693 193.283Z"
-                    fill="white" fill-opacity="0.3" stroke="#DCAD05" stroke-width="2" />
-            </svg>
-        </div>
-        <div class="svg-shape-6">
-            <svg width="500" height="500" viewBox="0 0 656 652" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M1.40902 342.934L288.873 1.40922L654.159 308.874L366.695 650.398L1.40902 342.934Z"
-                    fill="#747474" fill-opacity="0.8" stroke="#DCAD05" stroke-width="2"/>
-            </svg>
-        </div>
+    </div>
     </form>
-
+    <div class="svg-shape-4">
+        <svg width="300" height="300" viewBox="0 0 389 508" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M-292.586 179.709L60.7095 -173.586L387.031 152.735L33.7355 506.031L-292.586 179.709Z"
+                fill="#BFBFBF" fill-opacity="0.3" stroke="#DCAD05" stroke-width="2" />
+        </svg>
+    </div>
+    <div class="svg-shape-5">
+        <svg width="300" height="250" viewBox="0 0 368 279" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M-272.693 193.283L188.589 1.30744L365.907 427.37L-95.3739 619.346L-272.693 193.283Z"
+                fill="white" fill-opacity="0.3" stroke="#DCAD05" stroke-width="2" />
+        </svg>
+    </div>
+    <div class="svg-shape-6">
+        <svg width="500" height="500" viewBox="0 0 656 652" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1.40902 342.934L288.873 1.40922L654.159 308.874L366.695 650.398L1.40902 342.934Z"
+                fill="#747474" fill-opacity="0.8" stroke="#DCAD05" stroke-width="2"/>
+        </svg>
+    </div>
 
 </body>
 

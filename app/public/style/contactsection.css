@@ -40,18 +40,18 @@
     border: 2px solid var(--primary-color);
     cursor: pointer;
 }
-.input-textarea-contact {
+.input-textarea-contact-index {
     margin-top: 70px;
     border: none;
     border: 2px solid white;
-    border-radius: 10px;
+    /* border-radius: 10px; */
     resize: none; 
     height: 200px;
     background-color: transparent;
     color: white;
     text-align: center;
 }
-.input-textarea-contact:focus{
+.input-textarea-contact-index:focus{
     outline: none;
     border: 2px solid var(--primary-color);
     border-radius: 10px;
