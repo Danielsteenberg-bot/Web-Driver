@@ -114,9 +114,9 @@ flex-direction: row;
     padding-right: 15px;
 }
 .contact-info{
-    margin: 0 auto;
+    margin-top: 200px;
     position: relative;
-    top: 100px;
+    left: 120px;
 }
 
 .social-links{
@@ -142,6 +142,17 @@ flex-direction: row;
     font-size: 1.5rem;
 }
 .wrapper-socials{
-    margin-top: 160px;
+    
+
+}
+#envelope-contact{
+    position: relative;
+    right: 10px;
+    bottom: 3px;
+}
+#phone-contact{
+    position: relative;
+    right: 10px;
+    bottom: 3px;
 }
 
