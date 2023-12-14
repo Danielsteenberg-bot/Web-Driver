@@ -64,6 +64,7 @@
     width: 200px;
     height: 54px;
     border: 1px solid #d9d9d9;
+    font-size: 12px;
 }
 .submitbtn-contact:hover{
     border: 2px solid var(--yellow-color);
