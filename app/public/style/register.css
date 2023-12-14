@@ -1,5 +1,6 @@
 body{
     overflow-y: hidden !important;
+    font-family: var(--main-font);
 }
 .login-container{   
     text-align: center;
@@ -51,7 +52,7 @@ body{
     text-align: center;
     display: flex;
     margin: 0 auto;
-    margin-top: 10px;
+    margin-top: 5px;
     width: 65%;
     border: none;
     border-bottom: 2px solid;
@@ -75,7 +76,7 @@ body{
 .user-image{
     position: relative;
     right: 200px;
-    top: 45px;
+    top: 20px;
 }
 
 .mail-image{
@@ -87,7 +88,7 @@ body{
 .password-image{
     position: relative;
     right: 200px;
-    top: 45px;
+    top: 20px;
 }
 .submit-button{
     margin-top: 18px;
@@ -107,5 +108,26 @@ a{
     color: var(--yellow-color);
 }
 .form-content{
-    margin-top: 70px;
+    margin-top: 60px;
+}
+.login-h2{
+    padding: 20px;
+}
+.wrapper-submit{
+    padding: 20px;
+}
+.user-image-register{
+    position: relative;
+    right: 200px;
+    top: 40px;
+}
+.mail-image-register{
+    position: relative;
+    right: 200px;
+    top: 40px;
+}
+.password-image-register{
+    position: relative;
+    right: 200px;
+    top: 40px;
 }
