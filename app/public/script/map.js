@@ -155,11 +155,12 @@ arrowKeys.forEach(key => {
 const pressedKeys = {}
 onkeydown = (event) => {
     pressedKeys[event.key] = true;
+    console.log(Object.keys(pressedKeys));    
     HandleKeyDown()
 }
 onkeyup = (event) => {
     delete pressedKeys[event.key]
-    removeActive()
+    removeActive(event.key)
     HandleKeyDown()
 }
 
@@ -167,53 +168,30 @@ function HandleKeyDown() {
     const keys = Object.keys(pressedKeys)
     let combination = ''
 
-    keys.forEach(key => {
+    keys.forEach((key) => {
         switch (key) {
             case 'ArrowUp':
-                // console.log("F");
-                checkActive(0)
-                combination += 'F'
+            case 'w':
+                checkActive(0);
+                combination += 'F';
                 break;
 
             case 'ArrowLeft':
-                // console.log("L");
+            case 'a':
                 checkActive(1);
-                combination += 'L'
+                combination += 'L';
                 break;
 
             case 'ArrowDown':
-                // console.log("B");
-                checkActive(2)
-                combination += 'B'
+            case 's':
+                checkActive(2);
+                combination += 'B';
                 break;
 
             case 'ArrowRight':
-                // console.log("R");
-                checkActive(3)
-                combination += 'R'
-                break;
-            case 'w':
-                // console.log("F");
-                checkActive(0)
-                combination += 'F'
-                break;
-
-            case 'a':
-                // console.log("L");
-                checkActive(1)
-                combination += 'L'
-                break;
-
-            case 's':
-                // console.log("B");
-                checkActive(2)
-                combination += 'B'
-                break;
-
             case 'd':
-                // console.log("R");
-                checkActive(3)
-                combination += 'R'
+                checkActive(3);
+                combination += 'R';
                 break;
         }
     })
@@ -226,11 +204,16 @@ function HandleKeyDown() {
 
 }
 
-function removeActive() {
-    arrowKeys[0].classList.remove("active");
-    arrowKeys[1].classList.remove("active");
-    arrowKeys[2].classList.remove("active");
-    arrowKeys[3].classList.remove("active");
+function removeActive(releasedKey) {
+    // Check if any keys are still pressed
+    const anyKeysPressed = Object.keys(pressedKeys).length > 0;
+
+    arrowKeys.forEach((key, index) => {
+        const dataKey = key.dataset.key;
+        if (!anyKeysPressed || releasedKey === dataKey) {
+            key.classList.remove('active');
+        }
+    });
 }
 
 function checkActive(key) {
