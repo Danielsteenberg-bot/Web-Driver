@@ -6,7 +6,7 @@ const writeData = document.querySelector(".data-container");
     const generateDummyData = () => {
         const dummyData = [
             {
-                name: "Max Doe",
+                name: "Max Van Moorsel",
                 title: "IoT Engineer",
                 age: 19,
                 imgURL: "/images/company/thom2.jpg",
@@ -14,7 +14,7 @@ const writeData = document.querySelector(".data-container");
                 description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
             },
             {
-                name: "Richard Smith",
+                name: "Richard Vullings",
                 title: "Backend Developer",
                 age: 18,
                 imgURL: "/images/company/richard.png",
@@ -31,7 +31,7 @@ const writeData = document.querySelector(".data-container");
                 description: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
             },
             {
-                name: "Thom Williams",
+                name: "Thom van der Vorst",
                 title: "Captain",
                 age: 18,
                 imgURL: "/images/company/thom.jpg",
@@ -84,10 +84,6 @@ const writeData = document.querySelector(".data-container");
             <hr class="between-lines">
 
         `
-
-        
-        console.log(data.imgURL);
-
         writeData.innerHTML += template;
     });
 

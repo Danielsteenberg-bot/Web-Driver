@@ -1,4 +1,4 @@
-const icons = document.querySelectorAll('.icon-item');
+const iconSection = document.querySelectorAll('.icon-item');
 const footerIcons = document.querySelectorAll('.footer-item');
 const footerBottom = document.querySelectorAll('.footer-bottom-item');
 const box = document.querySelectorAll(".about-box-container");
@@ -7,8 +7,6 @@ const boxDesc = document.querySelectorAll(".box-desc");
 const aboutBTN = document.querySelectorAll(".about-btn-container");
 const landWords = document.querySelectorAll(".reveal-word");
 
-
- 
  
  ScrollReveal().reveal('.txt-spacer', {
     delay: 200,
@@ -50,8 +48,8 @@ ScrollReveal().reveal('.icon-txt', {
 
 
 
-for (let i = 0; i < icons.length; i++) {
-    ScrollReveal().reveal(icons[i], {
+for (let i = 0; i < iconSection.length; i++) {
+    ScrollReveal().reveal(iconSection[i], {
         delay: 100 + (i * 100),
         duration: 1000,
         distance: '100px',

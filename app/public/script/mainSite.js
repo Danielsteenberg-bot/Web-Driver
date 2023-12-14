@@ -15,7 +15,23 @@ const icons = document.querySelectorAll('.icon-item');
          imageHeader.classList.remove('sticky');
      }
  });
- 
+
+ScrollReveal().reveal('.land-main-text', {
+    delay: 100,
+    duration: 500,
+    distance: '100px',
+    origin: 'bottom',
+    easing: 'ease-in-out',
+    reset: true
+});
+ScrollReveal().reveal('.land-under-text', {
+    delay: 200,
+    duration: 500,
+    distance: '100px',
+    origin: 'bottom',
+    easing: 'ease-in-out',
+    reset: true
+});
  
  ScrollReveal().reveal('.txt-spacer', {
      delay: 200,
