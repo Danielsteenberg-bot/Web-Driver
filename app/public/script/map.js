@@ -131,43 +131,6 @@ function draw() {
 
 const keys = {}
 
-//         case 'ArrowDown':
-//             distance++;  
-//             ball.speed = 3;
-//             ball.dy = ball.speed;
-//             socket.emit('move', "B")
-
-//             break;
-
-//         case 'ArrowLeft':
-//             distance++;
-//             ball.speed = 6;
-//             ball.dx = -ball.speed;
-//             socket.emit('move', "L")
-//             break;
-//         case 'ArrowRight':
-//             distance++;
-//             ball.speed = 6;
-//             ball.dx = ball.speed;
-//             socket.emit('move', "R")
-//             break;
-//     }
-// });
-
-// document.addEventListener('keyup', (event) => {
-//     ball.speed = 5;
-//     switch (event.key) {
-//         case 'ArrowUp':
-//         case 'ArrowDown':
-//             ball.dy = 0;
-//         break;
-
-//         case 'ArrowLeft':
-//         case 'ArrowRight':
-//             ball.dx = 0;
-//         break;
-//     }
-// });
 const directionToMovement = {
     'up': 'F',
     'down': 'B',
@@ -180,7 +143,6 @@ arrowKeys.forEach(key => {
 
     key.addEventListener('mousedown', () => {
         const direction = key.dataset.direction;
-
         // Check if the direction is valid
         if (directionToMovement.hasOwnProperty(direction)) {
             mouseTimer = setInterval(() => {
@@ -275,3 +237,5 @@ function update() {
     requestAnimationFrame(update);
     handle_keys();
 }
+
+update();
