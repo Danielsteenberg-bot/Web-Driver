@@ -1,20 +1,23 @@
 .navbar-top-bar {
     display: flex;
-    background-color: white;
     color: #000000;
     padding: 10px;
     text-align: left;
-    z-index: 1;
     width: 100%;
     position: absolute;
     top: 0px;
     left: 0px;
+    z-index: 2 !important;
+    isolation: isolate;
+    background-color: transparent;
+    align-items: center;
+
 }
 
 .burger-menu {
     width: auto;
-    z-index: 2;
     cursor: pointer;
+
 }
 a{
     text-decoration: none;
@@ -25,14 +28,16 @@ a{
     padding: 20px;
     position: absolute;
     top: 0px; 
-    left: 0px;  
-    width: 10%;
+    left: -25%;  
+    width: 25%;
     height: 100vh;
     box-sizing: border-box;
     display: flex;
+    z-index: 1;
     flex-direction: column; /* Ensure child elements stack vertically */
     justify-content: space-between; /* Push elements to the top and bottom */
     transition: transform 0.5s ease;
+    
 }
 
 .user-profile,
@@ -42,17 +47,17 @@ a{
     text-align: center;
     position: relative;
     background-color: #d9d9d9;
-    height: 40px;
-    padding-top: 20px;
+    height: 30px;
+    padding-top: 8px;
     width: 100%; /* Ensure full width */
     cursor: pointer;
     margin-top: 10px;
 }
 
 .sign-out {
-    margin-top: 30px;
+  
     height: 40px;
-    padding-top: 10px;
+    padding-top: 8px;
     color: black;
     background-color: #d9d9d9;
     text-align: center;
@@ -71,6 +76,8 @@ a{
 
 .signout-svg {
     stroke: black;
+    position: relative;
+    top: -15px
 }
 
 .sign-out:hover .signout-svg {

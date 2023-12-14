@@ -8,9 +8,11 @@
 :root {
   --blue-color: #3fcaf6;
   --pink-color: #ff00c7a6;
-  --grey-color: #9f9f9f;
+  --grey-color: #646868;
+  --darker-grey: #8B8B8B;
   --black-color: #000000;
   --white-color: #ffffff;
+  --yellow-color: #DCAD05;
 }
 
 .container {
@@ -27,14 +29,17 @@
   align-items: center;
   justify-content: center;
   height: 20vh;
-  width: 95%;
+  width: 75%;
+  border: 2px solid var(--yellow-color);
+  border-radius: 25px;
+  color: white;
 }
 
 .top-bar {
   display: flex;
   flex-direction: row;
   width: 100%;
-  background-color: aqua;
+  background-color: var(--grey-color);
   border-radius: 1.5rem 1.5rem 0rem 0rem;
   height: 35vh;
 }
@@ -79,11 +84,16 @@
   height: 3rem;
   font-size: 1.2rem;
   border-radius: 1.5rem;
+  background-color: var(--darker-grey);
+  border: none;
+}
+.connectBTN:hover{
+  border: 2px solid var(--yellow-color);
 }
 
 .bottom-bar {
   width: 100%;
-  background-color: var(--grey-color);
+  background-color: var(--darker-grey);
   border-top: var(--black-color) 1px solid;
   border-radius: 0rem 0rem 1.5rem 1.5rem;
   height: 60%;

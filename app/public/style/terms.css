@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+:root {
+    --primary-color: #FFD369;
+    --secondary-color: #222831;
+    --background-color: #393E46;
+    --red-color: #CD1818;
+    --green-color: #8EAC50;
+    --main-font: 'press start 2p';
+    --secondary-font: 'Montserrat';
+
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--main-font);
+}
+
+
+.terms-container{
+    background-color: var(--secondary-color);
+    height: 100vh;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 1rem;
+}
+
+.terms-container h2{
+    font-size: 22px;
+    text-align: left;
+    color: var(--primary-color);
+    padding-bottom: 0.5rem;
+}
+
+.terms-container h1{
+    font-size: 50px;
+    text-align: center;
+    color: var(--primary-color);
+}
+
+.terms-container p{
+    font-family: var(--secondary-font);
+}
+
+
+
