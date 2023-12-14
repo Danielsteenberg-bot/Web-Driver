@@ -2,12 +2,6 @@ const icons = document.querySelectorAll('.icon-item');
  const footerIcons = document.querySelectorAll('.footer-item');
  const footerBottom = document.querySelectorAll('.footer-bottom-item');
 
- console.log("hej")
- 
- 
- 
- 
- 
  window.addEventListener('scroll', function() {
      var imageHeader = document.querySelector('.image-header');
      var headerOffset = imageHeader.offsetTop;
@@ -21,7 +15,23 @@ const icons = document.querySelectorAll('.icon-item');
          imageHeader.classList.remove('sticky');
      }
  });
- 
+
+ScrollReveal().reveal('.land-main-text', {
+    delay: 100,
+    duration: 500,
+    distance: '100px',
+    origin: 'bottom',
+    easing: 'ease-in-out',
+    reset: true
+});
+ScrollReveal().reveal('.land-under-text', {
+    delay: 200,
+    duration: 500,
+    distance: '100px',
+    origin: 'bottom',
+    easing: 'ease-in-out',
+    reset: true
+});
  
  ScrollReveal().reveal('.txt-spacer', {
      delay: 200,

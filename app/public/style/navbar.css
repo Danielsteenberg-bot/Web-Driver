@@ -4,7 +4,7 @@
     padding: 10px;
     text-align: left;
     width: 100%;
-    position: absolute;
+    position: fixed;
     top: 0px;
     left: 0px;
     z-index: 2 !important;

@@ -1,28 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
 
+<%- include('../partials/header', {styles: ['/style/default.css', '/style/contact.css' , '/style/contactsection.css'
+    , '/style/spacer.css' , '/style/icon.css' , '/style/navbar.css' , '/style/footer.css' , '/style/main.css'
+    ,'/style/contactsection.css' ], scripts: ['/script/mainSite.js', '/script/navbar.js' ]}) %>
+
+
+    
 <body>
-    <%- include('../partials/header', {styles: ['/style/default.css', '/style/contact.css' , '/style/contactsection.css'
-        , '/style/spacer.css' , '/style/icon.css' , '/style/navbar.css' , '/style/footer.css' , '/style/main.css'
-        ,'/style/contactsection.css' ], scripts: ['/script/mainSite.js', '/script/navbar.js' ]}) %>
+    <nav>
         <%- include('../partials/nav.ejs') %>
-
-            <div class="contact-outer">
+    </nav>
+          <div class="contact-outer">
                 <div class="wrapper-contact-info">
                     <h2>Contact us!</h2>
                     <div class="contact-info">
-                        <div class="phone-contact-div">
-                            <i class="fa-solid fa-phone"></i></i>
+                        <div class="phone-contact-div" >
+                            <i class="fa-solid fa-phone" id="phone-contact"></i></i>
                             <h3>+31 6 123456789</h3>
                         </div>
                         <div class="email-contact-div">
-                            <i class="fa-solid fa-envelope"></i>
+                            <i class="fa-solid fa-envelope" id="envelope-contact"></i>
                             <h3> Webdrive@gmail.com</h3>
                         </div>
                     </div>
@@ -52,6 +51,12 @@
                     </div>
                 </form>
             </div>
+
+
+
+
+        <%- include('../partials/footer.ejs') %>
+
 </body>
 
 </html>
