@@ -12,8 +12,6 @@ let sonar_front = 0;
 let sonar_left = 0;
 let sonar_right = 0;
 
-
-
 socket.on("rotation", (_rotation) => { rotation = 360 - _rotation; })
 socket.on("sonar", (front, left, right) => { 
     sonar_front = front;
@@ -133,6 +131,39 @@ function draw() {
 
 const keys = {}
 
+const directionToMovement = {
+    'up': 'F',
+    'down': 'B',
+    'left': 'L',
+    'right': 'R',
+}
+
+arrowKeys.forEach(key => {
+    let mouseTimer
+
+    key.addEventListener('mousedown', () => {
+        const direction = key.dataset.direction;
+        // Check if the direction is valid
+        if (directionToMovement.hasOwnProperty(direction)) {
+            mouseTimer = setInterval(() => {
+                socket.emit('move', directionToMovement[direction]);
+            }, 10);
+        }
+    });
+
+    key.addEventListener('mouseup', () => {
+        clearInterval(mouseTimer);
+    });
+
+    key.addEventListener('mouseleave', () => {
+        // Clear the interval when the mouse leaves the document
+        clearInterval(mouseTimer);
+        removeActive()
+    });
+    
+})
+
+const pressedKeys = {}
 onkeydown = (event) => {
     keys[event.key] = true;
 }
@@ -176,7 +207,6 @@ function handle_keys() {
 
         sendMove(combination)
     })
-
 }
 
 async function sendMove(combination) {
@@ -209,5 +239,3 @@ function update() {
 }
 
 update();
-
-

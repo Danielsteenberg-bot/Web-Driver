@@ -11,7 +11,7 @@
 
 #define WIFI_CLIENT true
 
-#define PROXY_IP IPAddress(172, 16, 112, 46)
+#define PROXY_IP IPAddress(192, 168, 137, 1)
 #define PROXY_PORT 8888
 #define WIFI_SSID "jungle-network"
 #define WIFI_PASSWORD "83:511Nx"

@@ -40,9 +40,12 @@ io.on('connection', (socket) => {
     let user = socket.request.session.userId
     if (user) {
         socket.on('join-room-user', (data) => {
+            socket.on('ready', () => {
+                setInterval(() => {
+                    socket.emit('rotation', 45);
+                }, 1000);});
             const { deviceId } = data;
             userId = socket.request.session.userId
-
             // Update the user's socket ID or add a new user to the room
             if (!users[deviceId]) {
                 users[deviceId] = {};
@@ -58,7 +61,7 @@ io.on('connection', (socket) => {
 
             // Emit a message to the user who just joined the room
             socket.emit('joined-message', `Welcome to user ${userId} to deviceId: ${deviceId}`);
-
+            
             // Emit a message to all users in the room except the newly joined user
             socket.to(deviceId).emit('joined-message', `${userId} has joined the room`);
 
@@ -99,3 +102,4 @@ io.on('connection', (socket) => {
     }
 
 });
+
