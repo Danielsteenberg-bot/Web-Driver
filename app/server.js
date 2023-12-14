@@ -35,15 +35,19 @@ server.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
 
+const sessionMap = new Map()
 io.on('connection', (socket) => {
     const users = {};
     let user = socket.request.session.userId
+    let drivingSession = socket.request.session.drivingSession
+    let device = socket.request.session.connectedDevice
     if (user) {
         socket.on('join-room-user', (data) => {
             socket.on('ready', () => {
                 setInterval(() => {
                     socket.emit('rotation', 45);
-                }, 1000);});
+                }, 1000);
+            });
             const { deviceId } = data;
             userId = socket.request.session.userId
             // Update the user's socket ID or add a new user to the room
@@ -52,51 +56,54 @@ io.on('connection', (socket) => {
             }
 
             users[deviceId][userId] = { socketId: socket.id };
+            sessionMap.set(device, { user, drivingSession });
 
+            console.log(`${device}: `, sessionMap.get(device));
             // Log the updated users information
-            console.log(users);
+            // console.log(users);
 
             // Join the room
             socket.join(deviceId);
 
             // Emit a message to the user who just joined the room
             socket.emit('joined-message', `Welcome to user ${userId} to deviceId: ${deviceId}`);
-            
+
             // Emit a message to all users in the room except the newly joined user
             socket.to(deviceId).emit('joined-message', `${userId} has joined the room`);
 
             socket.on("move", (direction) => {
-                console.log(": "+ direction)
+                // console.log(": "+ direction)
                 socket.to(deviceId).emit("move", direction)
             })
         });
     }
-    else if(!user){
+    else if (!user) {
         socket.on('join-room-device', (data) => {
+
             const { pass, deviceId } = data
             console.log("device:", deviceId)
-            
-            if(pass != process.env.DEVICE_PASS) {
+
+            if (pass != process.env.DEVICE_PASS) {
                 socket.disconnect();
-                return      
+                return
             }
-            
+
             socket.join(deviceId)
             socket.emit('joined-message', `Welcome to device: ${deviceId}`);
-            
+
             socket.on("gps", (lat, long) => {
                 socket.to(deviceId).emit("gps", lat, long)
-                AddGps(5, Date.now(), lat, long); 
+                AddGps(sessionMap.get(deviceId).drivingSession, Date.now(), lat, long);
             })
 
             socket.on("rotation", (rotation) => {
                 socket.to(deviceId).emit("rotation", rotation)
-                AddRotation(5, Date.now(), rotation); 
+                AddRotation(sessionMap.get(deviceId).drivingSession, Date.now(), rotation);
             })
 
-             socket.on("sonar", (f, l, r) => { 
-                socket.to(deviceId).emit("sonar", f, l, r); 
-                AddSonar(5, Date.now(), f, l, r); 
+            socket.on("sonar", (f, l, r) => {
+                socket.to(deviceId).emit("sonar", f, l, r);
+                AddSonar(sessionMap.get(deviceId).drivingSession, Date.now(), f, l, r);
             })
         })
     }

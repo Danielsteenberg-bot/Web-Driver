@@ -28,7 +28,7 @@ const checkDeviceSession = (req, res, next) => {
 router.route('/')
     .get(checkLogged, checkDeviceSession,  async (req, res) => {
         const session = await startSession(req.session.userId, parseInt(req.session.connectedDevice))
-        console.log("current Session: ", session.id);
+
         req.session.drivingSession = session.id
         res.render('dashboard/dashboard', {
             title: 'dashboard'
