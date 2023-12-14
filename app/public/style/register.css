@@ -106,3 +106,6 @@ body{
 a{
     color: var(--yellow-color);
 }
+.form-content{
+    margin-top: 70px;
+}
