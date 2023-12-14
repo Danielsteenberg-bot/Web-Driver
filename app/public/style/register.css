@@ -1,59 +1,37 @@
-body, html{
-    height: 110%;
-    margin: 0;
-    
-}
-@font-face{
-    font-family: Poppins;
-    src: url("font/Poppins/Poppins-Regular.ttf") format("truetype"); /* Path to your font file */
-    font-weight: normal;
-    font-style: normal;
-}
 body{
-	background: linear-gradient(-45deg, #FF00C7, rgb(209, 53, 113), #23a6d5, #23d5ab);
-	background-size: 400% 400%;
-	animation: gradient 8s ease infinite;
-	height: 100vh;
-    overflow-x: hidden;
-    overflow-y: hidden;
-    font-family: Poppins;
-}
-@keyframes gradient {
-	0% {
-		background-position: 0% 50%;
-	}
-	50% {
-		background-position: 100% 50%;
-	}
-	100% {
-		background-position: 0% 50%;
-	}
-}
-
-h2{
-    margin-bottom: 40px;
+    overflow-y: hidden !important;
 }
 .login-container{   
     text-align: center;
     margin: 0 auto;
-    margin-top: 278px;
-    background-color: #FFFFFF;
+    margin-top: 250px;
+    background-color: var(--form-color);
     width: 500px;
-    height: 400px;
+    height: 450px;
     border-radius: 26px;
+    color: #FFFFFF;
+    border: 2px solid var(--yellow-color);
 }
 .register-container{
+    color: white;
     text-align: center;
     margin: 0 auto;
     margin-top: 160px;
-    background-color: #FFFFFF;
+    background-color: var(--form-color);
     width: 500px;
-    height: 500px;
+    height: 550px;
     border-radius: 26px;
+    border: 3px solid var(--yellow-color);
 }
-
+.register-container h2{
+    padding-top: 10px;
+}
+.login-container input:focus{
+    outline: none;
+}
 .register-container input{
     text-align: center;
+    color: #e2e2e2;
 }
 
 .register-container input:focus {
@@ -61,6 +39,7 @@ h2{
 }
 
 .register-container input {
+    padding-top: 10px;
     text-align: center;
     transition: border-color 0.7s ease; 
 }
@@ -68,6 +47,7 @@ h2{
 .username-input,
 .email-input,
 .password-input {
+    background-color: var(--form-color);
     text-align: center;
     display: flex;
     margin: 0 auto;
@@ -77,67 +57,55 @@ h2{
     border-bottom: 2px solid;
     border-color: #d9d9d9;
     margin-bottom: 40px;
+    color: #e2e2e2;
 }
 
 .username-input:focus,
 .email-input:focus,
 .password-input:focus {
-    border-color: #007BFF; /* Change the border color when input is focused */
+    border-color: var(--yellow-color); 
 }
+.username-input:hover,
+.email-input:hover,
+.password-input:hover {
+    border-color: var(--yellow-color); 
+}
+
 
 .user-image{
     position: relative;
     right: 200px;
-    top: 35px;
+    top: 45px;
 }
 
 .mail-image{
     position: relative;
     right: 200px;
-    top: 35px;
+    top: 45px;
 }
 
 .password-image{
     position: relative;
     right: 200px;
-    top: 35px;
+    top: 45px;
 }
 .submit-button{
-    margin-top: 10px;
-    background-color: #FFFFFF;
+    margin-top: 18px;
+    background-color: var(--form-color);
+    color: white;
     border-radius: 25px;
     width: 171px;
     height: 54px;
-    border: 1 px solid black;
+    border: 1px solid #d9d9d9;
+
 }
 .submit-button:hover{
-    background-color: #ececec;
+    border: 2px solid var(--yellow-color);
     cursor: pointer;
 }
-
-.shape-1{
-    z-index: 1;
-    display: flex;
-    position: absolute;
-    top: -250px;
-    left: -350px;
+a{
+    color: var(--yellow-color);
 }
-.shape-2{
-    z-index: 1;
-    display: flex;
-    position: absolute;
-    left: -250px;
-    bottom: -180px;
-}
-.shape-3{
-    z-index: 1;
-    display: flex;
-    position: absolute;
-    right: -500px;
-    top: 100px
-}
-.navbar-top-bar{
-    height: 8%;
-    background-color: #d9d9d9;
-
+.form-content{
+    margin-top: 70px;
 }

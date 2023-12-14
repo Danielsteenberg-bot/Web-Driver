@@ -1,0 +1,26 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%- title %></title>
+
+    <!-- Css -->
+<% if (typeof styles !== 'undefined') { %>
+    <% styles.forEach(function(style) { %>
+        <link rel="stylesheet" href="<%= style %>">
+    <% }) %>
+<% } %>
+
+<!-- Script -->
+<% if (typeof scripts !== 'undefined') { %>
+    <% scripts.forEach(function(script) { %>
+        <script defer src="<%= script %>"></script>
+    <% }) %>
+<% } %>
+
+<!-- Random  -->
+<script src="https://kit.fontawesome.com/7c9eddd821.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/rellax/1.12.1/rellax.min.js"></script>
+<script src="https://unpkg.com/scrollreveal"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+
+</head>

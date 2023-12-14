@@ -34,5 +34,11 @@ router.route('/navbar')
             title: "navbar"
         })
     })
+router.route('/contact')
+    .get((get, res) =>{
+        res.render('dashboard/contact',{
+            title: "contact"
+        })
+    })
 
 module.exports = router;
