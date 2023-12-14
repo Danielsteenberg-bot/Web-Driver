@@ -1,4 +1,3 @@
-console.log("navbar.js loaded");
 
 document.addEventListener("DOMContentLoaded", function () {
     // Get references to the burger menu and navbar
@@ -21,14 +20,12 @@ document.addEventListener("DOMContentLoaded", function () {
           x: -navbar.clientWidth, duration: 0.1, 
           ease: "power4" 
       });
-        console.log("open");
       } else {
         gsap.to(navbar, {
           x: navbar.clientWidth * 1, 
           duration: 0.1,
           ease: "power4",
         });
-        console.log("closed");
       }
 
     });

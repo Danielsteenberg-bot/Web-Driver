@@ -84,10 +84,6 @@ const writeData = document.querySelector(".data-container");
             <hr class="between-lines">
 
         `
-
-        
-        console.log(data.imgURL);
-
         writeData.innerHTML += template;
     });
 
