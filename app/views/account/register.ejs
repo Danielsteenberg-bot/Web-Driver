@@ -1,91 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <%- include('../partials/header', {
-        title: 'Register',
-        styles: [
-            '/style/default.css',
-            '/style/register.css',
-            '/style/navbar.css',
-            '/style/footer.css',
-            '/style/main.css'
-        ],
-        scripts: [
-            '/script/mainSite.js',
-            '/script/navbar.js',
-            '/script/animation.js'
-        ]
-    }) %>
+<%- include('../partials/header', { title: 'Register' , styles: [ '/style/default.css' , '/style/register.css'
+    , '/style/navbar.css' , '/style/footer.css' , '/style/main.css' ], scripts: [ '/script/mainSite.js'
+    , '/script/navbar.js' , '/script/animation.js' ] }) %>
 
-<body>
+    <body>
 
-    <form method="post" class="register-container">
+        <form method="post" class="register-container">
 
-        <h2 class="h2-wrapper-register">Register</h2>
-        <div class="user">
-            <svg class="user-image-register" width="23" height="28" viewBox="0 0 23 28" fill="none"
-                xmlns="http://www.w3.org/2000/svg">
-                <path
-                    d="M1.5 23.5L1 26.5V27H21.5V26L21 24.5L20 22.5L18.5 20.5L16.5 19L14.5 18H12.5H10.5H8.5L6.5 18.5L4.5 19.5L2.5 21.5L1.5 23.5Z"
-                    stroke="white" stroke-width="2" />
-                <circle cx="11" cy="7.5" r="6.5" stroke="white" stroke-width="2" />
-            </svg>
-            <input type="text" id="username" name="userName" class="username-input" placeholder="Enter you're username"
-                required>
-        </div>
-        <div class="email">
-            <svg class="mail-image-register" width="26" height="17" viewBox="0 0 26 17" fill="none"
-                xmlns="http://www.w3.org/2000/svg">
-                <path d="M0.5 1H25.5V16H0.5V1Z" fill="transparent" />
-                <path
-                    d="M0.5 1H25.5M0.5 1V16M0.5 1L13.3676 8.82609M25.5 1V16M25.5 1L13.3676 8.82609M25.5 16H0.5M25.5 16L13.3676 8.82609M0.5 16L13.3676 8.82609"
-                    stroke="white" />
-            </svg>
-            <input type="email" id="email" name="email" class="email-input" placeholder="Enter you're email" required>
-        </div>
-        <div class="password">
-            <svg class="password-image-register" width="17" height="26" viewBox="0 0 17 26" fill="none"
-                xmlns="http://www.w3.org/2000/svg">
-                <path
-                    d="M16 11.8636V25.5H1V11.8636V9L1.5 6.5L3.64706 2.48864L8.5 1L12 2L14.5294 4.76136L15.7059 7.60227L16 9.5L16 11.8636Z"
-                    fill="transparent" />
-                <path
-                    d="M1 11.8636H16M1 11.8636V25.5H16V11.8636M1 11.8636V9L1.5 6.5L3.64706 2.48864L8.5 1L12 2L14.5294 4.76136L15.7059 7.60227L16 9.5L16 11.8636"
-                    stroke="white" />
-                <circle cx="8.5" cy="18.5" r="1.5" fill="white" />
-                <path d="M8.5 19V22" stroke="white" />
-            </svg>
-            <input type="password" id="password" name="passWord" class="password-input"
-                placeholder="enter you're password" required>
-        </div>
-        <p>Already have an account?<a href="./"> Sign in here!</a></p>
-
-        <button type="submit" class="submit-button">Sign up!</button>
-        </div>
-        <div class="shapes">
-            <div class="svg-shape-4">
-                <svg width="300" height="300" viewBox="0 0 389 508" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M-292.586 179.709L60.7095 -173.586L387.031 152.735L33.7355 506.031L-292.586 179.709Z"
-                        fill="#BFBFBF" fill-opacity="0.3" stroke="#DCAD05" stroke-width="2" />
-                </svg>
+            <h2 class="h2-wrapper-register">Register</h2>
+            <div class="wrapper-form-inputs">
+                <div class="user">
+                    <svg class="user-image-register" width="23" height="28" viewBox="0 0 23 28" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M1.5 23.5L1 26.5V27H21.5V26L21 24.5L20 22.5L18.5 20.5L16.5 19L14.5 18H12.5H10.5H8.5L6.5 18.5L4.5 19.5L2.5 21.5L1.5 23.5Z"
+                            stroke="white" stroke-width="2" />
+                        <circle cx="11" cy="7.5" r="6.5" stroke="white" stroke-width="2" />
+                    </svg>
+                    <input type="text" id="username" name="userName" class="username-input"
+                        placeholder="Enter you're username" required>
+                </div>
+                <div class="email">
+                    <svg class="mail-image-register" width="26" height="17" viewBox="0 0 26 17" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0.5 1H25.5V16H0.5V1Z" fill="transparent" />
+                        <path
+                            d="M0.5 1H25.5M0.5 1V16M0.5 1L13.3676 8.82609M25.5 1V16M25.5 1L13.3676 8.82609M25.5 16H0.5M25.5 16L13.3676 8.82609M0.5 16L13.3676 8.82609"
+                            stroke="white" />
+                    </svg>
+                    <input type="email" id="email" name="email" class="email-input" placeholder="Enter you're email"
+                        required>
+                </div>
+                <div class="password">
+                    <svg class="password-image-register" width="17" height="26" viewBox="0 0 17 26" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M16 11.8636V25.5H1V11.8636V9L1.5 6.5L3.64706 2.48864L8.5 1L12 2L14.5294 4.76136L15.7059 7.60227L16 9.5L16 11.8636Z"
+                            fill="transparent" />
+                        <path
+                            d="M1 11.8636H16M1 11.8636V25.5H16V11.8636M1 11.8636V9L1.5 6.5L3.64706 2.48864L8.5 1L12 2L14.5294 4.76136L15.7059 7.60227L16 9.5L16 11.8636"
+                            stroke="white" />
+                        <circle cx="8.5" cy="18.5" r="1.5" fill="white" />
+                        <path d="M8.5 19V22" stroke="white" />
+                    </svg>
+                    <input type="password" id="password" name="passWord" class="password-input"
+                        placeholder="enter you're password" required>
+                </div>
             </div>
-            <div class="svg-shape-5">
-                <svg width="300" height="250" viewBox="0 0 368 279" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M-272.693 193.283L188.589 1.30744L365.907 427.37L-95.3739 619.346L-272.693 193.283Z"
-                        fill="white" fill-opacity="0.3" stroke="#DCAD05" stroke-width="2" />
-                </svg>
+            <div class="wrapper-submit">
+                <p>Already have an account?<a href="./"> Sign in here!</a></p>
+
+                <button type="submit" class="submit-button">Sign up!</button>
             </div>
-            <div class="svg-shape-6">
-                <svg width="500" height="500" viewBox="0 0 656 652" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M1.40902 342.934L288.873 1.40922L654.159 308.874L366.695 650.398L1.40902 342.934Z"
-                        fill="#747474" fill-opacity="0.8" stroke="#DCAD05" stroke-width="2" />
-                </svg>
 
+            <div class="shapes">
+                <div class="svg-shape-4">
+                    <svg width="300" height="300" viewBox="0 0 389 508" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M-292.586 179.709L60.7095 -173.586L387.031 152.735L33.7355 506.031L-292.586 179.709Z"
+                            fill="#BFBFBF" fill-opacity="0.3" stroke="#DCAD05" stroke-width="2" />
+                    </svg>
+                </div>
+                <div class="svg-shape-5">
+                    <svg width="300" height="250" viewBox="0 0 368 279" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M-272.693 193.283L188.589 1.30744L365.907 427.37L-95.3739 619.346L-272.693 193.283Z"
+                            fill="white" fill-opacity="0.3" stroke="#DCAD05" stroke-width="2" />
+                    </svg>
+                </div>
+                <div class="svg-shape-6">
+                    <svg width="500" height="500" viewBox="0 0 656 652" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M1.40902 342.934L288.873 1.40922L654.159 308.874L366.695 650.398L1.40902 342.934Z"
+                            fill="#747474" fill-opacity="0.8" stroke="#DCAD05" stroke-width="2" />
+                    </svg>
+
+                </div>
             </div>
-        </div>
 
-    </form>
+        </form>
 
-</body>
+    </body>
 
 </html>
