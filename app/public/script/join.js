@@ -1,4 +1,3 @@
-
 const socket = io();
 const deviceId = "1";
 

@@ -93,16 +93,18 @@ io.on('connection', (socket) => {
             socket.emit('joined-message', `Welcome to device: ${deviceId}`);
 
             socket.on("gps", (lat, long) => {
-                socket.to(deviceId).emit("gps", lat, long)
+                if (!sessionMap.get(deviceId)) return;
                 AddGps(sessionMap.get(deviceId).drivingSession, Date.now(), lat, long);
             })
 
             socket.on("rotation", (rotation) => {
+                if (!sessionMap.get(deviceId)) return;
                 socket.to(deviceId).emit("rotation", rotation)
                 AddRotation(sessionMap.get(deviceId).drivingSession, Date.now(), rotation);
             })
 
             socket.on("sonar", (f, l, r) => {
+                if (!sessionMap.get(deviceId)) return;
                 socket.to(deviceId).emit("sonar", f, l, r);
                 AddSonar(sessionMap.get(deviceId).drivingSession, Date.now(), f, l, r);
             })

@@ -46,9 +46,8 @@ setInterval(async () => {
     buffer.clear();
     
     console.log("[buffer] size: " + data.length)
-    
-    // let result = await prisma.drivingHistory.createMany({data: data});
-    // console.log("[buffer] insert result:", result)
+    let result = await prisma.drivingHistory.createMany({data: data});
+    console.log("[buffer] insert result:", result)
 }, 5000)
 
 module.exports = {
