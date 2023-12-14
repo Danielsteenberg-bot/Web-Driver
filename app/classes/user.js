@@ -36,7 +36,7 @@ const validate = async (loginName, password) => {
     if (user) {
             let result = await comparePassword(password, user.password)
             if(!result) return false
-
+            socket.emit('userLoggedIn', { username: 'the-username' });
             return user
     }
 
@@ -45,5 +45,6 @@ const validate = async (loginName, password) => {
 
 module.exports = {
     validate,
-    register
+    register,
+    prisma
 }

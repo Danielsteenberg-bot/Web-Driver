@@ -28,6 +28,8 @@ model User {
   username String
   password String 
   sessions Session[]
+  rotation String
+  socketId String? @unique
 }
 
 model Device {

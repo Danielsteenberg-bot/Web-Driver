@@ -8,7 +8,14 @@ const { test } = require('./classes/session');
 const { on } = require('events');
 const io = socketIO(server)
 require('dotenv').config();
+const { PrismaClient } = require("@prisma/client");
+const prisma = new PrismaClient()
+const { post } = ('');
+let rotation = [];
 
+function getRotation() {
+  return rotation[rotation.length - 1];
+}
 
 //session setup
 const sessions = session({
@@ -77,38 +84,41 @@ io.on('connection', (socket) => {
             console.log("device:", deviceId)
             
             if(pass != process.env.DEVICE_PASS) {
+                console.log("wrong pass")
                 socket.disconnect();
                 return      
             }
             
+            console.log("correct pass")
             socket.join(deviceId)
             socket.emit('joined-message', `Welcome to device: ${deviceId}`);
             
-            let rotation = [];
-
+            io.on('connection', (socket) => {
             socket.on('rotation', async (angle) => {
                 rotation.push(angle);
-                console.log("successful socket");
-            });
-
-            setInterval(async() => {
-                const userId = socket.id;
+                console.log("successful emit: " + angle);
+              });
+              
+              setInterval(async() => {
+                const socketId = socket.username;
+                const rotation = getRotation(); 
                 const session = await prisma.user.findFirst({
-                    where: { id: userId },
+                  where: { username: socketId },
                 });
+                console.log(socketId)
                 if (session) {
-                    await prisma.user.update({
-                        where: { id: userId },
-                        data: {
-                            rotation
-                        }
-                    });
+                  await prisma.user.update({
+                    where: { username: socketId },
+                    data: {
+                      rotation
+                    }
+                  });
+                  console.log("successful update")
                 }
-                post(rotation);
-                console.log("successful post");
-            }, 10000);
-        })
-    }
-
-});
+              }, 10000);
+            });
+    }   
+    )};  
+}
+);
 

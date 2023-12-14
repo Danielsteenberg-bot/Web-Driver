@@ -6,8 +6,6 @@ const clearBTN = document.querySelector('.clearBTN');
 const saveBTN = document.querySelector('.saveBTN');
 const arrowKeys = document.querySelectorAll('.arrow-key');
 
-
-
 let distance = 0;
 let checkpoints = [];
 let drivesession = [];
@@ -151,6 +149,9 @@ arrowKeys.forEach(key => {
     
 })
 
+setInterval(async() => {
+    window.monkey.emit('rotation', Math.random());
+}, 1000);
 
 const pressedKeys = {}
 onkeydown = (event) => {
