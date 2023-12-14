@@ -26,7 +26,7 @@ const checkDeviceSession = (req, res, next) => {
 
 // Routers
 router.route('/')
-    .get(checkLogged, checkDeviceSession,  async (req, res) => {
+    .get(checkLogged, checkDeviceSession, async (req, res) => {
         const session = await startSession(req.session.userId, parseInt(req.session.connectedDevice))
 
         req.session.drivingSession = session.id

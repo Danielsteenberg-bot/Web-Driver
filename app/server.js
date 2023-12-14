@@ -56,7 +56,9 @@ io.on('connection', (socket) => {
             }
 
             users[deviceId][userId] = { socketId: socket.id };
-            sessionMap.set(device, { user, drivingSession });
+            if (drivingSession && device && user) {
+                sessionMap.set(device, { user, drivingSession })
+            }
 
             console.log(`${device}: `, sessionMap.get(device));
             // Log the updated users information
@@ -92,19 +94,26 @@ io.on('connection', (socket) => {
             socket.emit('joined-message', `Welcome to device: ${deviceId}`);
 
             socket.on("gps", (lat, long) => {
-                socket.to(deviceId).emit("gps", lat, long)
-                AddGps(sessionMap.get(deviceId).drivingSession, Date.now(), lat, long);
+                if (sessionMap.get(deviceId).drivingSession) {
+                    socket.to(deviceId).emit("gps", lat, long)
+                    AddGps(sessionMap.get(deviceId).drivingSession, Date.now(), lat, long);
+                }
             })
 
             socket.on("rotation", (rotation) => {
-                socket.to(deviceId).emit("rotation", rotation)
-                AddRotation(sessionMap.get(deviceId).drivingSession, Date.now(), rotation);
+                if (sessionMap.get(deviceId).drivingSession) {
+                    socket.to(deviceId).emit("rotation", rotation)
+                    AddRotation(sessionMap.get(deviceId).drivingSession, Date.now(), rotation);
+                }
             })
 
             socket.on("sonar", (f, l, r) => {
-                socket.to(deviceId).emit("sonar", f, l, r);
-                AddSonar(sessionMap.get(deviceId).drivingSession, Date.now(), f, l, r);
+                if (sessionMap.get(deviceId).drivingSession) {
+                    socket.to(deviceId).emit("sonar", f, l, r);
+                    AddSonar(sessionMap.get(deviceId).drivingSession, Date.now(), f, l, r);
+                }
             })
+
         })
     }
 
