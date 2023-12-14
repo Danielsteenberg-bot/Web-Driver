@@ -2,12 +2,6 @@ const icons = document.querySelectorAll('.icon-item');
  const footerIcons = document.querySelectorAll('.footer-item');
  const footerBottom = document.querySelectorAll('.footer-bottom-item');
 
- console.log("hej")
- 
- 
- 
- 
- 
  window.addEventListener('scroll', function() {
      var imageHeader = document.querySelector('.image-header');
      var headerOffset = imageHeader.offsetTop;
