@@ -1,5 +1,4 @@
 const {PrismaClient } = require("@prisma/client");
-
 const prisma = new PrismaClient();
 const buffer = new Map();
 
@@ -44,12 +43,12 @@ setInterval(async () => {
         history.time = new Date(history.time);
         data.push(history)
     })
-    
-    console.log("buffer size: " + data.length)
-
     buffer.clear();
-    // let x = await prisma.drivingHistory.createMany({data: data});
-    // console.log(x)
+    
+    console.log("[buffer] size: " + data.length)
+    
+    // let result = await prisma.drivingHistory.createMany({data: data});
+    // console.log("[buffer] insert result:", result)
 }, 5000)
 
 module.exports = {

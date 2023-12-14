@@ -20,6 +20,15 @@ router.route('/')
         })
     })
 
+router.route('/history/:history_id')
+    .get((req, res) => {
+        const history_id = req.params.history_id 
+        console.log(history_id)
+        res.render('dashboard/history', {
+            history_id
+        })
+    })
+
 router.route('/manage')
     .get((req, res) => {
 

@@ -28,6 +28,7 @@ app.use(express.json());
 app.use('/', require('./routes/account'));
 app.use('/dashboard', require('./routes/home'));
 app.use('/company', require('./routes/company'));
+app.use('/history', require('./routes/history'));
 
 
 const port = process.env.PORT || 3000;

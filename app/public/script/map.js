@@ -1,10 +1,10 @@
 const canvas = document.querySelector('.canvasMap');
+const ctx = canvas.getContext('2d');
 const infoSpeed = document.querySelector('.infoSpeed');
 const infoDist = document.querySelector('.infoDist');
 const clearBTN = document.querySelector('.clearBTN');
 const saveBTN = document.querySelector('.saveBTN');
 const arrowKeys = document.querySelectorAll('.arrow-key');
-const ctx = canvas.getContext('2d');
 
 let distance = 0;
 let rotation = 0;
