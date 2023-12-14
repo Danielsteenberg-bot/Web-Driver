@@ -29,7 +29,7 @@ router.route('/')
 
         if (user) {
             req.session.userId = user.id
-            res.redirect('/dashboard/')
+            res.redirect('/dashboard/manage')
         }
 
     })

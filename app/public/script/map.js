@@ -189,7 +189,7 @@ function handle_keys() {
             case 'ArrowLeft', 'a':
                 // console.log("L");
                 checkActive(1);
-                combination += 'L'
+                combination += 'L';
                 break;
 
             case 'ArrowDown', 's':
@@ -217,11 +217,16 @@ async function sendMove(combination) {
     }
 }
 
-function removeActive() {
-    arrowKeys[0].classList.remove("active");
-    arrowKeys[1].classList.remove("active");
-    arrowKeys[2].classList.remove("active");
-    arrowKeys[3].classList.remove("active");
+function removeActive(releasedKey) {
+    // Check if any keys are still pressed
+    const anyKeysPressed = Object.keys(pressedKeys).length > 0;
+
+    arrowKeys.forEach((key, index) => {
+        const dataKey = key.dataset.key;
+        if (!anyKeysPressed || releasedKey === dataKey) {
+            key.classList.remove('active');
+        }
+    });
 }
 
 function checkActive(key) {
