@@ -15,8 +15,6 @@ const icons = document.querySelectorAll('.icon-item');
          imageHeader.classList.remove('sticky');
      }
  });
- 
-
 
 ScrollReveal().reveal('.land-main-text', {
     delay: 100,

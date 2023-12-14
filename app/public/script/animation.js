@@ -7,26 +7,6 @@ const boxDesc = document.querySelectorAll(".box-desc");
 const aboutBTN = document.querySelectorAll(".about-btn-container");
 const landWords = document.querySelectorAll(".reveal-word");
 
-
-
-ScrollReveal().reveal('.land-main-text', {
-    delay: 100,
-    duration: 500,
-    distance: '100px',
-    origin: 'bottom',
-    easing: 'ease-in-out',
-    reset: true
-});
-ScrollReveal().reveal('.land-under-text', {
-    delay: 200,
-    duration: 500,
-    distance: '100px',
-    origin: 'bottom',
-    easing: 'ease-in-out',
-    reset: true
-});
-
- 
  
  ScrollReveal().reveal('.txt-spacer', {
     delay: 200,
