@@ -4,18 +4,9 @@ const http = require('http');
 const app = express();
 const server = http.createServer(app);
 const socketIO = require('socket.io');
-const { test } = require('./classes/session');
-const { on } = require('events');
 const io = socketIO(server)
 require('dotenv').config();
-const { PrismaClient } = require("@prisma/client");
-const prisma = new PrismaClient()
-const { post } = ('');
-let rotation = [];
-
-function getRotation() {
-  return rotation[rotation.length - 1];
-}
+const { AddGps, AddRotation, AddSonar } = require("./classes/drivingHistory")
 
 //session setup
 const sessions = session({
@@ -34,8 +25,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 //Routers
-app.use('/', require('./routes/account'))
-app.use('/dashboard', require('./routes/home'))
+app.use('/', require('./routes/account'));
+app.use('/dashboard', require('./routes/home'));
+app.use('/company', require('./routes/company'));
 
 
 const port = process.env.PORT || 3000;
@@ -93,32 +85,22 @@ io.on('connection', (socket) => {
             socket.join(deviceId)
             socket.emit('joined-message', `Welcome to device: ${deviceId}`);
             
-            io.on('connection', (socket) => {
-            socket.on('rotation', async (angle) => {
-                rotation.push(angle);
-                console.log("successful emit: " + angle);
-              });
-              
-              setInterval(async() => {
-                const socketId = socket.username;
-                const rotation = getRotation(); 
-                const session = await prisma.user.findFirst({
-                  where: { username: socketId },
-                });
-                console.log(socketId)
-                if (session) {
-                  await prisma.user.update({
-                    where: { username: socketId },
-                    data: {
-                      rotation
-                    }
-                  });
-                  console.log("successful update")
-                }
-              }, 10000);
-            });
-    }   
-    )};  
-}
-);
+            socket.on("gps", (lat, long) => {
+                socket.to(deviceId).emit("gps", lat, long)
+                AddGps(5, Date.now(), lat, long); 
+            })
+
+            socket.on("rotation", (rotation) => {
+                socket.to(deviceId).emit("rotation", rotation)
+                AddRotation(5, Date.now(), rotation); 
+            })
+
+             socket.on("sonar", (f, l, r) => { 
+                socket.to(deviceId).emit("sonar", f, l, r); 
+                AddSonar(5, Date.now(), f, l, r); 
+            })
+        })
+    }
+
+});
 

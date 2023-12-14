@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <%- include('../partials/header', {styles: ['/style/default.css', '/style/contact.css' , '/style/contactsection.css'
+        , '/style/spacer.css' , '/style/icon.css' , '/style/navbar.css' , '/style/footer.css' , '/style/main.css'
+        ,'/style/contactsection.css' ], scripts: ['/script/mainSite.js', '/script/navbar.js' ]}) %>
+        <%- include('../partials/nav.ejs') %>
+
+            <div class="contact-outer">
+                <div class="wrapper-contact-info">
+                    <h2>Contact us!</h2>
+                    <div class="contact-info">
+                        <div class="phone-contact-div">
+                            <i class="fa-solid fa-phone"></i></i>
+                            <h3>+31 6 123456789</h3>
+                        </div>
+                        <div class="email-contact-div">
+                            <i class="fa-solid fa-envelope"></i>
+                            <h3> Webdrive@gmail.com</h3>
+                        </div>
+                    </div>
+                        <div class="wrapper-socials">
+                        <h3 class="socials-h3">Our socials:</h3>
+                            <div class="social-links">
+                                <div><i class="fa-brands fa-instagram"></i></div>
+                            
+                                <div><i class="fa-brands fa-twitter"></i></div>
+                            
+                                <div><i class="fa-brands fa-facebook"></i></div>
+                           </div>
+                        </div>
+
+                </div>
+                <form class="contact-form" method="post">
+
+
+
+                    <div class="wrapper-form-contact">
+                        <h2 class="h2-wrapper"> Tell us about your experience!</h2>
+                        <input class="input-name-contact" type="text" name="name_contact_form"
+                            placeholder="please enter your name">
+                        <textarea class="input-textarea-contact"
+                            placeholder="Write about your experience here!"></textarea>
+                        <button type="submit" class="submitbtn-contact">Send message</button>
+                    </div>
+                </form>
+            </div>
+</body>
+
+</html>

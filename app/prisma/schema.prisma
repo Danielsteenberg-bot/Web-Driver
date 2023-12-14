@@ -17,7 +17,7 @@ model Session {
   userid Int
   device Device @relation(fields: [deviceid], references: [id])
   deviceid Int
-  driving Driving_history[]
+  driving DrivingHistory[]
 
   @@index([userid])
   @@index([deviceid])
@@ -37,16 +37,16 @@ model Device {
   sessions Session[]
 }
 
-model Driving_history {
+model DrivingHistory {
+  history_id Int @id @default(autoincrement())
   session Session @relation(fields: [session_id], references: [id])
-  session_id Int @id
-  distanceTraveled Decimal 
-  angle Int
-  battery Int
-  lat Float 
-  long Float
-  connection Int
-  velocity Int  
-
+  session_id Int
+  rotation Float? 
+  lat Float? 
+  long Float?
+  sonar_forward Int?
+  sonar_left Int?
+  sonar_right Int?
+  time DateTime
   @@index([session_id])
 }
