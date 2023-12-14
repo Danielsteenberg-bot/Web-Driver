@@ -116,7 +116,7 @@ flex-direction: row;
 .contact-info{
     margin-top: 200px;
     position: relative;
-    left: 120px;
+    left: 180px;
 }
 
 .social-links{
@@ -141,10 +141,7 @@ flex-direction: row;
 .fa-regular{
     font-size: 1.5rem;
 }
-.wrapper-socials{
-    
 
-}
 #envelope-contact{
     position: relative;
     right: 10px;
