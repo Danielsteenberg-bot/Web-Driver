@@ -28,8 +28,6 @@ app.use(express.json());
 //Routers
 app.use('/', require('./routes/account'))
 app.use('/dashboard', require('./routes/home'))
-app.use('/company', require('./routes/company'))
-
 
 const port = process.env.PORT || 3000;
 server.listen(port, () => {
