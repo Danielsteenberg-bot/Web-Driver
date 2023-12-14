@@ -5,7 +5,7 @@
     width: 35%;
     height: 500px;
     background-color: #636363;
-    border: 2px solid var(--yellow-color);
+    border: 2px solid var(--primary-color);
     border-radius: 25px;
     display: flex;
     flex-direction: column;
@@ -45,12 +45,12 @@
 .contact-form input:focus,
 .contact-form textarea:focus {
     outline: none;
-    border-bottom: var(--yellow-color) 2px solid;
+    border-bottom: var(--primary-color) 2px solid;
 }
 
 .contact-form input:hover,
 .contact-form textarea:hover{
-    border-bottom: 2px solid var(--yellow-color);
+    border-bottom: 2px solid var(--primary-color);
 }
 .wrapper-form-contact{
     width: 80%;
@@ -67,7 +67,7 @@
     font-size: 12px;
 }
 .submitbtn-contact:hover{
-    border: 2px solid var(--yellow-color);
+    border: 2px solid var(--primary-color);
     cursor: pointer;
 }
 .wrapper-contact-info{
@@ -81,6 +81,7 @@ text-align: center;
 }
 .wrapper-contact-info h2{
     margin-top: 40px;
+
 }
 .contact-outer{
     margin: 0 auto;

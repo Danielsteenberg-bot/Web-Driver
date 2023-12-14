@@ -27,6 +27,12 @@ router.route('/about')
             title: "About Us"
         })
     })
+router.route('/contact')
+    .get((req, res) => {
+        res.render('company/contact', {
+            title: "Contact Us"
+        })
+    })
 
 
     module.exports = router;

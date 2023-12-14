@@ -4,10 +4,9 @@ const http = require('http');
 const app = express();
 const server = http.createServer(app);
 const socketIO = require('socket.io');
-const { test } = require('./classes/session');
 const io = socketIO(server)
 require('dotenv').config();
-
+const { AddGps, AddRotation, AddSonar } = require("./classes/drivingHistory")
 
 //session setup
 const sessions = session({
@@ -41,9 +40,12 @@ io.on('connection', (socket) => {
     let user = socket.request.session.userId
     if (user) {
         socket.on('join-room-user', (data) => {
+            socket.on('ready', () => {
+                setInterval(() => {
+                    socket.emit('rotation', 45);
+                }, 1000);});
             const { deviceId } = data;
             userId = socket.request.session.userId
-
             // Update the user's socket ID or add a new user to the room
             if (!users[deviceId]) {
                 users[deviceId] = {};
@@ -59,7 +61,7 @@ io.on('connection', (socket) => {
 
             // Emit a message to the user who just joined the room
             socket.emit('joined-message', `Welcome to user ${userId} to deviceId: ${deviceId}`);
-
+            
             // Emit a message to all users in the room except the newly joined user
             socket.to(deviceId).emit('joined-message', `${userId} has joined the room`);
 
@@ -82,7 +84,22 @@ io.on('connection', (socket) => {
             socket.join(deviceId)
             socket.emit('joined-message', `Welcome to device: ${deviceId}`);
             
+            socket.on("gps", (lat, long) => {
+                socket.to(deviceId).emit("gps", lat, long)
+                AddGps(5, Date.now(), lat, long); 
+            })
+
+            socket.on("rotation", (rotation) => {
+                socket.to(deviceId).emit("rotation", rotation)
+                AddRotation(5, Date.now(), rotation); 
+            })
+
+             socket.on("sonar", (f, l, r) => { 
+                socket.to(deviceId).emit("sonar", f, l, r); 
+                AddSonar(5, Date.now(), f, l, r); 
+            })
         })
     }
 
 });
+

@@ -5,7 +5,7 @@ body{
     text-align: center;
     margin: 0 auto;
     margin-top: 250px;
-    background-color: var(--form-color);
+    background-color: var(--secoundary-color);
     width: 500px;
     height: 450px;
     border-radius: 26px;
@@ -17,7 +17,7 @@ body{
     text-align: center;
     margin: 0 auto;
     margin-top: 160px;
-    background-color: var(--form-color);
+    background-color: var(--secoundary-color);
     width: 500px;
     height: 550px;
     border-radius: 26px;
