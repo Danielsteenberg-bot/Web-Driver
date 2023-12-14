@@ -17,9 +17,10 @@ const writeData = document.querySelector(".data-container");
                 name: "Richard Smith",
                 title: "Backend Developer",
                 age: 18,
-                imgURL: "/images/company/thom.jpg",
+                imgURL: "/images/company/richard.png",
                 email: "rvullings8@gmail.com",
-                description: "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+                description: "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                class: "richardIMG"
             },
             {
                 name: "Kasper Korthesen",
@@ -57,7 +58,7 @@ const writeData = document.querySelector(".data-container");
             <div class="about-box-container">
                 <div class="about-box-wrapper">
                     <div class="about-box-image">
-                        <img src="${data.imgURL}" alt="">
+                        <img class="${data.class}" src="${data.imgURL}" alt="">
                     </div>
                     <div class="about-box-text">
                         <div class="name-container box-info">

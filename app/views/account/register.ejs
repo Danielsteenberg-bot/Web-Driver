@@ -1,13 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="../public/style/main.css" rel="stylesheet">
-    <link href="../public/style/register.css" rel="stylesheet">
-    <title>Document</title>
-</head>
+    <%- include('../partials/header', {
+        title: 'Register',
+        styles: [
+            '/style/default.css',
+            '/style/register.css',
+            '/style/navbar.css',
+            '/style/footer.css',
+            '/style/main.css'
+        ],
+        scripts: [
+            '/script/mainSite.js',
+            '/script/navbar.js',
+            '/script/animation.js'
+        ]
+    }) %>
 
 <body>
 
