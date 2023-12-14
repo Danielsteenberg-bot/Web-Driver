@@ -1,6 +1,5 @@
 body{
     overflow-y: hidden !important;
-    font-family: var(--main-font);
 }
 .login-container{   
     text-align: center;
