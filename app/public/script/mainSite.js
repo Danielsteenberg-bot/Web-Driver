@@ -2,7 +2,7 @@ const icons = document.querySelectorAll('.icon-item');
  const footerIcons = document.querySelectorAll('.footer-item');
  const footerBottom = document.querySelectorAll('.footer-bottom-item');
 
- console.log("hej")
+//  console.log("hej")
  
  
  

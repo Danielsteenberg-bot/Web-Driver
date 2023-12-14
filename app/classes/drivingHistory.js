@@ -45,7 +45,7 @@ setInterval(async () => {
         data.push(history)
     })
     
-    console.log("buffer size: " + data.length)
+    // console.log("buffer size: " + data.length)
 
     buffer.clear();
     // let x = await prisma.drivingHistory.createMany({data: data});
